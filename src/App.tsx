@@ -1,11 +1,11 @@
-import React from "react";
-import "./App.css";
-import Component from "./components/Component";
+import React from 'react';
+import './App.scss';
+import MainPage from './components/MainPage/MainPage';
 
 const App = () => {
   return (
     <div className="App">
-      <Component />
+      <MainPage />
     </div>
   );
 };

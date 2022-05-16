@@ -1,0 +1,11 @@
+@import "../../sass-variables/breckpoints.scss";
+
+.icons__link:not(:last-child) {
+	margin-right: 20px;
+}
+
+@media (min-width: $breakpiont-tablet) {
+	.icons {
+		margin-bottom: 0;
+	}
+}

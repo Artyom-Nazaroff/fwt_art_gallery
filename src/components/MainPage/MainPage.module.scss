@@ -1,0 +1,47 @@
+@import "../../sass-variables/colors.scss";
+@import "../../sass-variables/breckpoints.scss";
+
+.wrapper {
+	min-height: 100vh;
+	background-color: $primary-black;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	color: gray;
+}
+
+.main {
+	flex: 1 1 auto;
+}
+
+// .menuBurger {
+// 	position: absolute;
+// 	top: 0;
+// 	bottom: 0;
+// 	left: 0;
+// 	right: 0;
+// 	background-color: $darkThemeBackground;
+// }
+
+// .picturesContainer {
+// 	margin: 0;
+// 	padding: 0;
+// 	list-style: none;
+// 	display: grid;
+// 	grid-template-columns: 1fr 1fr;
+// 	gap: 15px;
+// 	padding-bottom: 30px;
+// }
+
+// @media (min-width: $breakpiont-tablet) {
+// 	.wrapper {
+// 		padding: 20px;
+// 	}
+
+// 	.picturesContainer {
+// 	grid-template-columns: 1fr 1fr 1fr;
+// 	gap: 20px;
+// 	padding-bottom: 40px;
+// }
+// }
