@@ -1,0 +1,65 @@
+@import "../../sass-variables/colors.scss";
+@import "../../sass-variables/breckpoints.scss";
+
+.return {
+	height: 52px;
+
+	&__container {
+		display: flex;
+		justify-content: flex-start;
+		height: 100%;
+	}
+
+	&__btn {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 4px;
+
+		img {
+			cursor: pointer;
+		}
+	}
+
+	&__link {
+		margin-left: 16px;
+		display: none;
+	}
+}
+
+.gallery {
+	&__container {
+		padding-bottom: 80px;
+	}
+
+	&__title {
+		font-family: "Cormorant SC", serif;
+		font-weight: 600;
+		font-size: 32px;
+		line-height: 100%;
+		color: $accent-gold;
+		margin-bottom: 60px;
+	}
+}
+
+@media (min-width: $breakpiont-tablet) {
+	.return {
+		height: 80px;
+
+		&__link {
+			display: block;
+		}
+	}
+
+	.gallery {
+		&__container {
+			padding-bottom: 100px;
+		}
+
+		&__title {
+			font-size: 60px;
+			line-height: 73px;
+		}
+	}
+}

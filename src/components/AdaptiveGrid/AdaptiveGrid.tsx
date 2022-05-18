@@ -9,10 +9,10 @@ const AdaptiveGrid = () => {
   return (
     <section className={cn('grid')}>
       <ul className={cn('grid__container')}>
-        <Artist />
-        <Artist />
-        <Artist />
-        <Artist />
+        <Artist name="Jean-Honore Fragonard" years="1732 - 1806" />
+        <Artist name="Jean-Honore Fragonard" years="1732 - 1806" />
+        <Artist name="Jean-Honore Fragonard" years="1732 - 1806" />
+        <Artist name="Jean-Honore Fragonard" years="1732 - 1806" />
       </ul>
     </section>
   );

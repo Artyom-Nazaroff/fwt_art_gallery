@@ -11,9 +11,32 @@
 		width: 100%;
 	}
 
+	&__modalWindow {
+		display: none;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		z-index: 4;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: $primary-black;
+		text-transform: uppercase;
+		text-decoration: underline;
+		font-weight: 700;
+		font-size: 12px;
+		line-height: 15px;
+		color: $primary-light-gray;
+		font-family: "Inter", sans-serif;
+
+		span {
+			cursor: pointer;
+		}
+	}
+
 	&__inner {
 		position: absolute;
-		z-index: 1;
 		top: 0;
 		left: 0;
 		right: 0;
@@ -33,15 +56,14 @@
 		}
 	}
 
-	&__description {
+	&__info {
 		height: 45px;
-		width: 260px;
-		display: flex;
-		justify-content: space-between;
+		width: 236px;
 		position: absolute;
-		z-index: 2;
 		bottom: 0;
 		left: 0;
+		padding: 8px 12px;
+		background-color: $primary-black;
 
 		&::before {
 			content: "";
@@ -54,12 +76,6 @@
 			top: 50%;
 			transform: translateY(-50%);
 		}
-	}
-
-	&__info {
-		flex: 1 0 90%;
-		padding: 8px 12px;
-		background-color: $primary-black;
 	}
 
 	&__name {
@@ -81,12 +97,15 @@
 	}
 
 	&__arrow {
-		flex: 1 0 10%;
+		height: 45px;
+		width: 24px;
+		position: absolute;
+		bottom: 0;
+		left: 236px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		background-color: $accent-gold;
-		cursor: pointer;
 
 		img {
 			width: 66%;
@@ -97,49 +116,9 @@
 
 @media (min-width: $breakpiont-tablet) {
 	.artist {
-		&__description {
-			height: 66px;
-			width: 324px;
-		}
-
 		&__info {
-			padding: 12px;
-		}
-
-		&__name {
-			font-size: 16px;
-			line-height: 19px;
-		}
-
-		&__datesOfLife {
-			font-size: 12px;
-			line-height: 15px;
-		}
-	}
-}
-
-@media (min-width: $breakpiont-desktop) {
-	.artist {
-		&__description {
 			height: 66px;
-			width: 324px;
-
-			&::before {
-				display: block;
-			}
-
-			&:hover {
-				.artist__arrow {
-					display: flex;
-				}
-
-				&::before {
-					display: none;
-				}
-			}
-		}
-
-		&__info {
+			width: 300px;
 			padding: 12px;
 		}
 
@@ -154,6 +133,42 @@
 		}
 
 		&__arrow {
+			height: 66px;
+			left: 300px;
+		}
+	}
+}
+
+@media (min-width: $breakpiont-small-desktop) {
+	.artist {
+		&:hover {
+			.artist__modalWindow {
+				display: flex;
+			}
+		}
+
+		&__info {
+			height: 82px;
+			width: 300px;
+			padding: 20px;
+
+			&::before {
+				display: block;
+			}
+		}
+
+		&__name {
+			font-size: 16px;
+			line-height: 19px;
+		}
+
+		&__datesOfLife {
+			font-size: 12px;
+			line-height: 15px;
+		}
+
+		&__arrow {
+			height: 82px;
 			display: none;
 		}
 	}

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './MainPage.module.scss';
 import '../../App.scss';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import PaintingsContainer from '../AdaptiveGrid/AdaptiveGrid';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import AdaptiveGrid from '../../components/AdaptiveGrid/AdaptiveGrid';
+import BurgerMenu from '../../components/BurgerMenu/BurgerMenu';
 
 const cn = classNames.bind(styles);
 
@@ -20,7 +20,7 @@ const MainPage = () => {
       <main className={cn('main')}>
         <section className={cn('paintings')}>
           <div className={cn('paintings__container', 'container')}>
-            <PaintingsContainer />
+            <AdaptiveGrid />
           </div>
         </section>
       </main>
