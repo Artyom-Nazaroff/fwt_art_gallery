@@ -2,11 +2,10 @@ import React, { FC } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import '../../App.scss';
-import openDarkBurger from '../../assets/burger-menu/open-menu-dark-theme.svg';
-// import openLightBurger from '../../assets/burger-menu/open-menu-light-theme.svg';
-import darkThemeLogo from '../../assets/logo-dark-theme.svg';
-// import lightThemeLogo from '../../assets/logo-light-theme.svg';
-import changeDarkTheme from '../../assets/dark-theme-change-theme.svg';
+import openDarkBurger from '../../assets/dark-theme/burger-menu/open-menu-dt.svg';
+import darkThemeLogo from '../../assets/dark-theme/header/logo-dt.svg';
+// import lightThemeLogo from '../../assets/logo-lt.svg';
+import changeDarkTheme from '../../assets/dark-theme/header/change-theme-dt.svg';
 
 const cn = classNames.bind(styles);
 

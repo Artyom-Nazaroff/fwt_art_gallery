@@ -1,0 +1,69 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/templates";
+
+.textarea {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    @extend %label-styles;
+  }
+
+  &__field {
+    @extend %default;
+    height: 150px;
+    resize: none;
+  }
+
+  &__error {
+    @extend %error-styles;
+  }
+}
+
+.textarea--dt {
+  .textarea__label {
+    @extend %label--dt;
+  }
+
+  .textarea__field {
+    @extend %default--dt;
+  }
+
+  .textarea__field:hover {
+    @extend %hover--dt;
+  }
+
+  .textarea__field:focus {
+    @extend %focus--dt;
+  }
+}
+
+.textarea--lt {
+  .textarea__label {
+    @extend %label--lt;
+  }
+
+  .textarea__field {
+    @extend %default--lt;
+  }
+
+  .textarea__field:hover {
+    @extend %hover--lt;
+  }
+
+  .textarea__field:focus {
+    @extend %focus--lt;
+  }
+}
+
+.textarea--err {
+  .textarea__field {
+    @extend %error-field-border;
+  }
+
+  .textarea__error {
+    display: flex;
+  }
+}
+

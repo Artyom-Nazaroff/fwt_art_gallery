@@ -1,5 +1,5 @@
-@import "../../sass-variables/breckpoints.scss";
-@import "../../sass-variables/colors.scss";
+@import "../../sass/breckpoints.scss";
+@import "../../sass/colors.scss";
 
 .header {
 	height: 64px;
@@ -47,7 +47,7 @@
 
 @media (min-width: $breakpiont-small-desktop) {
 	.header {
-		height: 100px;
+		height: 80px;
 
 		&__burger {
 			display: none;

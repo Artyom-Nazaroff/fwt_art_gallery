@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.scss';
-import ArtistProfile from './pages/ArtistProfile/ArtistProfile';
+import AddAndEditArtist from './components/AddAndEditArtistPopUp/AddAndEditArtist';
 
 const App = () => {
-  return <ArtistProfile />;
+  return <AddAndEditArtist />;
 };
 
 export default App;

@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import classNames from 'classnames/bind';
 import styles from './ArtistInfo.module.scss';
 import '../../App.scss';
-import artistPortrait from '../../assets/artist-profile/Aivazovsky.jpg';
-import linkArrowDown from '../../assets/artist-profile/link-arrow-down-dark-theme.svg';
+import artistPortrait from '../../assets/common-files/Aivazovsky.jpg';
+import linkArrowDown from '../../assets/dark-theme/artist-profile/link-arrow-down-dt.svg';
 import TextLink from '../_UI/TextLink/TextLink';
 import Label from '../_UI/Label/Label';
 

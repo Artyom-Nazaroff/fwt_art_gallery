@@ -3,12 +3,12 @@ import classNames from 'classnames/bind';
 import styles from './ArtistProfile.module.scss';
 import '../../App.scss';
 import Header from '../../components/Header/Header';
-import arrowDarkTheme from '../../assets/artist-profile/return-arrow-dark-theme.svg';
+import arrowDarkTheme from '../../assets/dark-theme/artist-profile/return-arrow-dt.svg';
 import ArtistInfo from '../../components/ArtistInfo/ArtistInfo';
 import AdaptiveGrid from '../../components/AdaptiveGrid/AdaptiveGrid';
 import Footer from '../../components/Footer/Footer';
 import TextLink from '../../components/_UI/TextLink/TextLink';
-// import artist from '../../assets/Artist-profile/Aivazovsky.jpg';
+// import artist from '../../assets/ArtistCard-profile/Aivazovsky.jpg';
 
 const cn = classNames.bind(styles);
 

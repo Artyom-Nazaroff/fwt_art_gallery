@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Label.module.scss';
-import crossDT from '../../../assets/label/cross-dark-theme.svg';
+import crossDT from '../../../assets/dark-theme/_UI/Label/cross-dt.svg';
 
 const cn = classNames.bind(styles);
 

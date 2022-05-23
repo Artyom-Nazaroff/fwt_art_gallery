@@ -1,39 +1,51 @@
-// .btn {
-// 	padding: 12px 0;
-// 	font-weight: 700;
-// 	font-size: 14px;
-// 	line-height: 16px;
-// 	display: flex;
-// 	align-items: center;
-// 	justify-content: center;
-// 	border: none;
-// 	border-radius: 6px;
-// 	border: 1px solid #FFFFFF;
-// 	text-transform: uppercase;
-// }
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
 
-// .btn--white {
-// 	background-color: #fff;
-// 	color: #000;
-// }
+.btn {
+  border-radius: 30px;
+  padding: 16px 80px;
+  border: none;
+  cursor: pointer;
 
-// .btn--black {
-// 	background-color: #000;
-// 	color: #fff;
-// }
+  span {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: $primary-white;
+  }
+}
 
-// .btn--mobile {
-// 	width: 100%;
+.btn--dt {
+  background-color: $accent-gold;
 
-// 	&:not(:last-child) {
-// 	margin-bottom: 15px;
-// }
-// }
+  &:hover {
+    box-shadow: 0 4px 10px $accent-gold;
+  }
 
-// .btn--not-mobile {
-// 	padding: 12px 16px;
+  &:disabled {
+    opacity: 0.5;
+  }
 
-// 	&:not(:last-child) {
-// 		margin-right: 12px;
-// 	}
-// }
+  &:focus {
+    background-color: #BA9052;
+    box-shadow: 0 4px 10px $accent-gold;
+  }
+}
+
+.btn--lt {
+  background-color: $primary-black;
+
+  &:hover {
+    box-shadow: 0 4px 10px $primary-black;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    background-color: #232323;
+    box-shadow: 0 4px 10px $primary-black;
+  }
+}

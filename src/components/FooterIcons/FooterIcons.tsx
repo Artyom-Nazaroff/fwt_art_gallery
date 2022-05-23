@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './FooterIcons.module.scss';
-import darkFB from '../../assets/footer-icons/dark-theme/fb.svg';
-import darkVK from '../../assets/footer-icons/dark-theme/vk.svg';
-import darkInst from '../../assets/footer-icons/dark-theme/inst.svg';
+import darkFB from '../../assets/dark-theme/footer/fb.svg';
+import darkVK from '../../assets/dark-theme/footer/vk.svg';
+import darkInst from '../../assets/dark-theme/footer/inst.svg';
 
 const cn = classNames.bind(styles);
 

@@ -4,10 +4,14 @@ import styles from './Button.module.scss';
 
 const cn = classNames.bind(styles);
 
-const Button: FC = () => {
+interface ButtonProps {
+  text: string;
+}
+
+const Button: FC<ButtonProps> = ({ text }) => {
   return (
-    <button className={cn('btn', 'btn--not-mobile', 'btn--black')} type="button">
-      <span>LOG IN</span>
+    <button className={cn('btn', 'btn--dt')} type="button">
+      <span>{text}</span>
     </button>
   );
 };

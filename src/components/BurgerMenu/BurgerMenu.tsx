@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './BurgerMenu.module.scss';
-import closeDarkTheme from '../../assets/burger-menu/close-menu-dark-theme.svg';
-import changeDarkTheme from '../../assets/dark-theme-change-theme.svg';
+import closeDarkTheme from '../../assets/dark-theme/burger-menu/close-menu-dt.svg';
+import changeDarkTheme from '../../assets/dark-theme/header/change-theme-dt.svg';
 import TextLink from '../_UI/TextLink/TextLink';
-// import closeLightTheme from '../../assets/burger-menu/close-menu-light-theme.svg';
 
 const cn = classNames.bind(styles);
 

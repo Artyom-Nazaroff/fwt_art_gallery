@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import classNames from 'classnames/bind';
-import styles from './Artist.module.scss';
-import picture from '../../assets/picture-example.jpg';
-import arrow from '../../assets/artist-arrow.svg';
+import styles from './ArtistCard.module.scss';
+import picture from '../../assets/common-files/picture-example.jpg';
+import arrow from '../../assets/dark-theme/artist-profile/back-arrow-dt.svg';
 import TextLink from '../_UI/TextLink/TextLink';
 
 const cn = classNames.bind(styles);
@@ -12,7 +12,7 @@ interface ArtistProps {
   years: string;
 }
 
-const Artist: FC<ArtistProps> = ({ name, years }) => {
+const ArtistCard: FC<ArtistProps> = ({ name, years }) => {
   return (
     <li className={cn('artist')}>
       <div className={cn('artist__modalWindow')}>
@@ -32,4 +32,4 @@ const Artist: FC<ArtistProps> = ({ name, years }) => {
   );
 };
 
-export default Artist;
+export default ArtistCard;

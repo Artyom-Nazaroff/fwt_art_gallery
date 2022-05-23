@@ -1,0 +1,76 @@
+@import "./colors";
+@import "./fonts";
+
+%label-styles {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 8px;
+}
+
+%label--dt {
+  color: $primary-white;
+}
+
+%label--lt {
+  color: $primary-black;
+}
+
+%default {
+  border-radius: 4px;
+  outline: none;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+
+%default--dt {
+  background-color: $secondary-black;
+  border: 1px solid $secondary-black;
+  color: $primary-light-gray;
+}
+
+%default--lt {
+  background-color: $primary-white;
+  border: 1px solid $primary-light-gray;
+  color: $primary-dark-gray;
+}
+
+%hover--dt {
+  border: 1px solid $primary-dark-gray;
+}
+
+%hover--lt {
+  border: 1px solid $secondary-gray;
+}
+
+%focus--dt {
+  border: 1px solid $primary-light-gray;
+}
+
+%focus--lt {
+  border: 1px solid $primary-dark-gray;
+}
+
+%error-styles {
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 7px 5px;
+
+  img {
+    margin-right: 8px;
+  }
+
+  span {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 140%;
+    color: $accent-error;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+%error-field-border {
+  border: 1px solid $accent-error;
+}

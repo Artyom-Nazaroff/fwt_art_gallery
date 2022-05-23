@@ -1,0 +1,75 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/templates";
+
+.input {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    @extend %label-styles;
+  }
+
+  &__field {
+    @extend %default;
+
+    &::placeholder {
+      color: $secondary-gray;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 140%;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+
+  &__error {
+    @extend %error-styles;
+  }
+}
+
+.input--dt {
+  .input__label {
+    @extend %label--dt;
+  }
+
+  .input__field {
+    @extend %default--dt;
+  }
+
+  .input__field:hover {
+    @extend %hover--dt;
+  }
+
+  .input__field:focus {
+    @extend %focus--dt;
+  }
+}
+
+.input--lt {
+  .input__label {
+    @extend %label--lt;
+  }
+
+  .input__field {
+    @extend %default--lt;
+  }
+
+  .input__field:hover {
+    @extend %hover--lt;
+  }
+
+  .input__field:focus {
+    @extend %focus--lt;
+  }
+}
+
+.input--err {
+  .input__field {
+    @extend %error-field-border;
+  }
+
+  .input__error {
+    display: flex;
+  }
+}
+
