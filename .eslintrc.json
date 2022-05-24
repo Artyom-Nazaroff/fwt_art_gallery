@@ -5,11 +5,11 @@
 	},
 	"extends": [
 		"plugin:@typescript-eslint/recommended",
+		"airbnb",
 		"plugin:react/recommended",
 		"plugin:import/errors",
 		"plugin:import/warnings",
 		"plugin:import/typescript",
-		"airbnb",
 		"plugin:storybook/recommended",
 		"plugin:prettier/recommended",
 		"prettier"
@@ -23,8 +23,8 @@
 		"sourceType": "module"
 	},
 	"plugins": [
-		"react",
 		"@typescript-eslint",
+		"react",
 		"prettier"
 	],
 	"settings": {
@@ -87,6 +87,7 @@
 			}
 		}],
 		"no-shadow": "off",
+		"no-unused-vars": "off",
 		"@typescript-eslint/no-shadow": ["error"],
 		"require-jsdoc": "off",
 		"@typescript-eslint/ban-ts-comment": "off",
@@ -94,7 +95,8 @@
 		"react/require-default-props": "off",
 		"react/jsx-props-no-spreading": "off",
 		"import/prefer-default-export": "off",
-		"react/no-unescaped-entities": "off"
+		"react/no-unescaped-entities": "off",
+		"@typescript-eslint/no-unused-vars": "off"
 	},
 	"overrides": [
 		{

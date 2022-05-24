@@ -22,7 +22,6 @@
     line-height: 100%;
     font-family: 'Cormorant SC', serif;
     text-align: center;
-    color: $primary-white;
     margin-bottom: 40px;
   }
 
@@ -55,14 +54,50 @@
     font-size: 12px;
     line-height: 140%;
     font-family: 'Inter', sans-serif;
-    color: $primary-light-gray;
 
     a {
       font-weight: 500;
+    }
+  }
+}
+
+
+.auth--dt {
+  background-color: $primary-black;
+
+  .auth__title {
+    color: $primary-white;
+  }
+
+  .auth__field {
+    input::-ms-reveal {
+      filter: invert(100%);
+    }
+  }
+
+  .auth__text {
+    color: $primary-light-gray;
+    a {
       color: $primary-light-gray;
     }
   }
 }
+
+.auth--lt {
+  background-color: $secondary-white;
+
+  .auth__title {
+    color: $primary-dark-gray;
+  }
+
+  .auth__text {
+    color: $primary-dark-gray;
+    a {
+      color: $primary-dark-gray;
+    }
+  }
+}
+
 
 @media (min-width: $breakpiont-tablet) {
   .auth {
@@ -115,6 +150,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 150px 0;
     background-color: $modal-window-background;
   }
 
@@ -132,7 +168,6 @@
 
   .auth {
     flex: 0 0 52%;
-    background-color: $primary-black;
     padding-bottom: 130px;
 
     &__top {

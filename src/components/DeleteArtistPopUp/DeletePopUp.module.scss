@@ -16,7 +16,6 @@
 .popup {
   width: 100%;
   padding: 20px 33px;
-  background-color: $primary-black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +30,6 @@
     line-height: 140%;
     text-align: center;
     margin-bottom: 12px;
-    color: $primary-light-gray;
   }
 
   &__warning {
@@ -48,6 +46,24 @@
     margin-bottom: 20px;
   }
 }
+
+
+.popup--dt {
+  background-color: $primary-black;
+
+  .popup__title {
+    color: $primary-light-gray;
+  }
+}
+
+.popup--lt {
+  background-color: $secondary-white;
+
+  .popup__title {
+    color: $primary-dark-gray;
+  }
+}
+
 
 @media (min-width: $breakpiont-tablet) {
   .popupBackground {
@@ -68,6 +84,13 @@
       display: flex;
       justify-content: flex-end;
       margin-bottom: 20px;
+    }
+
+    &__closeBtn {
+      border: none;
+      padding: 0;
+      background-color: inherit;
+      cursor: pointer;
     }
 
     &__trashBin {

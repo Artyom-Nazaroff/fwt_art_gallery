@@ -3,12 +3,19 @@
 
 .wrapper {
 	min-height: 100vh;
-	background-color: $primary-black;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	color: lightgrey;
+}
+
+.wrapper--dt {
+	background-color: $primary-black;
+}
+
+.wrapper--lt {
+	background-color: $primary-white;
 }
 
 .container {

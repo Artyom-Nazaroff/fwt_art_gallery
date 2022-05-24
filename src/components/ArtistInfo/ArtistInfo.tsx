@@ -1,22 +1,36 @@
-import React, { FC } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './ArtistInfo.module.scss';
 import '../../App.scss';
 import artistPortrait from '../../assets/common-files/Aivazovsky.jpg';
-import linkArrowDown from '../../assets/dark-theme/artist-profile/link-arrow-down-dt.svg';
+import linkArrowDownDT from '../../assets/dark-theme/artist-profile/link-arrow-down-dt.svg';
+import linkArrowUpDT from '../../assets/dark-theme/artist-profile/link-arrow-up-dt.svg';
+import linkArrowDownLT from '../../assets/light-theme/artist-profile/link-arrow-down-lt.svg';
+import linkArrowUpLT from '../../assets/light-theme/artist-profile/link-arrow-up-lt.svg';
 import TextLink from '../_UI/TextLink/TextLink';
 import Label from '../_UI/Label/Label';
+import { ThemeContext } from '../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
-// interface ArtistProps {
-//   name: string;
-//   years: string;
-// }
+type ArtistInfoProps = {
+  name: string;
+  years: string;
+  place: string;
+};
 
-const ArtistInfo: FC = () => {
+const ArtistInfo: FC<ArtistInfoProps> = ({ name, years, place }) => {
+  const [isFullText, setIsFullText] = useState<boolean>(false);
+
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <section className={cn('artist')}>
+    <section
+      className={cn('artist', {
+        'artist--dt': theme === 'dark',
+        'artist--lt': theme === 'light',
+      })}
+    >
       <div className={cn('artist__container')}>
         <div className={cn('artist__portrait')}>
           <img src={artistPortrait} alt="portrait" />
@@ -24,14 +38,19 @@ const ArtistInfo: FC = () => {
         <div className={cn('artist__description')}>
           <div className={cn('artist__basicInfo')}>
             <div className={cn('artist__inner')}>
-              <div className={cn('artist__dates')}>29 july 1817 – 2 may 1900</div>
-              <div className={cn('artist__name')}>Ivan Aivazovsky</div>
+              <div className={cn('artist__dates')}>{years}</div>
+              <div className={cn('artist__name')}>{name}</div>
             </div>
-            <div className={cn('artist__place')}>Feodosia, Russian Empire</div>
+            <div className={cn('artist__place')}>{place}</div>
           </div>
-          <div className={cn('artist__desktopName')}>Ivan Aivazovsky</div>
+          <div className={cn('artist__desktopName')}>{name}</div>
           <div className={cn('artist__otherInfo')}>
-            <p className={cn('artist__text')}>
+            <p
+              className={cn('artist__text', {
+                'artist__text--short': !isFullText,
+                'artist__text--full': isFullText,
+              })}
+            >
               Ivan Konstantinovich Aivazovsky was a Russian Romantic painter who is considered one
               of the greatest masters of marine art. Baptized as Hovhannes Aivazian, he was born
               into an Armenian family in the Black Sea port of Feodosia in Crimea and was mostly
@@ -50,15 +69,22 @@ const ArtistInfo: FC = () => {
               depicted battle scenes, Armenian themes, and portraiture. Most of Aivazovsky's works
               are kept in Russian, Ukrainian and Armenian museums as well as private collections.
             </p>
-            <div className={cn('artist__link')}>
-              <TextLink text="Read more" />
-              <img src={linkArrowDown} alt="" />
-            </div>
+            <button
+              className={cn('artist__link')}
+              type="button"
+              onClick={() => setIsFullText(!isFullText)}
+            >
+              <TextLink text={isFullText ? 'Read less' : 'Read more'} />
+              {!isFullText && (
+                <img src={theme === 'dark' ? linkArrowDownDT : linkArrowDownLT} alt="" />
+              )}
+              {isFullText && <img src={theme === 'dark' ? linkArrowUpDT : linkArrowUpLT} alt="" />}
+            </button>
             <div className={cn('artist__labels')}>
-              <Label text="Romanticism" />
-              <Label text="Art" />
-              <Label text="Nature" />
-              <Label text="Bataille" />
+              <Label text="Romanticism" isRemove={false} />
+              <Label text="Art" isRemove={false} />
+              <Label text="Nature" isRemove={false} />
+              <Label text="Bataille" isRemove={false} />
             </div>
           </div>
         </div>

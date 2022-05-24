@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Input.module.scss';
 import errorSign from '../../../assets/common-files/error-sign.svg';
+import { ThemeContext } from '../../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
@@ -14,8 +15,15 @@ interface InputProps {
 }
 
 const Input: FC<InputProps> = ({ id, type, label, name, placeholder }) => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className={cn('input', 'input--dt')}>
+    <div
+      className={cn('input', {
+        'input--dt': theme === 'dark',
+        'input--lt': theme === 'light',
+      })}
+    >
       <label className={cn('input__label')} htmlFor={id}>
         {label}
       </label>

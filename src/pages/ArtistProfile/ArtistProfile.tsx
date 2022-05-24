@@ -1,33 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames/bind';
 import styles from './ArtistProfile.module.scss';
 import '../../App.scss';
 import Header from '../../components/Header/Header';
-import arrowDarkTheme from '../../assets/dark-theme/artist-profile/return-arrow-dt.svg';
+import arrowDT from '../../assets/dark-theme/artist-profile/return-arrow-dt.svg';
+import arrowLT from '../../assets/light-theme/artist-profile/return-arrow-lt.svg';
 import ArtistInfo from '../../components/ArtistInfo/ArtistInfo';
 import AdaptiveGrid from '../../components/AdaptiveGrid/AdaptiveGrid';
 import Footer from '../../components/Footer/Footer';
 import TextLink from '../../components/_UI/TextLink/TextLink';
-// import artist from '../../assets/ArtistCard-profile/Aivazovsky.jpg';
+import { ThemeContext } from '../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
 const ArtistProfile = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className={cn('wrapper')}>
+    <div
+      className={cn('wrapper', {
+        'wrapper--dt': theme === 'dark',
+        'wrapper--lt': theme === 'light',
+      })}
+    >
       <Header />
       <div className={cn('return')}>
         <div className={cn('return__container', 'container')}>
-          <div className={cn('return__btn')}>
-            <img src={arrowDarkTheme} alt="arrow" />
+          <button className={cn('return__btn')} type="button">
+            <img src={theme === 'dark' ? arrowDT : arrowLT} alt="" />
             <div className={cn('return__link')}>
               <TextLink text="back" />
             </div>
-          </div>
+          </button>
         </div>
       </div>
-      <ArtistInfo />
-      <div className={cn('gallery')}>
+      <ArtistInfo
+        name="Ivan Aivazovsky"
+        years="29 july 1817 – 2 may 1900"
+        place="Feodosia, Russian Empire"
+      />
+      <div
+        className={cn('gallery', {
+          'gallery--dt': theme === 'dark',
+          'gallery--lt': theme === 'light',
+        })}
+      >
         <div className={cn('gallery__container', 'container')}>
           <h2 className={cn('gallery__title')}>Artworks</h2>
           <AdaptiveGrid />

@@ -4,13 +4,6 @@
 @import "../../../sass/templates";
 
 .select {
-
-  &.open {
-    .select__dropdown {
-      display: block;
-    }
-  }
-
   &__label {
     @extend %label-styles;
   }
@@ -51,7 +44,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $secondary-black;
+    background-color: inherit;
     cursor: pointer;
   }
 
@@ -68,47 +61,24 @@
   &__list {
     list-style: none;
   }
+}
 
-  &__item {
-    height: 40px;
-    padding: 9px 16px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgba(205, 205, 205, 0.05);
-    }
-
-    input {
-      display: none;
-    }
-
-    label {
-      width: 100%;
-      padding-left: 36px;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 140%;
-      color: $primary-light-gray;
-      font-family: 'Inter', sans-serif;
-      position: relative;
-      cursor: pointer;
-
-      &::before {
-        content: '';
-        display: block;
-        width: 24px;
-        height: 24px;
-        border-radius: 4px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        cursor: pointer;
-      }
-    }
+.open {
+  .select__dropdown {
+    display: block;
   }
+}
 
+.open.select--dt {
+  .select__input {
+    border: 1px solid $primary-light-gray;
+  }
+}
+
+.open.select--lt {
+  .select__input {
+    border: 1px solid $primary-dark-gray;
+  }
 }
 
 .select--dt {
@@ -130,18 +100,6 @@
 
   .select__dropdown {
     background-color: $secondary-black;
-  }
-
-  .select__item {
-    input:checked + label::before {
-      background-image: url("../../../assets/dark-theme/_UI/Multiselect/check-mark.svg");
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    label::before {
-      background-color: $primary-black;
-    }
   }
 }
 
@@ -165,17 +123,6 @@
 
   .select__dropdown {
     background-color: $primary-white;
-  }
-
-  .select__item {
-    input:checked + label::before {
-      background-image: url("../../../assets/light-theme/_UI/Multiselect/check-mark.svg");
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    label::before {
-      background-color: $secondary-white;
-    }
+    border: 1px solid $primary-light-gray;
   }
 }

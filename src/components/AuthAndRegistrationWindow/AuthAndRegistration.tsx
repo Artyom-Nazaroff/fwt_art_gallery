@@ -1,27 +1,29 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
 import styles from './AuthAndRegistration.module.scss';
 import '../../App.scss';
 import crossDT from '../../assets/dark-theme/auth-registration/cross.svg';
+import crossLT from '../../assets/light-theme/auth-registration/cross.svg';
 import authMainPic from '../../assets/common-files/auth-main-picture.jpg';
 import registrationMainPic from '../../assets/common-files/registration-main-picture.jpg';
 import Input from '../_UI/Input/Input';
 import Button from '../_UI/Button/Button';
+import { ThemeContext } from '../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
 export enum AuthOrRegistration {
-  // eslint-disable-next-line no-unused-vars
   auth = 'auth',
-  // eslint-disable-next-line no-unused-vars
   registration = 'registration',
 }
 
-interface AuthAndRegistrationProps {
+type AuthAndRegistrationProps = {
   variant: AuthOrRegistration;
-}
+};
 
 const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({ variant }) => {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <div className={cn('wrapper', 'modalWindowWrapper')}>
       <div className={cn('contentInner')}>
@@ -31,10 +33,15 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({ variant }) => {
             alt=""
           />
         </div>
-        <div className={cn('auth')}>
+        <div
+          className={cn('auth', {
+            'auth--dt': theme === 'dark',
+            'auth--lt': theme === 'light',
+          })}
+        >
           <div className={cn('auth__top')}>
             <div className={cn('auth__close')}>
-              <img src={crossDT} alt="" />
+              <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
             </div>
           </div>
           <h2 className={cn('auth__title')}>

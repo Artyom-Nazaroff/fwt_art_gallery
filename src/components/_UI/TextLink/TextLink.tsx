@@ -1,15 +1,27 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
 import styles from './TextLink.module.scss';
+import { ThemeContext } from '../../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
-interface LinkProps {
+type LinkProps = {
   text: string;
-}
+};
 
 const TextLink: FC<LinkProps> = ({ text }) => {
-  return <div className={cn('link')}>{text}</div>;
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <div
+      className={cn('link', {
+        'link--dt': theme === 'dark',
+        'link--lt': theme === 'light',
+      })}
+    >
+      {text}
+    </div>
+  );
 };
 
 export default TextLink;

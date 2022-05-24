@@ -1,0 +1,79 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/breckpoints";
+
+.item {
+  height: 40px;
+  padding: 9px 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  input {
+    display: none;
+  }
+
+  label {
+    width: 100%;
+    padding-left: 36px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 140%;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+    }
+  }
+}
+
+.item--dt {
+  &:hover {
+    background-color: rgba(205, 205, 205, 0.05);
+  }
+
+  input:checked + label::before {
+    background-image: url("../../../assets/dark-theme/_UI/Multiselect/check-mark.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  label {
+    color: $primary-light-gray;
+
+    &::before {
+      background-color: $primary-black;
+    }
+  }
+}
+
+.item--lt {
+  &:hover {
+    background-color: rgba(18, 18, 18, 0.05);
+  }
+
+  input:checked + label::before {
+    background-image: url("../../../assets/light-theme/_UI/Multiselect/check-mark.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  label {
+    color: $primary-dark-gray;
+
+    &::before {
+      background-color: $secondary-white;
+      border: 1px solid $primary-light-gray;
+    }
+  }
+}

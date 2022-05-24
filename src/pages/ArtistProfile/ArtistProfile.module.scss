@@ -2,64 +2,77 @@
 @import "../../sass/breckpoints.scss";
 
 .return {
-	height: 52px;
+  height: 52px;
 
-	&__container {
-		display: flex;
-		justify-content: flex-start;
-		height: 100%;
-	}
+  &__container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+  }
 
-	&__btn {
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 0 4px;
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 4px;
+    background-color: inherit;
+    border: none;
 
-		img {
-			cursor: pointer;
-		}
-	}
+    img {
+      cursor: pointer;
+    }
+  }
 
-	&__link {
-		margin-left: 16px;
-		display: none;
-	}
+  &__link {
+    margin-left: 16px;
+    display: none;
+  }
 }
 
 .gallery {
-	&__container {
-		padding-bottom: 80px;
-	}
+  &__container {
+    padding-bottom: 80px;
+  }
 
-	&__title {
-		font-family: "Cormorant SC", serif;
-		font-weight: 600;
-		font-size: 32px;
-		line-height: 100%;
-		color: $accent-gold;
-		margin-bottom: 60px;
-	}
+  &__title {
+    font-family: "Cormorant SC", serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 100%;
+    margin-bottom: 60px;
+  }
+}
+
+.gallery--dt {
+  .gallery__title {
+    color: $accent-gold;
+  }
+}
+
+.gallery--lt {
+  .gallery__title {
+    color: $accent-red;
+  }
 }
 
 @media (min-width: $breakpiont-tablet) {
-	.return {
-		height: 80px;
+  .return {
+    height: 80px;
 
-		&__link {
-			display: block;
-		}
-	}
+    &__link {
+      display: block;
+    }
+  }
 
-	.gallery {
-		&__container {
-			padding-bottom: 100px;
-		}
+  .gallery {
+    &__container {
+      padding-bottom: 100px;
+    }
 
-		&__title {
-			font-size: 60px;
-			line-height: 73px;
-		}
-	}
+    &__title {
+      font-size: 60px;
+      line-height: 73px;
+    }
+  }
 }

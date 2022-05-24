@@ -2,61 +2,84 @@
 @import "../../sass/colors.scss";
 
 .header {
-	height: 64px;
-	background-color: $primary-black;
+  height: 64px;
 
-	&__container {
-		height: 100%;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
+  &__container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-	&__burger {
-		display: block;
-		cursor: pointer;
-	}
+  &__burger {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    height: fit-content;
+  }
 
-	&__buttons {
-		display: none;
-		button {
-			background-color: $primary-black;
-			outline: none;
-			border: none;
-			color: $primary-light-gray;
-			font-family: "Cormorant SC", serif;
-			font-weight: 700;
-			font-size: 16px;
-			line-height: 128%;
-			padding: 5px 10px;
-			cursor: pointer;
-		}
-	}
+  &__buttons {
+    display: none;
 
-	&__changeTheme {
-		margin-left: 50px;
-		cursor: pointer;
-	}
+    button {
+      background-color: inherit;
+      outline: none;
+      border: none;
+      font-family: "Cormorant SC", serif;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 128%;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  }
+
+  &__changeTheme {
+    margin-left: 50px;
+    cursor: pointer;
+  }
 }
 
+
+.header--dt {
+  background-color: $primary-black;
+
+  .header__buttons {
+    button {
+      color: $primary-light-gray;
+    }
+  }
+}
+
+.header--lt {
+  background-color: $primary-white;
+
+  .header__buttons {
+    button {
+      color: $primary-dark-gray;
+    }
+  }
+}
+
+
 @media (min-width: $breakpiont-tablet) {
-	.header {
-		height: 88px;
-	}
+  .header {
+    height: 88px;
+  }
 }
 
 @media (min-width: $breakpiont-small-desktop) {
-	.header {
-		height: 80px;
+  .header {
+    height: 80px;
 
-		&__burger {
-			display: none;
-		}
+    &__burger {
+      display: none;
+    }
 
-		&__buttons {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-	}
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
 }

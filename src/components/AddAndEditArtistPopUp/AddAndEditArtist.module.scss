@@ -17,7 +17,7 @@
   &__close {
     cursor: pointer;
   }
-  
+
   &__addPortrait {
     text-align: center;
     margin-bottom: 40px;
@@ -26,7 +26,6 @@
   &__portraitField {
     width: 200px;
     height: 200px;
-    border: 1px dashed $primary-dark-gray;
     border-radius: 10px;
     margin: 0 auto 20px;
     display: flex;
@@ -52,11 +51,37 @@
   &__multiselect {
     margin-bottom: 40px;
   }
-  
+
   &__btn {
     text-align: center;
   }
 }
+
+
+.popup--dt {
+  background-color: $primary-black;
+
+  .popup__portraitField {
+    border: 1px dashed $primary-dark-gray;
+  }
+
+  .popup__portraitFieldText {
+    color: $primary-light-gray;
+  }
+}
+
+.popup--lt {
+  background-color: $secondary-white;
+
+  .popup__portraitField {
+    border: 1px dashed $secondary-gray;
+  }
+
+  .popup__portraitFieldText {
+    color: $primary-dark-gray;
+  }
+}
+
 
 @media (min-width: $breakpiont-tablet) {
   .popup {
@@ -93,6 +118,7 @@
     justify-content: center;
     align-items: center;
     background-color: $modal-window-background;
+    padding: 74px 0;
   }
 
   .popup {
@@ -118,7 +144,6 @@
       font-weight: 300;
       font-size: 16px;
       line-height: 140%;
-      color: $primary-light-gray;
       font-family: 'Inter', sans-serif;
     }
 
@@ -139,109 +164,3 @@
     }
   }
 }
-
-//.popupBackground {
-//  background-color: $modal-window-background;
-//  position: absolute;
-//  top: 0;
-//  bottom: 0;
-//  left: 0;
-//  right: 0;
-//  display: flex;
-//  align-items: center;
-//  justify-content: center;
-//}
-//
-//.popup {
-//  width: 100%;
-//  padding: 24px;
-//  background-color: $primary-black;
-//  display: flex;
-//  flex-direction: column;
-//  align-items: center;
-//
-//  &__top {
-//    width: 100%;
-//    display: flex;
-//    justify-content: flex-end;
-//    margin-bottom: 40px;
-//  }
-//
-//  &__addPortrait {
-//    width: 100%;
-//    display: flex;
-//    flex-direction: column;
-//    align-items: center;
-//    margin-bottom: 40px;
-//  }
-//
-//  &__portraitField {
-//    width: 200px;
-//    height: 200px;
-//    border: 1px dashed #575757;
-//    border-radius: 10px;
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    margin-bottom: 20px;
-//  }
-//
-//  &__form {
-//    padding: 0 6px;
-//    width: 100%;
-//  }
-//
-//  &__input {
-//    margin-bottom: 30px;
-//  }
-//
-//  &__textarea {
-//    margin-bottom: 30px;
-//  }
-//
-//  &__btn {
-//    text-align: center;
-//  }
-//}
-
-//@media (min-width: $breakpiont-tablet) {
-//  .popupBackground {
-//    align-items: center;
-//    justify-content: center;
-//  }
-//
-//  .popup {
-//    width: 320px;
-//    padding: 24px;
-//
-//    &__top {
-//      display: block;
-//      width: 100%;
-//    }
-//
-//    &__close {
-//      display: flex;
-//      justify-content: flex-end;
-//      margin-bottom: 20px;
-//    }
-//
-//    &__trashBin {
-//      display: flex;
-//      justify-content: center;
-//      margin-bottom: 32px;
-//    }
-//
-//    &__title {
-//      max-width: 233px;
-//    }
-//
-//    &__warning {
-//      max-width: 240px;
-//      margin-bottom: 32px;
-//    }
-//
-//    &__link {
-//      margin-bottom: 36px;
-//    }
-//  }
-//}

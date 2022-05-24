@@ -2,12 +2,27 @@
 @import "../../../sass/fonts.scss";
 
 .link {
-	font-family: 'Inter', sans-serif;
-	font-weight: 700;
-	font-size: 12px;
-	line-height: 15px;
-	text-transform: uppercase;
-	text-decoration: underline;
-	color: $primary-light-gray;
-	cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link--dt {
+  color: $primary-light-gray;
+
+  &:hover {
+    color: $primary-white;
+  }
+}
+
+.link--lt {
+  color: $primary-dark-gray;
+
+  &:hover {
+    color: $primary-black;
+  }
 }

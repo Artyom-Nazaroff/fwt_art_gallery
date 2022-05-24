@@ -8,7 +8,6 @@
 	right: 0;
 	left: 0;
 	z-index: 5;
-	background-color: rgba(3, 3, 3, 0.6);
 
 	&__content {
 		width: 252px;
@@ -16,7 +15,6 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
-		background-color: $primary-black;
 	}
 
 	&__top {
@@ -27,6 +25,12 @@
 		padding: 24px;
 	}
 
+	&__closeBtn {
+		border: none;
+		background-color: inherit;
+		cursor: pointer;
+	}
+
 	&__buttons {
 		padding: 80px 47px;
 		list-style: none;
@@ -34,19 +38,17 @@
 
 	&__changeTheme {
 		margin-bottom: 40px;
+	}
+
+	&__changeThemeBtn {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		color: $primary-light-gray;
+		background-color: inherit;
+		border: none;
 
 		img {
 			margin-right: 12px;
-		}
-
-		span {
-			text-decoration: underline;
-			text-transform: uppercase;
-			font-family: "Inter", sans-serif;
 			cursor: pointer;
 		}
 	}
@@ -56,7 +58,6 @@
 		font-weight: 500;
 		font-size: 32px;
 		line-height: 100%;
-		color: $primary-light-gray;
 		cursor: pointer;
 
 		&:not(:last-child) {
@@ -64,6 +65,32 @@
 		}
 	}
 }
+
+
+.burger--dt {
+	background-color: rgba(3, 3, 3, 0.6);
+
+	.burger__content {
+		background-color: $primary-black;
+	}
+
+	.burger__btn {
+		color: $primary-light-gray;
+	}
+}
+
+.burger--lt {
+	background-color: rgba(3, 3, 3, 0.3);
+
+	.burger__content {
+		background-color: $primary-white;
+	}
+
+	.burger__btn {
+		color: $primary-dark-gray;
+	}
+}
+
 
 @media (min-width: $breakpiont-tablet) {
 	.burger {

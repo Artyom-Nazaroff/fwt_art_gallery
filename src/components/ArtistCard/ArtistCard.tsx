@@ -1,20 +1,28 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
 import styles from './ArtistCard.module.scss';
 import picture from '../../assets/common-files/picture-example.jpg';
 import arrow from '../../assets/dark-theme/artist-profile/back-arrow-dt.svg';
 import TextLink from '../_UI/TextLink/TextLink';
+import { ThemeContext } from '../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
-interface ArtistProps {
+type ArtistProps = {
   name: string;
   years: string;
-}
+};
 
 const ArtistCard: FC<ArtistProps> = ({ name, years }) => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <li className={cn('artist')}>
+    <li
+      className={cn('artist', {
+        'artist--dt': theme === 'dark',
+        'artist--lt': theme === 'light',
+      })}
+    >
       <div className={cn('artist__modalWindow')}>
         <TextLink text="know more" />
       </div>

@@ -21,18 +21,12 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-color: $primary-black;
 		text-transform: uppercase;
 		text-decoration: underline;
 		font-weight: 700;
 		font-size: 12px;
 		line-height: 15px;
-		color: $primary-light-gray;
 		font-family: "Inter", sans-serif;
-
-		span {
-			cursor: pointer;
-		}
 	}
 
 	&__inner {
@@ -63,14 +57,12 @@
 		bottom: 0;
 		left: 0;
 		padding: 8px 12px;
-		background-color: $primary-black;
 
 		&::before {
 			content: "";
 			display: none;
 			height: 42px;
 			width: 2px;
-			background-color: $accent-gold;
 			position: absolute;
 			left: 0;
 			top: 50%;
@@ -79,7 +71,6 @@
 	}
 
 	&__name {
-		color: $primary-light-gray;
 		font-family: "Cormorant SC", serif;
 		font-weight: 500;
 		font-size: 12px;
@@ -93,7 +84,6 @@
 		font-size: 8px;
 		line-height: 10px;
 		text-transform: uppercase;
-		color: $accent-gold;
 	}
 
 	&__arrow {
@@ -105,7 +95,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: $accent-gold;
 
 		img {
 			width: 66%;
@@ -113,6 +102,58 @@
 		}
 	}
 }
+
+
+.artist--dt {
+	.artist__modalWindow {
+		background-color: $primary-black;
+	}
+
+	.artist__info {
+		background-color: $primary-black;
+		&::before {
+			background-color: $accent-gold;
+		}
+	}
+
+	.artist__name {
+		color: $primary-white;
+	}
+
+	.artist__datesOfLife {
+		color: $accent-gold;
+	}
+
+	.artist__arrow {
+		background-color: $accent-gold;
+	}
+}
+
+.artist--lt {
+	.artist__modalWindow {
+		background-color: $primary-white;
+	}
+
+	.artist__info {
+		background-color: $primary-white;
+		&::before {
+			background-color: $accent-red;
+		}
+	}
+
+	.artist__name {
+		color: $primary-black;
+	}
+
+	.artist__datesOfLife {
+		color: $accent-red;
+	}
+
+	.artist__arrow {
+		background-color: $accent-red;
+	}
+}
+
 
 @media (min-width: $breakpiont-tablet) {
 	.artist {
