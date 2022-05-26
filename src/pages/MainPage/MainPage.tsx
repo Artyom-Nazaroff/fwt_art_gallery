@@ -6,11 +6,13 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import AdaptiveGrid from '../../components/AdaptiveGrid/AdaptiveGrid';
 import { ThemeContext } from '../../context/themeContext';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const cn = classNames.bind(styles);
 
 const MainPage = () => {
   const { theme } = useContext(ThemeContext);
+  const { artists } = useTypedSelector((state) => state.artists);
 
   return (
     <div
@@ -23,7 +25,7 @@ const MainPage = () => {
       <main className={cn('main')}>
         <section className={cn('paintings')}>
           <div className={cn('paintings__container', 'container')}>
-            <AdaptiveGrid />
+            <AdaptiveGrid items={artists} />
           </div>
         </section>
       </main>
