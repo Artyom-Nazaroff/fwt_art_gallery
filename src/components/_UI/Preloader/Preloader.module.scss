@@ -1,0 +1,88 @@
+.preloaderContainer {
+  text-align: center;
+}
+
+.preloader {
+  animation: rotate 1s linear infinite;
+  width: 50px;
+  height: 50px;
+
+  &__part1, &__part2, &__part3, &__part4 {
+    stroke-linecap: round;
+    stroke-dasharray: 1, 150;
+    transform: rotateZ(100deg);
+    transform-origin: center;
+    animation: dash 2s ease-in-out infinite;
+  }
+
+  &__part2, &__part3, &__part4 {
+    opacity: 0.35;
+  }
+
+  &__part1 {
+    opacity: 0.8;
+    animation: dash1 2s ease-in-out infinite;
+  }
+
+  &__part2 {
+    animation: dash2 2s ease-in-out infinite;
+  }
+
+  &__part3 {
+    animation: dash3 2s ease-in-out infinite;
+  }
+
+  &__part4 {
+    animation: dash4 2s ease-in-out infinite;
+  }
+}
+
+@keyframes dash1 {
+  0%, 100% {
+    stroke-dasharray: 1, 150;
+    transform: rotateZ(100deg);
+  }
+  50% {
+    stroke-dasharray: 30, 150;
+    transform: rotateZ(16deg);
+  }
+}
+
+@keyframes dash2 {
+  0%, 100% {
+    stroke-dasharray: 1, 150;
+    transform: rotateZ(100deg);
+  }
+  50% {
+    stroke-dasharray: 45, 150;
+    transform: rotateZ(-26deg);
+  }
+}
+
+@keyframes dash3 {
+  0%, 100% {
+    stroke-dasharray: 1, 150;
+    transform: rotateZ(100deg);
+  }
+  50% {
+    stroke-dasharray: 60, 150;
+    transform: rotateZ(-68deg);
+  }
+}
+
+@keyframes dash4 {
+  0%, 100% {
+    stroke-dasharray: 1, 150;
+    transform: rotateZ(100deg);
+  }
+  50% {
+    stroke-dasharray: 75, 150;
+    transform: rotateZ(-110deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

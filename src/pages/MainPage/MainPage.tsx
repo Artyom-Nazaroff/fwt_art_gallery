@@ -7,6 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import AdaptiveGrid from '../../components/AdaptiveGrid/AdaptiveGrid';
 import { ThemeContext } from '../../context/themeContext';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import Preloader from '../../components/_UI/Preloader/Preloader';
 
 const cn = classNames.bind(styles);
 
