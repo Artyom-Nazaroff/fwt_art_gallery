@@ -13,7 +13,18 @@ import { ThemeContext } from '../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
-const Header: FC = () => {
+type User = {
+  name: string;
+};
+
+type HeaderProps = {
+  user?: User;
+  onLogin?: () => void;
+  onLogout?: () => void;
+  onCreateAccount?: () => void;
+};
+
+const Header: FC<HeaderProps> = ({ user, onLogin, onLogout, onCreateAccount }) => {
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
 
   const { theme, toggleTheme } = useContext(ThemeContext);
