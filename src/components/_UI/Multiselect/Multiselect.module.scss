@@ -1,0 +1,128 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/breckpoints";
+@import "../../../sass/templates";
+
+.select {
+  &__label {
+    @extend %label-styles;
+  }
+
+  &__inner {
+    position: relative;
+  }
+
+  &__input {
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 46px;
+    overflow: hidden;
+  }
+
+  &__inputItems {
+    height: 100%;
+    width: 100%;
+    padding: 6px 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  &__inputItems {
+    div:not(:last-child) {
+      margin-right: 12px;
+    }
+  }
+
+  &__inputArrow {
+    border: none;
+    height: 100%;
+    padding: 0 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: inherit;
+    cursor: pointer;
+  }
+
+  &__dropdown {
+    width: 100%;
+    padding: 20px 0;
+    border-radius: 0 0 4px 4px;
+    display: none;
+    position: absolute;
+    top: 46px;
+    left: 0;
+  }
+
+  &__list {
+    list-style: none;
+  }
+}
+
+.open {
+  .select__dropdown {
+    display: block;
+  }
+}
+
+.open.select--dt {
+  .select__input {
+    border: 1px solid $primary-light-gray;
+  }
+}
+
+.open.select--lt {
+  .select__input {
+    border: 1px solid $primary-dark-gray;
+  }
+}
+
+.select--dt {
+  .select__label {
+    @extend %label--dt;
+  }
+
+  .select__input {
+    @extend %default--dt;
+  }
+
+  .select__input:hover {
+    @extend %hover--dt;
+  }
+
+  .select__input:focus {
+    @extend %focus--dt;
+  }
+
+  .select__dropdown {
+    background-color: $secondary-black;
+  }
+}
+
+
+.select--lt {
+  .select__label {
+    @extend %label--lt;
+  }
+
+  .select__input {
+    @extend %default--lt;
+  }
+
+  .select__input:hover {
+    @extend %hover--lt;
+  }
+
+  .select__input:focus {
+    @extend %focus--lt;
+  }
+
+  .select__dropdown {
+    background-color: $primary-white;
+    border: 1px solid $primary-light-gray;
+  }
+}

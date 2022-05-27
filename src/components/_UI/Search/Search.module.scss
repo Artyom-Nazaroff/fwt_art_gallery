@@ -1,0 +1,103 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/templates";
+
+.search {
+  display: flex;
+  flex-direction: column;
+
+  &__field {
+    position: relative;
+    height: 32px;
+    overflow: hidden;
+  }
+
+  &__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 100%;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: url("../../../assets/dark-theme/_UI/Search/search-icon.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  &__input {
+    border-radius: 4px;
+    height: 100%;
+    width: 100%;
+    padding: 7.5px 53px 7.5px 52px;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      width: 8px;
+      height: 8px;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+  }
+
+  &__error {
+    @extend %error-styles;
+  }
+}
+
+.search--dt {
+  .search__input {
+    @extend %default--dt;
+
+    &::-webkit-search-cancel-button {
+      background-image: url("../../../assets/dark-theme/_UI/Search/close-icon.svg");
+    }
+  }
+
+  .search__input:hover {
+    @extend %hover--dt;
+  }
+
+  .search__input:focus {
+    @extend %focus--dt;
+  }
+}
+
+.search--lt {
+  .search__input {
+    @extend %default--lt;
+
+    &::-webkit-search-cancel-button {
+      background-image: url("../../../assets/light-theme/_UI/Search/close-icon.svg");
+    }
+  }
+
+  .search__input:hover {
+    @extend %hover--lt;
+  }
+
+  .search__input:focus {
+    @extend %focus--lt;
+  }
+}
+
+.search--err {
+  .search__input {
+    @extend %error-field-border;
+  }
+
+  .search__error {
+    display: flex;
+  }
+}

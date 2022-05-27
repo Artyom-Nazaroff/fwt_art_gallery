@@ -1,12 +1,13 @@
-import React from "react";
-import "./App.css";
-import Component from "./components/Component";
+import React from 'react';
+import './App.scss';
+import { ThemeState } from './context/ThemeState';
+import MainPage from './pages/MainPage/MainPage';
 
 const App = () => {
   return (
-    <div className="App">
-      <Component />
-    </div>
+    <ThemeState>
+      <MainPage />
+    </ThemeState>
   );
 };
 

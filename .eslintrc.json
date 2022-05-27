@@ -5,12 +5,12 @@
 	},
 	"extends": [
 		"plugin:@typescript-eslint/recommended",
+		"airbnb",
 		"plugin:react/recommended",
 		"plugin:import/errors",
 		"plugin:import/warnings",
 		"plugin:import/typescript",
-		"airbnb",
-		// "plugin:storybook/recommended",
+		"plugin:storybook/recommended",
 		"plugin:prettier/recommended",
 		"prettier"
 	],
@@ -23,8 +23,8 @@
 		"sourceType": "module"
 	},
 	"plugins": [
-		"react",
 		"@typescript-eslint",
+		"react",
 		"prettier"
 	],
 	"settings": {
@@ -68,13 +68,35 @@
 				"unnamedComponents": "arrow-function"
 			}
 		],
+		"no-use-before-define": [
+			"error",
+			{
+				"functions": false,
+				"classes": false,
+				"variables": false
+			}
+		],
+		"jsx-a11y/label-has-associated-control": ["error", {
+			"required": {
+				"some": ["nesting", "id"]
+			}
+		}],
+		"jsx-a11y/label-has-for": ["error", {
+			"required": {
+				"some": ["nesting", "id"]
+			}
+		}],
+		"no-shadow": "off",
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-shadow": ["error"],
 		"require-jsdoc": "off",
 		"@typescript-eslint/ban-ts-comment": "off",
 		"@typescript-eslint/ban-types": "off",
 		"react/require-default-props": "off",
 		"react/jsx-props-no-spreading": "off",
 		"import/prefer-default-export": "off",
-		"react/no-unescaped-entities": "off"
+		"react/no-unescaped-entities": "off",
+		"@typescript-eslint/no-unused-vars": "off"
 	},
 	"overrides": [
 		{

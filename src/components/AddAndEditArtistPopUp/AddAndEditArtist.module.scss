@@ -1,0 +1,166 @@
+@import "../../sass/colors";
+@import "../../sass/breckpoints";
+
+.popupBackground {
+  flex: 1 0 auto;
+}
+
+.popup {
+  padding: 24px 24px 0;
+
+  &__top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+  }
+
+  &__close {
+    cursor: pointer;
+  }
+
+  &__addPortrait {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__portraitField {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__portraitFieldText {
+    display: none;
+  }
+
+  &__form {
+    padding: 0 6px;
+    margin-bottom: 80px;
+  }
+
+  &__input,
+  &__textarea {
+    margin-bottom: 32px;
+  }
+
+  &__multiselect {
+    margin-bottom: 40px;
+  }
+
+  &__btn {
+    text-align: center;
+  }
+}
+
+
+.popup--dt {
+  background-color: $primary-black;
+
+  .popup__portraitField {
+    border: 1px dashed $primary-dark-gray;
+  }
+
+  .popup__portraitFieldText {
+    color: $primary-light-gray;
+  }
+}
+
+.popup--lt {
+  background-color: $secondary-white;
+
+  .popup__portraitField {
+    border: 1px dashed $secondary-gray;
+  }
+
+  .popup__portraitFieldText {
+    color: $primary-dark-gray;
+  }
+}
+
+
+@media (min-width: $breakpiont-tablet) {
+  .popup {
+    padding: 36px 24px 0;
+
+    &__top {
+      margin-bottom: 28px;
+    }
+
+    &__addPortrait {
+      margin-bottom: 60px;
+    }
+
+    &__form {
+      padding: 0;
+      width: 340px;
+      margin: 0 auto 80px;
+    }
+
+    &__input,
+    &__textarea {
+      margin-bottom: 40px;
+    }
+
+    &__multiselect {
+      margin-bottom: 60px;
+    }
+  }
+}
+
+@media (min-width: $breakpiont-small-desktop) {
+  .popupBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $modal-window-background;
+    padding: 74px 0;
+  }
+
+  .popup {
+    width: 800px;
+    padding: 36px;
+
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    &__addPortrait {
+      padding: 0 60px 0 64px;
+      margin: 0;
+    }
+
+    &__portraitFieldText {
+      display: block;
+      width: 136px;
+      margin-top: 16px;
+      text-align: center;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 140%;
+      font-family: 'Inter', sans-serif;
+    }
+
+    &__form {
+      margin: 0;
+      padding: 0 64px 0 0;
+      flex: 1 0 auto;
+    }
+
+    &__input,
+    &__textarea {
+      margin-bottom: 40px;
+    }
+
+    &__btn {
+      text-align: start;
+      margin-bottom: 44px;
+    }
+  }
+}

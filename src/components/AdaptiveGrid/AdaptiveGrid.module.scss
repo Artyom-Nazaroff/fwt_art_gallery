@@ -1,0 +1,27 @@
+@import "../../sass/breckpoints.scss";
+
+.grid {
+	&__container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+}
+
+@media (min-width: $breakpiont-tablet) {
+	.grid {
+		&__container {
+			grid-template-columns: 1fr 1fr;
+			gap: 24px;
+		}
+	}
+}
+
+@media (min-width: $breakpiont-small-desktop) {
+	.grid {
+		&__container {
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 32px;
+		}
+	}
+}

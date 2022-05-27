@@ -1,0 +1,51 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+
+.btn {
+  border-radius: 30px;
+  padding: 16px 80px;
+  border: none;
+  cursor: pointer;
+
+  span {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+    color: $primary-white;
+  }
+}
+
+.btn--dt {
+  background-color: $accent-gold;
+
+  &:hover {
+    box-shadow: 0 4px 10px $accent-gold;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    background-color: #BA9052;
+    box-shadow: 0 4px 10px $accent-gold;
+  }
+}
+
+.btn--lt {
+  background-color: $primary-black;
+
+  &:hover {
+    box-shadow: 0 4px 10px $primary-black;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    background-color: #232323;
+    box-shadow: 0 4px 10px $primary-black;
+  }
+}

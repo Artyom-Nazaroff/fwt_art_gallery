@@ -1,0 +1,340 @@
+@import "../../sass/breckpoints.scss";
+@import "../../sass/colors.scss";
+@import "../../sass/fonts.scss";
+
+.artist {
+  margin-bottom: 40px;
+  overflow: hidden;
+
+  &__portrait {
+    width: 100%;
+    overflow: hidden;
+    max-height: 500px;
+
+    img {
+      width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  &__description {
+    position: relative;
+  }
+
+  &__basicInfo {
+    position: absolute;
+    left: 0;
+    top: -118px;
+    width: 300px;
+    padding: 20px;
+    font-family: "Cormorant SC", serif;
+  }
+
+  &__dates {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 8px;
+  }
+
+  &__name {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 100%;
+    margin-bottom: 8px;
+  }
+
+  &__place {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  &__desktopName {
+    display: none;
+  }
+
+  &__otherInfo {
+    padding: 20px;
+  }
+
+  &__text {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 140%;
+    text-align: justify;
+    margin-bottom: 20px;
+    max-height: 176px;
+    overflow: hidden;
+
+    &--short {
+      max-height: 176px;
+    }
+    &--full {
+      max-height: none;
+    }
+  }
+
+  &__link {
+    background-color: inherit;
+    border: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0;
+
+    img {
+      margin-left: 10px;
+    }
+  }
+
+  &__labels {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 8px;
+    row-gap: 12px;
+  }
+}
+
+
+.artist--dt {
+  .artist__description {
+    background-color: $primary-black;
+  }
+
+  .artist__basicInfo {
+    background-color: $primary-black;
+  }
+
+  .artist__dates {
+    color: $secondary-gray;
+  }
+
+  .artist__name {
+    color: $accent-gold;
+  }
+
+  .artist__desktopName {
+    color: $accent-gold;
+    &::before {
+      background-color: $accent-gold;
+    }
+  }
+
+  .artist__place {
+    color: $secondary-gray;
+  }
+
+  .artist__otherInfo {
+    &::before {
+      background-color: $primary-light-gray;
+    }
+  }
+
+  .artist__text {
+    color: $primary-light-gray;
+  }
+}
+
+.artist--lt {
+  .artist__description {
+    background-color: $primary-white;
+  }
+
+  .artist__basicInfo {
+    background-color: $primary-white;
+  }
+
+  .artist__dates {
+    color: $primary-dark-gray;
+  }
+
+  .artist__name {
+    color: $accent-red;
+  }
+
+  .artist__desktopName {
+    color: $accent-red;
+    &::before {
+      background-color: $accent-red;
+    }
+  }
+
+  .artist__place {
+    color: $primary-dark-gray;
+  }
+
+  .artist__otherInfo {
+    &::before {
+      background-color: $primary-dark-gray;
+    }
+  }
+
+  .artist__text {
+    color: $primary-dark-gray;
+  }
+}
+
+
+@media (min-width: $breakpiont-tablet) {
+  .artist {
+    margin-bottom: 60px;
+
+    &__portrait {
+      max-height: 1000px;
+    }
+
+    &__description {
+      padding: 40px 20px;
+    }
+
+    &__basicInfo {
+      width: 560px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    &__dates {
+      font-size: 16px;
+      line-height: 19px;
+      margin-bottom: 12px;
+    }
+
+    &__name {
+      font-size: 48px;
+      margin-bottom: 0;
+    }
+
+    &__place {
+      font-size: 16px;
+      line-height: 19px;
+    }
+
+    &__text {
+      &--short {
+        max-height: 66px;
+      }
+    }
+
+    &__labels {
+      column-gap: 20px;
+    }
+  }
+}
+
+@media (min-width: $breakpiont-small-desktop) {
+  .artist {
+    margin-bottom: 160px;
+
+    &__container {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      position: relative;
+      margin: 0 auto;
+      max-width: 1280px;
+      padding: 0 20px;
+    }
+
+    &__portrait {
+      height: 1000px;
+      flex: 0 0 72%;
+      transform: translateX(20px);
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &__description {
+      width: 600px;
+      position: absolute;
+      top: 60px;
+      left: 100px;
+      padding: 60px 80px;
+    }
+
+    &__basicInfo {
+      position: static;
+      width: 100%;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    &__inner {
+      position: relative;
+    }
+
+    &__dates {
+      margin: 0;
+    }
+
+    &__name {
+      display: none;
+    }
+
+    &__desktopName {
+      display: block;
+      font-weight: 500;
+      font-size: 60px;
+      line-height: 73px;
+      font-family: "Cormorant SC", serif;
+      position: relative;
+      margin-bottom: 30px;
+
+      &::before {
+        content: "";
+        display: block;
+        height: 73px;
+        width: 2px;
+        position: absolute;
+        top: 0;
+        left: -80px;
+      }
+    }
+
+    &__otherInfo {
+      padding: 20px 0 0;
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 2px;
+        background-color: $primary-light-gray;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &__text {
+      &--short {
+        max-height: 110px;
+      }
+    }
+  }
+}
+
+@media (min-width: $breakpiont-large-desktop) {
+  .artist {
+    &__portrait {
+      flex: 0 0 75%;
+      transform: translateX(100px);
+    }
+
+    &__container {
+      max-width: 1440px;
+      padding: 0 100px;
+    }
+  }
+}
