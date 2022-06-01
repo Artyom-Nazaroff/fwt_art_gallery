@@ -1,5 +1,32 @@
+type MainPaintingType = {
+  mainPainting: {
+    artist: string;
+    name: string;
+    yearOfCreation: string;
+    _id: string;
+    image: {
+      original: string;
+      src: string;
+      src2x: string;
+      webp: string;
+      webp2x: string;
+      _id: string;
+    };
+  };
+};
+
+export type ArtistItemType = {
+  name: string;
+  yearsOfLife: string;
+  description: string;
+  __v: number;
+  _id: string;
+  genres: Array<string>;
+  mainPainting: MainPaintingType;
+};
+
 export type ArtistsState = {
-  artists: any[];
+  artists: Array<ArtistItemType>;
   loading: boolean;
   error: null | string;
 };
@@ -16,7 +43,7 @@ export type FetchArtistsAction = {
 
 export type FetchArtistsSuccessAction = {
   type: ArtistsActionTypes.FETCH_ARTISTS_SUCCESS;
-  payload: any[];
+  payload: Array<ArtistItemType>;
 };
 
 export type FetchArtistsErrorAction = {

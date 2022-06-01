@@ -16,6 +16,11 @@ type ArtistProps = {
 const ArtistCard: FC<ArtistProps> = ({ name, years }) => {
   const { theme } = useContext(ThemeContext);
 
+  const datesOfLife = years
+    .split(' – ')
+    .map((i) => i.slice(-4))
+    .join(' – ');
+
   return (
     <li
       className={cn('artist', {
@@ -30,7 +35,7 @@ const ArtistCard: FC<ArtistProps> = ({ name, years }) => {
         <img src={picture} alt="artist_portrait" />
         <div className={cn('artist__info')}>
           <div className={cn('artist__name')}>{name}</div>
-          <div className={cn('artist__datesOfLife')}>{years}</div>
+          <div className={cn('artist__datesOfLife')}>{datesOfLife}</div>
         </div>
         <div className={cn('artist__arrow')}>
           <img src={arrow} alt="arrow" />

@@ -29,25 +29,24 @@
     top: -118px;
     width: 300px;
     padding: 20px;
-    font-family: "Cormorant SC", serif;
   }
 
   &__dates {
-    font-weight: 500;
+    font-family: "CormorantSCMedium", serif;
     font-size: 12px;
     line-height: 15px;
     margin-bottom: 8px;
   }
 
   &__name {
-    font-weight: 600;
+    font-family: "CormorantSCSemiBold", serif;
     font-size: 32px;
     line-height: 100%;
     margin-bottom: 8px;
   }
 
   &__place {
-    font-weight: 500;
+    font-family: "CormorantSCMedium", serif;
     font-size: 12px;
     line-height: 15px;
   }
@@ -61,7 +60,7 @@
   }
 
   &__text {
-    font-weight: 300;
+    font-family: "InterLight", sans-serif;
     font-size: 16px;
     line-height: 140%;
     text-align: justify;

@@ -1,20 +1,20 @@
 import { Dispatch } from 'redux';
-import axios from 'axios';
 import { ArtistsAction, ArtistsActionTypes } from './artistsTypes';
+import { artistsAPI } from '../../utils/artistsAPI';
 
-export const fetchUsers = () => {
+export const fetchArtists = () => {
   return async (dispatch: Dispatch<ArtistsAction>) => {
     try {
       dispatch({ type: ArtistsActionTypes.FETCH_ARTISTS });
-      const response = await axios.get('https://framework.team/');
+      const response = await artistsAPI.getArtists();
       dispatch({
         type: ArtistsActionTypes.FETCH_ARTISTS_SUCCESS,
-        payload: response.data,
+        payload: response,
       });
     } catch (e) {
       dispatch({
         type: ArtistsActionTypes.FETCH_ARTISTS_ERROR,
-        payload: 'Произошла ошибка!',
+        payload: `${e}`,
       });
     }
   };

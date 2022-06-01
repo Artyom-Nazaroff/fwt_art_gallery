@@ -1,12 +1,7 @@
 import { ArtistsAction, ArtistsActionTypes, ArtistsState } from './artistsTypes';
 
 const initialState: ArtistsState = {
-  artists: [
-    { name: 'Jean-Honore Fragonard', years: '1732 - 1806' },
-    { name: 'John Peter Russell', years: '1858 - 1930' },
-    { name: 'Vasily Pukirev', years: '1832 - 1890' },
-    { name: 'Gerrit van Honthorst', years: '1592 - 1656' },
-  ],
+  artists: [],
   loading: false,
   error: null,
 };

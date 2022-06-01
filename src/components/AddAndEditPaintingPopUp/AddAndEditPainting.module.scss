@@ -3,14 +3,21 @@
 
 .popupBackground {
   flex: 1 0 auto;
+  position: relative;
 }
 
 .popup {
-  padding: 24px 24px 80px;
+  padding: 24px 20px 80px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   &__top {
     display: flex;
     justify-content: flex-end;
+    padding-right: 4px;
     margin-bottom: 40px;
   }
 
@@ -18,37 +25,54 @@
     cursor: pointer;
   }
 
-  &__addPortrait {
+  &__form {
+    width: 280px;
+    margin: 0 auto;
+  }
+
+  &__input {
+    padding: 0 6px;
+    margin: 0 0 32px;
+  }
+
+  &__browseImage {
     text-align: center;
+    margin-top: 40px;
     margin-bottom: 40px;
   }
 
-  &__portraitField {
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    margin: 0 auto 20px;
+  &__imageField {
+    width: 100%;
+    height: 187px;
+    border-radius: 2px;
+    padding: 20px 26px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border: 1px dashed $primary-dark-gray;
+
+    img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
   }
 
-  &__portraitFieldText {
+  &__mobileLink {
+    margin-bottom: 12px;
+  }
+
+  &__desktopLink {
     display: none;
   }
 
-  &__form {
-    padding: 0 6px;
-  }
-
-  &__input,
-  &__textarea {
-    margin-bottom: 32px;
-  }
-
-  &__multiselect {
-    margin-bottom: 40px;
+  &__imageFieldText {
+    width: 227px;
+    font-family: 'InterLight', sans-serif;
+    font-size: 12px;
+    line-height: 140%;
+    color: $primary-dark-gray;
   }
 
   &__btn {
@@ -83,30 +107,72 @@
 
 
 @media (min-width: $breakpiont-tablet) {
+  .popupBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 150px 37px;
+    background-color: $modal-window-background;
+  }
+
   .popup {
-    padding: 36px 24px 0;
+    padding: 36px 36px 80px;
+    position: static;
+    width: 693px;
+    height: 723px;
 
     &__top {
+      padding-right: 0;
       margin-bottom: 28px;
     }
 
-    &__addPortrait {
-      margin-bottom: 60px;
-    }
-
     &__form {
-      padding: 0;
-      width: 340px;
-      margin: 0 auto 80px;
+      width: 493px;
+      margin: 0 auto;
     }
 
-    &__input,
-    &__textarea {
-      margin-bottom: 40px;
-    }
-
-    &__multiselect {
+    &__inputs {
+      display: grid;
+      grid-template-columns: 340px 105px;
+      column-gap: 48px;
       margin-bottom: 60px;
+    }
+
+    &__input {
+      margin-bottom: 0;
+    }
+
+    &__imageField {
+      height: 327px;
+      padding: 52px 116px;
+
+      img {
+        width: 130px;
+        height: 130px;
+      }
+    }
+
+    &__mobileLink {
+      display: none;
+    }
+
+    &__desktopLink {
+      display: block;
+      width: 239px;
+      text-align: center;
+      font-size: 16px;
+      line-height: 140%;
+      font-family: "InterLight", sans-serif;
+      color: $primary-light-gray;
+      margin-bottom: 12px;
+    }
+
+    &__desktopLinkText {
+      font-family: "InterMedium", sans-serif;
+    }
+
+    &__imageFieldText {
+      width: 260px;
     }
   }
 }
