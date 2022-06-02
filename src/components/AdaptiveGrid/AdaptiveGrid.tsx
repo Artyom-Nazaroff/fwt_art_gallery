@@ -15,7 +15,12 @@ const AdaptiveGrid: FC<AdaptiveGridProps> = ({ items }) => {
     <section className={cn('grid')}>
       <ul className={cn('grid__container')}>
         {items.map((item) => (
-          <ArtistCard key={item.name} name={item.name} years={item.yearsOfLife} />
+          <ArtistCard
+            key={item.name}
+            name={item.name}
+            years={item.yearsOfLife}
+            picture={item.mainPainting.image.src}
+          />
         ))}
       </ul>
     </section>

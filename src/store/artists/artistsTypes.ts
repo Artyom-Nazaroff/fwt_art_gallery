@@ -1,17 +1,15 @@
 type MainPaintingType = {
-  mainPainting: {
-    artist: string;
-    name: string;
-    yearOfCreation: string;
+  artist: string;
+  name: string;
+  yearOfCreation: string;
+  _id: string;
+  image: {
+    original: string;
+    src: string;
+    src2x: string;
+    webp: string;
+    webp2x: string;
     _id: string;
-    image: {
-      original: string;
-      src: string;
-      src2x: string;
-      webp: string;
-      webp2x: string;
-      _id: string;
-    };
   };
 };
 
