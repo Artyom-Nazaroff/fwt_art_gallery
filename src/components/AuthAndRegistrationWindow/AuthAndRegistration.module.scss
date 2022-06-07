@@ -8,12 +8,20 @@
 
 .auth {
   padding-bottom: 32px;
+  min-height: 100vh;
 
   &__top {
     padding: 24px;
     display: flex;
     justify-content: flex-end;
     margin-bottom: 66px;
+  }
+
+  &__close {
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
   }
 
   &__title {
@@ -52,10 +60,17 @@
     font-family: "InterLight", sans-serif;
     font-size: 12px;
     line-height: 140%;
+  }
 
-    a {
-      font-weight: 500;
-    }
+  &__textLink {
+    font-family: "InterMedium", sans-serif;
+    font-size: 12px;
+    line-height: 140%;
+    text-decoration: underline;
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
   }
 }
 
@@ -75,9 +90,10 @@
 
   .auth__text {
     color: $primary-light-gray;
-    a {
-      color: $primary-light-gray;
-    }
+  }
+
+  .auth__textLink {
+    color: $primary-light-gray;
   }
 }
 
@@ -90,9 +106,10 @@
 
   .auth__text {
     color: $primary-dark-gray;
-    a {
-      color: $primary-dark-gray;
-    }
+  }
+
+  .auth__textLink {
+    color: $primary-dark-gray;
   }
 }
 
@@ -135,6 +152,10 @@
       margin-bottom: 60px;
       font-size: 16px;
     }
+
+    &__textLink {
+      font-size: 16px;
+    }
   }
 }
 
@@ -147,7 +168,6 @@
     right: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
     padding: 150px 0;
     background-color: $modal-window-background;
   }
@@ -167,6 +187,7 @@
   .auth {
     flex: 0 0 52%;
     padding-bottom: 130px;
+    min-height: 0;
 
     &__top {
       padding: 36px;

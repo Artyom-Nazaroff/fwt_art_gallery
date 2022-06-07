@@ -1,7 +1,7 @@
 @import "../../sass/breckpoints.scss";
 @import "../../sass/colors.scss";
 
-.artist {
+.painting {
   position: relative;
   padding-top: 66%;
 
@@ -9,20 +9,6 @@
     content: "";
     display: block;
     width: 100%;
-  }
-
-  &__modalWindow {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    z-index: 4;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: 0.9;
-    cursor: pointer;
   }
 
   &__inner {
@@ -40,7 +26,9 @@
 
     img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
   }
 
@@ -75,7 +63,7 @@
     white-space: nowrap;
   }
 
-  &__datesOfLife {
+  &__dateOfCreation {
     font-family: "InterBold", serif;
     font-size: 8px;
     line-height: 10px;
@@ -100,12 +88,8 @@
 }
 
 
-.artist--dt {
-  .artist__modalWindow {
-    background-color: $primary-black;
-  }
-
-  .artist__info {
+.painting--dt {
+  .painting__info {
     background-color: $primary-black;
 
     &::before {
@@ -113,25 +97,21 @@
     }
   }
 
-  .artist__name {
+  .painting__name {
     color: $primary-white;
   }
 
-  .artist__datesOfLife {
+  .painting__dateOfCreation {
     color: $accent-gold;
   }
 
-  .artist__arrow {
+  .painting__arrow {
     background-color: $accent-gold;
   }
 }
 
-.artist--lt {
-  .artist__modalWindow {
-    background-color: $primary-white;
-  }
-
-  .artist__info {
+.painting--lt {
+  .painting__info {
     background-color: $primary-white;
 
     &::before {
@@ -139,22 +119,22 @@
     }
   }
 
-  .artist__name {
+  .painting__name {
     color: $primary-black;
   }
 
-  .artist__datesOfLife {
+  .painting__dateOfCreation {
     color: $accent-red;
   }
 
-  .artist__arrow {
+  .painting__arrow {
     background-color: $accent-red;
   }
 }
 
 
 @media (min-width: $breakpiont-tablet) {
-  .artist {
+  .painting {
     &__info {
       height: 66px;
       width: 300px;
@@ -166,7 +146,7 @@
       line-height: 19px;
     }
 
-    &__datesOfLife {
+    &__dateOfCreation {
       font-size: 12px;
       line-height: 15px;
     }
@@ -179,13 +159,7 @@
 }
 
 @media (min-width: $breakpiont-small-desktop) {
-  .artist {
-    &:hover {
-      .artist__modalWindow {
-        display: flex;
-      }
-    }
-
+  .painting {
     &__info {
       height: 82px;
       width: 300px;
@@ -201,7 +175,7 @@
       line-height: 19px;
     }
 
-    &__datesOfLife {
+    &__dateOfCreation {
       font-size: 12px;
       line-height: 15px;
     }

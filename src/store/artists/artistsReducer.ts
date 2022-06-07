@@ -1,19 +1,25 @@
-import { ArtistsAction, ArtistsActionTypes, ArtistsState } from './artistsTypes';
+import {
+  ArtistsAction,
+  ArtistsActionTypes,
+  ArtistsState,
+  Artist,
+  ArtistCard,
+} from './artistsTypes';
 
 const initialState: ArtistsState = {
-  artists: [],
+  artistProfile: {} as Artist,
+  artists: [] as Array<ArtistCard>,
   loading: false,
-  error: null,
 };
 
 export const artistsReducer = (state = initialState, action: ArtistsAction) => {
   switch (action.type) {
-    case ArtistsActionTypes.FETCH_ARTISTS:
+    case ArtistsActionTypes.SHOW_PRELOADER:
       return { ...state, loading: true };
-    case ArtistsActionTypes.FETCH_ARTISTS_SUCCESS:
+    case ArtistsActionTypes.FETCH_ARTISTS:
       return { ...state, loading: false, artists: action.payload };
-    case ArtistsActionTypes.FETCH_ARTISTS_ERROR:
-      return { ...state, loading: false, error: action.payload };
+    case ArtistsActionTypes.FETCH_ARTIST_PROFILE:
+      return { ...state, loading: false, artistProfile: action.payload };
     default:
       return state;
   }

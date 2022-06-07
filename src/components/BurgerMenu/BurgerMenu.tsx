@@ -7,16 +7,22 @@ import changeThemeDT from '../../assets/dark-theme/header/change-theme-dt.svg';
 import changeThemeLT from '../../assets/light-theme/header/change-theme-lt.svg';
 import TextLink from '../_UI/TextLink/TextLink';
 import { ThemeContext } from '../../context/themeContext';
+import { AuthOrRegistration } from '../AuthAndRegistrationWindow/AuthAndRegistration';
 
 const cn = classNames.bind(styles);
 
 type BurgerMenuProps = {
-  isMenuOpened: boolean;
-  setIsMenuOpened: (a: boolean) => void;
+  setIsMenuOpened: (val: boolean) => void;
+  openModalWindow: (val: AuthOrRegistration) => void;
 };
 
-const BurgerMenu: FC<BurgerMenuProps> = ({ isMenuOpened, setIsMenuOpened }) => {
+const BurgerMenu: FC<BurgerMenuProps> = ({ setIsMenuOpened, openModalWindow }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+
+  const openBurgerModalWindow = (variant: AuthOrRegistration) => {
+    openModalWindow(variant);
+    setIsMenuOpened(false);
+  };
 
   return (
     <div
@@ -30,7 +36,7 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ isMenuOpened, setIsMenuOpened }) => {
           <button
             className={cn('burger__closeBtn')}
             type="button"
-            onClick={() => setIsMenuOpened(!isMenuOpened)}
+            onClick={() => setIsMenuOpened(false)}
           >
             <img src={theme === 'dark' ? closeWindowDT : closeWindowLT} alt="" />
           </button>
@@ -42,8 +48,24 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ isMenuOpened, setIsMenuOpened }) => {
               <TextLink text={theme === 'dark' ? 'light theme' : 'dark theme'} />
             </button>
           </li>
-          <li className={cn('burger__btn')}>LOG IN</li>
-          <li className={cn('burger__btn')}>SIGN UP</li>
+          <li className={cn('burger__li')}>
+            <button
+              className={cn('burger__btn')}
+              type="button"
+              onClick={() => openBurgerModalWindow(AuthOrRegistration.auth)}
+            >
+              LOG IN
+            </button>
+          </li>
+          <li className={cn('burger__li')}>
+            <button
+              className={cn('burger__btn')}
+              type="button"
+              onClick={() => openBurgerModalWindow(AuthOrRegistration.registration)}
+            >
+              SIGN UP
+            </button>
+          </li>
         </ul>
       </div>
     </div>
