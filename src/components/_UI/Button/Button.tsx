@@ -7,9 +7,11 @@ const cn = classNames.bind(styles);
 
 interface ButtonProps {
   text: string;
+  isDisabled: boolean;
+  onClick: () => void;
 }
 
-const Button: FC<ButtonProps> = ({ text }) => {
+const Button: FC<ButtonProps> = ({ text, isDisabled, onClick }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -19,6 +21,8 @@ const Button: FC<ButtonProps> = ({ text }) => {
         'btn--lt': theme === 'light',
       })}
       type="button"
+      disabled={isDisabled}
+      onClick={() => onClick()}
     >
       <span>{text}</span>
     </button>

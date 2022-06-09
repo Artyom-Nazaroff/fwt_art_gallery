@@ -6,15 +6,29 @@ import { ThemeContext } from '../../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
-interface InputProps {
+type InputProps = {
   id: string;
   label: string;
   name: string;
   type: string;
+  value: string;
+  errorMessage: string;
   placeholder?: string;
-}
+  changeHandler: (val: string) => void;
+  onBlur: () => void;
+};
 
-const Input: FC<InputProps> = ({ id, type, label, name, placeholder }) => {
+const Input: FC<InputProps> = ({
+  id,
+  type,
+  label,
+  name,
+  errorMessage,
+  placeholder,
+  value,
+  changeHandler,
+  onBlur,
+}) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -22,6 +36,7 @@ const Input: FC<InputProps> = ({ id, type, label, name, placeholder }) => {
       className={cn('input', {
         'input--dt': theme === 'dark',
         'input--lt': theme === 'light',
+        'input--err': errorMessage?.length > 0,
       })}
     >
       <label className={cn('input__label')} htmlFor={id}>
@@ -32,11 +47,14 @@ const Input: FC<InputProps> = ({ id, type, label, name, placeholder }) => {
         type={type}
         id={id}
         name={name}
+        value={value}
         placeholder={placeholder}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeHandler(e.target.value)}
+        onBlur={() => onBlur()}
       />
       <div className={cn('input__error')}>
         <img src={errorSign} alt="" />
-        <span>This is an error message!</span>
+        <span>{errorMessage}</span>
       </div>
     </div>
   );

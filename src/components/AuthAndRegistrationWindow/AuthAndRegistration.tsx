@@ -1,5 +1,6 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
+import { ClientJS } from 'clientjs';
 import styles from './AuthAndRegistration.module.scss';
 import '../../App.scss';
 import crossDT from '../../assets/dark-theme/auth-registration/cross.svg';
@@ -9,6 +10,9 @@ import registrationMainPic from '../../assets/common-files/registration-main-pic
 import Input from '../_UI/Input/Input';
 import Button from '../_UI/Button/Button';
 import { ThemeContext } from '../../context/themeContext';
+import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useInput } from '../../hooks/useInput';
 
 const cn = classNames.bind(styles);
 
@@ -28,7 +32,30 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
   setVariant,
   setIsModalOpened,
 }) => {
+  // const [email, setEmail] = useState<string>('');
+  // const [password, setPassword] = useState<string>('');
   const { theme } = useContext(ThemeContext);
+  const { isBtnDisabled } = useTypedSelector((state) => state.authRegistration);
+  // const { registerUser, authUser } = useActions();
+
+  // const changeHandler = (type: string, val: string) => {
+  //   if (type === 'email') setEmail(val);
+  //   if (type === 'password') setPassword(val);
+  // };
+
+  // const clickHandler = () => {
+  //   if (variant === AuthOrRegistration.auth) {
+  //     authUser({ email, password });
+  //   }
+  //   if (variant === AuthOrRegistration.registration) {
+  //     const client = new ClientJS();
+  //     const fingerprint = `${client.getFingerprint()}`;
+  //     registerUser({ email, password, fingerprint });
+  //   }
+  // };
+
+  const email = useInput('', { isEmpty: true, maxLength: 50, isEmail: true });
+  const password = useInput('', { isEmpty: true, minLength: 8, isValidPassword: true });
 
   return (
     <div className={cn('wrapper', 'modalWindowWrapper')}>
@@ -60,13 +87,35 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
           <div className={cn('auth__content')}>
             <form className={cn('auth__form')}>
               <div className={cn('auth__field')}>
-                <Input id="email" type="email" label="Email" name="email" />
+                <Input
+                  id="email"
+                  type="email"
+                  label="Email"
+                  name="email"
+                  value={email.inputValue}
+                  changeHandler={email.onChange}
+                  onBlur={email.onBlur}
+                  errorMessage={email.errorMessage}
+                />
               </div>
               <div className={cn('auth__field')}>
-                <Input id="password" type="password" label="Password" name="password" />
+                <Input
+                  id="password"
+                  type="password"
+                  label="Password"
+                  name="password"
+                  value={password.inputValue}
+                  changeHandler={password.onChange}
+                  onBlur={password.onBlur}
+                  errorMessage={password.errorMessage}
+                />
               </div>
               <div className={cn('auth__btn')}>
-                <Button text={variant === AuthOrRegistration.auth ? 'Log in' : 'Sign up'} />
+                <Button
+                  text={variant === AuthOrRegistration.auth ? 'Log in' : 'Sign up'}
+                  isDisabled={isBtnDisabled || !email.inputValid || !password.inputValid}
+                  onClick={() => console.log('Wow')}
+                />
               </div>
             </form>
             <div className={cn('auth__text')}>

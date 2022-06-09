@@ -14,6 +14,10 @@
     text-transform: uppercase;
     color: $primary-white;
   }
+
+  &:disabled {
+    pointer-events: none;
+  }
 }
 
 .btn--dt {
