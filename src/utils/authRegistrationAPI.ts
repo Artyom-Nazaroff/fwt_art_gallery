@@ -1,11 +1,15 @@
 import { instance } from './_api';
-import { DataType } from '../store/authRegistration/authRegistrationTypes';
+import { TokensType } from '../store/authRegistration/authRegistrationTypes';
 
 export const authRegistrationAPI = {
-  registration(data: DataType) {
-    return instance.post('auth/register', data).then((response) => response.data);
+  registration(email: string, password: string, fingerprint: string) {
+    return instance
+      .post<TokensType>('auth/register', { email, password, fingerprint })
+      .then((response) => response.data);
   },
-  authorization(data: DataType) {
-    return instance.post(`auth/login`, data).then((response) => response.data);
+  authorization(email: string, password: string) {
+    return instance
+      .post<TokensType>(`auth/login`, { email, password })
+      .then((response) => response.data);
   },
 };

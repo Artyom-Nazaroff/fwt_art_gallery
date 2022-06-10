@@ -1,25 +1,28 @@
 import { Dispatch } from 'redux';
-import { AuthAction, AuthActionTypes, DataType } from './authRegistrationTypes';
+import Cookies from 'js-cookie';
+import { AuthAction, AuthActionTypes } from './authRegistrationTypes';
 import { authRegistrationAPI } from '../../utils/authRegistrationAPI';
 
-export const registerUser = (data: DataType) => {
+export const registerUser = (email: string, password: string, fingerprint: string) => {
   return async (dispatch: Dispatch<AuthAction>) => {
     dispatch({ type: AuthActionTypes.DISABLE_BUTTON });
-    // const response = await authRegistrationAPI.registration(data);
-    // dispatch({
-    //   type: AuthActionTypes.SET_TOKENS,
-    //   payload: response,
-    // });
+    const response = await authRegistrationAPI.registration(email, password, fingerprint);
+    Cookies.set('token', response.accessToken);
+    dispatch({
+      type: AuthActionTypes.SET_TOKENS,
+      payload: response,
+    });
   };
 };
 
-export const authUser = (data: DataType) => {
+export const authUser = (email: string, password: string) => {
   return async (dispatch: Dispatch<AuthAction>) => {
     dispatch({ type: AuthActionTypes.DISABLE_BUTTON });
-    // const response = await authRegistrationAPI.authorization(data);
-    // dispatch({
-    //   type: AuthActionTypes.SET_TOKENS,
-    //   payload: response,
-    // });
+    const response = await authRegistrationAPI.authorization(email, password);
+    Cookies.set('token', response.accessToken);
+    dispatch({
+      type: AuthActionTypes.SET_TOKENS,
+      payload: response,
+    });
   };
 };

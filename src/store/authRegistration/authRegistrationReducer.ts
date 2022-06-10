@@ -2,8 +2,8 @@ import { AuthAction, AuthActionTypes, AuthState } from './authRegistrationTypes'
 
 const initialState: AuthState = {
   isBtnDisabled: false,
-  accessToken: null,
-  refreshToken: null,
+  accessToken: '',
+  refreshToken: '',
 };
 
 export const authRegistrationReducer = (state = initialState, action: AuthAction) => {

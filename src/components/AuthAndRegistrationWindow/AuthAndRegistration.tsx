@@ -32,30 +32,24 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
   setVariant,
   setIsModalOpened,
 }) => {
-  // const [email, setEmail] = useState<string>('');
-  // const [password, setPassword] = useState<string>('');
   const { theme } = useContext(ThemeContext);
   const { isBtnDisabled } = useTypedSelector((state) => state.authRegistration);
-  // const { registerUser, authUser } = useActions();
-
-  // const changeHandler = (type: string, val: string) => {
-  //   if (type === 'email') setEmail(val);
-  //   if (type === 'password') setPassword(val);
-  // };
-
-  // const clickHandler = () => {
-  //   if (variant === AuthOrRegistration.auth) {
-  //     authUser({ email, password });
-  //   }
-  //   if (variant === AuthOrRegistration.registration) {
-  //     const client = new ClientJS();
-  //     const fingerprint = `${client.getFingerprint()}`;
-  //     registerUser({ email, password, fingerprint });
-  //   }
-  // };
+  const { registerUser, authUser } = useActions();
 
   const email = useInput('', { isEmpty: true, maxLength: 50, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8, isValidPassword: true });
+
+  const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (variant === AuthOrRegistration.auth) {
+      authUser(email.inputValue, password.inputValue);
+    }
+    if (variant === AuthOrRegistration.registration) {
+      const client = new ClientJS();
+      const fingerprint = `${client.getFingerprint()}`;
+      registerUser(email.inputValue, password.inputValue, fingerprint);
+    }
+  };
 
   return (
     <div className={cn('wrapper', 'modalWindowWrapper')}>
@@ -114,7 +108,7 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
                 <Button
                   text={variant === AuthOrRegistration.auth ? 'Log in' : 'Sign up'}
                   isDisabled={isBtnDisabled || !email.inputValid || !password.inputValid}
-                  onClick={() => console.log('Wow')}
+                  onClick={clickHandler}
                 />
               </div>
             </form>

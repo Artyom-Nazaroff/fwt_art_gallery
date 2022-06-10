@@ -1,17 +1,11 @@
-export type DataType = {
-  email: string;
-  password: string;
-  fingerprint?: string;
-};
-
 export type TokensType = {
   accessToken: string;
   refreshToken: string;
 };
 
 export type AuthState = {
-  accessToken: string | null;
-  refreshToken: string | null;
+  accessToken: string;
+  refreshToken: string;
   isBtnDisabled: boolean;
 };
 
