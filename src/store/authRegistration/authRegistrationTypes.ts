@@ -4,23 +4,26 @@ export type TokensType = {
 };
 
 export type AuthState = {
-  accessToken: string;
-  refreshToken: string;
+  isAuth: boolean;
   isBtnDisabled: boolean;
 };
 
 export enum AuthActionTypes {
   DISABLE_BUTTON = 'DISABLE_BUTTON',
-  SET_TOKENS = 'SET_TOKENS',
+  SET_AUTH = 'SET_AUTH',
+  LOG_OUT = 'LOG_OUT',
 }
 
 export type DisableButton = {
   type: AuthActionTypes.DISABLE_BUTTON;
 };
 
-export type SetTokens = {
-  type: AuthActionTypes.SET_TOKENS;
-  payload: TokensType;
+export type SetAuth = {
+  type: AuthActionTypes.SET_AUTH;
 };
 
-export type AuthAction = DisableButton | SetTokens;
+export type LogOut = {
+  type: AuthActionTypes.LOG_OUT;
+};
+
+export type AuthAction = DisableButton | SetAuth | LogOut;

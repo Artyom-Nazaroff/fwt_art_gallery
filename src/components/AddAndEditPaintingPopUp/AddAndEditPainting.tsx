@@ -31,14 +31,14 @@ const AddAndEditPainting = () => {
             </div>
           </div>
           <form className={cn('popup__form')}>
-            <div className={cn('popup__inputs')}>
-              <div className={cn('popup__input')}>
-                <Input id="name" type="text" label="The name of the picture" name="name" />
-              </div>
-              <div className={cn('popup__input')}>
-                <Input id="year" type="text" label="Year of creation" name="year" />
-              </div>
-            </div>
+            {/* <div className={cn('popup__inputs')}> */}
+            {/*  <div className={cn('popup__input')}> */}
+            {/*    <Input id="name" type="text" label="The name of the picture" name="name" /> */}
+            {/*  </div> */}
+            {/*  <div className={cn('popup__input')}> */}
+            {/*    <Input id="year" type="text" label="Year of creation" name="year" /> */}
+            {/*  </div> */}
+            {/* </div> */}
             <div className={cn('popup__browseImage')}>
               <div className={cn('popup__imageField')}>
                 <img src={theme === 'dark' ? iconDT : iconLT} alt="" />
@@ -54,9 +54,9 @@ const AddAndEditPainting = () => {
                 </p>
               </div>
             </div>
-            <div className={cn('popup__btn')}>
-              <Button text="Save" />
-            </div>
+            {/* <div className={cn('popup__btn')}> */}
+            {/*  <Button text="Save" /> */}
+            {/* </div> */}
           </form>
         </div>
       </div>

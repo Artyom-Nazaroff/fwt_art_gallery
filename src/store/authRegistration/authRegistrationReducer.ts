@@ -2,21 +2,17 @@ import { AuthAction, AuthActionTypes, AuthState } from './authRegistrationTypes'
 
 const initialState: AuthState = {
   isBtnDisabled: false,
-  accessToken: '',
-  refreshToken: '',
+  isAuth: false,
 };
 
 export const authRegistrationReducer = (state = initialState, action: AuthAction) => {
   switch (action.type) {
     case AuthActionTypes.DISABLE_BUTTON:
       return { ...state, isBtnDisabled: true };
-    case AuthActionTypes.SET_TOKENS:
-      return {
-        ...state,
-        accessToken: action.payload.accessToken,
-        refreshToken: action.payload.refreshToken,
-        isBtnDisabled: false,
-      };
+    case AuthActionTypes.SET_AUTH:
+      return { ...state, isAuth: true, isBtnDisabled: false };
+    case AuthActionTypes.LOG_OUT:
+      return { ...state, isAuth: false };
     default:
       return state;
   }

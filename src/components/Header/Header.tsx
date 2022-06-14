@@ -1,5 +1,6 @@
 import React, { FC, useContext, useState } from 'react';
 import classNames from 'classnames/bind';
+import Cookies from 'js-cookie';
 import styles from './Header.module.scss';
 import '../../App.scss';
 import openBurgerDT from '../../assets/dark-theme/burger-menu/open-menu-dt.svg';
@@ -11,6 +12,9 @@ import changeThemeLT from '../../assets/light-theme/header/change-theme-lt.svg';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import { ThemeContext } from '../../context/themeContext';
 import { AuthOrRegistration } from '../AuthAndRegistrationWindow/AuthAndRegistration';
+import MenuItem from '../_UI/MenuItem/MenuItem';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../hooks/useActions';
 
 const cn = classNames.bind(styles);
 
@@ -22,6 +26,8 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = ({ setIsModalOpened, setVariant }) => {
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { isAuth } = useTypedSelector((state) => state.authRegistration);
+  const { logOutUser } = useActions();
 
   const openModalWindow = (variant: AuthOrRegistration) => {
     setIsModalOpened(true);
@@ -51,22 +57,22 @@ const Header: FC<HeaderProps> = ({ setIsModalOpened, setVariant }) => {
             <img src={theme === 'dark' ? openBurgerDT : openBurgerLT} alt="" />
           </button>
           <div className={cn('header__buttons')}>
-            <button
-              type="button"
-              onClick={() => {
-                openModalWindow(AuthOrRegistration.auth);
-              }}
-            >
-              LOG IN
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                openModalWindow(AuthOrRegistration.registration);
-              }}
-            >
-              SIGN UP
-            </button>
+            {isAuth ? (
+              <MenuItem text="LOG OUT" removeAccount={logOutUser} />
+            ) : (
+              <>
+                <MenuItem
+                  text="LOG IN"
+                  variant={AuthOrRegistration.auth}
+                  setAccount={openModalWindow}
+                />
+                <MenuItem
+                  text="SIGN UP"
+                  variant={AuthOrRegistration.registration}
+                  setAccount={openModalWindow}
+                />
+              </>
+            )}
             <button className={cn('header__changeTheme')} type="button" onClick={toggleTheme}>
               <img src={theme === 'dark' ? changeThemeDT : changeThemeLT} alt="" />
             </button>

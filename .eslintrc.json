@@ -87,6 +87,7 @@
 			}
 		}],
 		"no-shadow": "off",
+		"no-debugger": "off",
 		"no-unused-vars": "off",
 		"no-underscore-dangle": "off",
 		"no-param-reassign": 0,

@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
 import { ClientJS } from 'clientjs';
 import styles from './AuthAndRegistration.module.scss';
@@ -39,15 +39,18 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
   const email = useInput('', { isEmpty: true, maxLength: 50, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8, isValidPassword: true });
 
+  const client = new ClientJS();
+  const fingerprint = `${client.getFingerprint()}`;
+
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (variant === AuthOrRegistration.auth) {
-      authUser(email.inputValue, password.inputValue);
+      authUser(email.inputValue, password.inputValue, fingerprint);
+      setIsModalOpened(false);
     }
     if (variant === AuthOrRegistration.registration) {
-      const client = new ClientJS();
-      const fingerprint = `${client.getFingerprint()}`;
       registerUser(email.inputValue, password.inputValue, fingerprint);
+      setIsModalOpened(false);
     }
   };
 

@@ -41,29 +41,29 @@ const AddAndEditArtist = () => {
               </div>
               <TextLink text="Browse Profile Photo" />
             </div>
-            <form className={cn('popup__form')}>
-              <div className={cn('popup__input')}>
-                <Input id="name" type="text" label="Name*" name="name" />
-              </div>
-              <div className={cn('popup__input')}>
-                <Input id="years" type="text" label="Years of life" name="years" />
-              </div>
-              <div className={cn('popup__input')}>
-                <Input id="location" type="text" label="Location" name="location" />
-              </div>
-              <div className={cn('popup__textarea')}>
-                <Textarea id="description" label="Description" name="description" />
-              </div>
-              <div className={cn('popup__multiselect')}>
-                <Multiselect />
-              </div>
-              <div className={cn('popup__multiselect')}>
-                <Search id="search" name="search" />
-              </div>
-              <div className={cn('popup__btn')}>
-                <Button text="Save" />
-              </div>
-            </form>
+            {/* <form className={cn('popup__form')}> */}
+            {/*  <div className={cn('popup__input')}> */}
+            {/*    <Input id="name" type="text" label="Name*" name="name"  /> */}
+            {/*  </div> */}
+            {/*  <div className={cn('popup__input')}> */}
+            {/*    <Input id="years" type="text" label="Years of life" name="years" /> */}
+            {/*  </div> */}
+            {/*  <div className={cn('popup__input')}> */}
+            {/*    <Input id="location" type="text" label="Location" name="location" /> */}
+            {/*  </div> */}
+            {/*  <div className={cn('popup__textarea')}> */}
+            {/*    <Textarea id="description" label="Description" name="description" /> */}
+            {/*  </div> */}
+            {/*  <div className={cn('popup__multiselect')}> */}
+            {/*    <Multiselect /> */}
+            {/*  </div> */}
+            {/*  <div className={cn('popup__multiselect')}> */}
+            {/*    <Search id="search" name="search" /> */}
+            {/*  </div> */}
+            {/*  <div className={cn('popup__btn')}> */}
+            {/*    <Button text="Save" /> */}
+            {/*  </div> */}
+            {/* </form> */}
           </div>
         </div>
       </div>

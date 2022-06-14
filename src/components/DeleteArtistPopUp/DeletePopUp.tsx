@@ -37,9 +37,9 @@ const DeletePopUp = () => {
         <div className={cn('popup__warning')}>
           You will not be able to recover this profile afterwards.
         </div>
-        <div className={cn('popup__btn')}>
-          <Button text="Delete" />
-        </div>
+        {/* <div className={cn('popup__btn')}> */}
+        {/*  <Button text="Delete" /> */}
+        {/* </div> */}
         <div className={cn('popup__link')}>
           <TextLink text="Cancel" />
         </div>

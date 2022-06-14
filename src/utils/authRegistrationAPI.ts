@@ -1,15 +1,27 @@
+import axios from 'axios';
 import { instance } from './_api';
 import { TokensType } from '../store/authRegistration/authRegistrationTypes';
 
+const url = process.env.REACT_APP_BASE_URL;
+
 export const authRegistrationAPI = {
-  registration(email: string, password: string, fingerprint: string) {
+  registration(username: string, password: string, fingerprint: string) {
     return instance
-      .post<TokensType>('auth/register', { email, password, fingerprint })
+      .post<TokensType>('auth/register', { username, password, fingerprint })
       .then((response) => response.data);
   },
-  authorization(email: string, password: string) {
+  authorization(username: string, password: string, fingerprint: string) {
     return instance
-      .post<TokensType>(`auth/login`, { email, password })
+      .post<TokensType>(`auth/login`, { username, password, fingerprint })
+      .then((response) => response.data);
+  },
+  refresh(fingerprint: string, refreshToken: string) {
+    return axios
+      .post<TokensType>(
+        `${url}auth/refresh`,
+        { fingerprint, refreshToken },
+        { withCredentials: true }
+      )
       .then((response) => response.data);
   },
 };
