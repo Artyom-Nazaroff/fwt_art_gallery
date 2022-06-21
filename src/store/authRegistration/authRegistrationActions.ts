@@ -3,6 +3,12 @@ import Cookies from 'js-cookie';
 import { AuthAction, AuthActionTypes } from './authRegistrationTypes';
 import { authRegistrationAPI } from '../../utils/authRegistrationAPI';
 
+export const setAuthUser = () => {
+  return async (dispatch: Dispatch<AuthAction>) => {
+    dispatch({ type: AuthActionTypes.SET_AUTH });
+  };
+};
+
 export const registerUser = (username: string, password: string, fingerprint: string) => {
   return async (dispatch: Dispatch<AuthAction>) => {
     dispatch({ type: AuthActionTypes.DISABLE_BUTTON });
@@ -10,6 +16,7 @@ export const registerUser = (username: string, password: string, fingerprint: st
     Cookies.set('accessToken', response.accessToken);
     Cookies.set('refreshToken', response.refreshToken);
     dispatch({ type: AuthActionTypes.SET_AUTH });
+    dispatch({ type: AuthActionTypes.ABLE_BUTTON });
   };
 };
 
@@ -20,6 +27,7 @@ export const authUser = (username: string, password: string, fingerprint: string
     Cookies.set('accessToken', response.accessToken);
     Cookies.set('refreshToken', response.refreshToken);
     dispatch({ type: AuthActionTypes.SET_AUTH });
+    dispatch({ type: AuthActionTypes.ABLE_BUTTON });
   };
 };
 
@@ -31,11 +39,11 @@ export const logOutUser = () => {
   };
 };
 
-export const checkAuth = (fingerprint: string, refreshToken: string) => {
-  return async (dispatch: Dispatch<AuthAction>) => {
-    const response = await authRegistrationAPI.refresh(fingerprint, refreshToken);
-    Cookies.set('accessToken', response.accessToken);
-    Cookies.set('refreshToken', response.refreshToken);
-    dispatch({ type: AuthActionTypes.SET_AUTH });
-  };
-};
+// export const checkAuth = (fingerprint: string, refreshToken: string) => {
+//   return async (dispatch: Dispatch<AuthAction>) => {
+//     const response = await authRegistrationAPI.refresh(fingerprint, refreshToken);
+//     Cookies.set('accessToken', response.accessToken);
+//     Cookies.set('refreshToken', response.refreshToken);
+//     dispatch({ type: AuthActionTypes.SET_AUTH });
+//   };
+// };

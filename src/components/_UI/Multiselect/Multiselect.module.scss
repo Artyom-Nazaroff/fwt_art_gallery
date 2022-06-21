@@ -56,10 +56,13 @@
     position: absolute;
     top: 46px;
     left: 0;
+    z-index: 10;
   }
 
   &__list {
     list-style: none;
+    max-height: 230px;
+    overflow-y: auto;
   }
 }
 

@@ -12,16 +12,34 @@
 }
 
 .paintings {
+  &__row {
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+
+  &__inner {
+    display: none;
+    padding-bottom: 25px;
+  }
+
+  &__inner--active {
+    display: block;
+  }
+
   &__container {
-    padding-top: 80px;
     padding-bottom: 80px;
   }
 }
 
 @media (min-width: $breakpiont-tablet) {
   .paintings {
+    &__addArtistRow {
+      height: 100px;
+    }
+
     &__container {
-      padding-top: 100px;
       padding-bottom: 100px;
     }
   }

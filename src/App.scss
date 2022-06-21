@@ -2,49 +2,42 @@
 @import "sass/colors.scss";
 
 .appContainer {
-	position: relative;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.modalContainer {
-	display: none;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: 10;
-}
-
-.modalContainer--active {
-	display: block;
+.centralBlock {
+  flex: 1 1 auto;
 }
 
 .wrapper {
-	min-height: 100vh;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	color: lightgrey;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .wrapper--dt {
-	background-color: $primary-black;
+  background-color: $primary-black;
 }
 
 .wrapper--lt {
-	background-color: $primary-white;
+  background-color: $primary-white;
 }
 
 .container {
-	margin: 0 auto;
-	max-width: 1280px;
-	padding: 0 20px;
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 20px;
 }
 
 @media (min-width: $breakpiont-large-desktop) {
-	.container {
-		max-width: 1440px;
-		padding: 0 100px;
-	}
+  .container {
+    max-width: 1440px;
+    padding: 0 100px;
+  }
 }

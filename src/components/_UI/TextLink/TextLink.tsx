@@ -7,20 +7,23 @@ const cn = classNames.bind(styles);
 
 type LinkProps = {
   text: string;
+  onClick?: (val: boolean) => void;
 };
 
-const TextLink: FC<LinkProps> = ({ text }) => {
+const TextLink: FC<LinkProps> = ({ text, onClick }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div
+    <button
       className={cn('link', {
         'link--dt': theme === 'dark',
         'link--lt': theme === 'light',
       })}
+      type="button"
+      onClick={() => onClick?.(false)}
     >
       {text}
-    </div>
+    </button>
   );
 };
 

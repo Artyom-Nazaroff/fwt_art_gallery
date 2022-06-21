@@ -19,19 +19,20 @@ import { useActions } from '../../hooks/useActions';
 const cn = classNames.bind(styles);
 
 type HeaderProps = {
-  setIsModalOpened: (val: boolean) => void;
-  setVariant: (val: AuthOrRegistration) => void;
+  setAuthOpened: (val: boolean) => void;
+  setAuthOrRegistration: (val: AuthOrRegistration) => void;
 };
 
-const Header: FC<HeaderProps> = ({ setIsModalOpened, setVariant }) => {
+const Header: FC<HeaderProps> = ({ setAuthOpened, setAuthOrRegistration }) => {
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
   const { logOutUser } = useActions();
 
   const openModalWindow = (variant: AuthOrRegistration) => {
-    setIsModalOpened(true);
-    setVariant(variant);
+    setAuthOpened(true);
+    setAuthOrRegistration(variant);
+    document.body.style.overflow = 'hidden';
   };
 
   return (
@@ -58,18 +59,20 @@ const Header: FC<HeaderProps> = ({ setIsModalOpened, setVariant }) => {
           </button>
           <div className={cn('header__buttons')}>
             {isAuth ? (
-              <MenuItem text="LOG OUT" removeAccount={logOutUser} />
+              <MenuItem text="LOG OUT" removeAccount={logOutUser} isBurger={false} />
             ) : (
               <>
                 <MenuItem
                   text="LOG IN"
                   variant={AuthOrRegistration.auth}
                   setAccount={openModalWindow}
+                  isBurger={false}
                 />
                 <MenuItem
                   text="SIGN UP"
                   variant={AuthOrRegistration.registration}
                   setAccount={openModalWindow}
+                  isBurger={false}
                 />
               </>
             )}

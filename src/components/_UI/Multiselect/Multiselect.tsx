@@ -1,20 +1,40 @@
-import React, { useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Multiselect.module.scss';
 import arrowDownDT from '../../../assets/dark-theme/_UI/Multiselect/arrow-down.svg';
 import arrowDownLT from '../../../assets/light-theme/_UI/Multiselect/arrow-down.svg';
 import arrowUpDT from '../../../assets/dark-theme/_UI/Multiselect/arrow-up.svg';
 import arrowUpLT from '../../../assets/light-theme/_UI/Multiselect/arrow-up.svg';
-import Label from '../Label/Label';
 import { ThemeContext } from '../../../context/themeContext';
 import SelectItem from '../SelectItem/SelectItem';
+import { Genre } from '../../../store/artists/artistsTypes';
+import Label from '../Label/Label';
 
 const cn = classNames.bind(styles);
 
-const Multiselect = () => {
-  const [isOpened, setIsOpened] = useState<boolean>(false);
+type MultiselectProps = {
+  label: string;
+  genresList: Array<Genre>;
+  artistsGenres: Array<Genre>;
+  setArtistsGenres: (val: Array<Genre>) => void;
+};
 
+const Multiselect: FC<MultiselectProps> = ({
+  label,
+  genresList,
+  artistsGenres,
+  setArtistsGenres,
+}) => {
+  const [isOpened, setIsOpened] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext);
+
+  const addGenre = (name: string, _id: string) => {
+    setArtistsGenres([...artistsGenres, { name, _id }]);
+  };
+
+  const removeGenre = (_id: string) => {
+    setArtistsGenres(artistsGenres.filter((i) => i._id !== _id));
+  };
 
   return (
     <div
@@ -24,10 +44,20 @@ const Multiselect = () => {
         open: isOpened,
       })}
     >
-      <div className={cn('select__label')}>Label</div>
+      <div className={cn('select__label')}>{label}</div>
       <div className={cn('select__inner')}>
         <div className={cn('select__input')}>
-          <div className={cn('select__inputItems')}>LABELS ARE HERE</div>
+          <div className={cn('select__inputItems')}>
+            {artistsGenres.map((item) => (
+              <Label
+                key={item._id}
+                id={item._id}
+                name={item.name}
+                isRemove
+                removeGenre={removeGenre}
+              />
+            ))}
+          </div>
           <button
             type="button"
             className={cn('select__inputArrow')}
@@ -42,8 +72,16 @@ const Multiselect = () => {
         </div>
         <div className={cn('select__dropdown')}>
           <ul className={cn('select__list')}>
-            <SelectItem title="Romanticism" id="romanticism" name="romanticism" />
-            <SelectItem title="Art" id="art" name="art" />
+            {genresList.map((genre) => (
+              <SelectItem
+                key={genre._id}
+                title={genre.name}
+                id={genre._id}
+                name={genre.name}
+                addGenre={addGenre}
+                removeGenre={removeGenre}
+              />
+            ))}
           </ul>
         </div>
       </div>

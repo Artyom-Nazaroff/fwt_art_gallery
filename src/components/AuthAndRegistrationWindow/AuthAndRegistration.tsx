@@ -24,13 +24,13 @@ export enum AuthOrRegistration {
 type AuthAndRegistrationProps = {
   variant: AuthOrRegistration;
   setVariant: (val: AuthOrRegistration) => void;
-  setIsModalOpened: (val: boolean) => void;
+  setAuthOpened: (val: boolean) => void;
 };
 
 const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
   variant,
   setVariant,
-  setIsModalOpened,
+  setAuthOpened,
 }) => {
   const { theme } = useContext(ThemeContext);
   const { isBtnDisabled } = useTypedSelector((state) => state.authRegistration);
@@ -46,12 +46,25 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
     e.preventDefault();
     if (variant === AuthOrRegistration.auth) {
       authUser(email.inputValue, password.inputValue, fingerprint);
-      setIsModalOpened(false);
+      email.setInputValue('');
+      password.setInputValue('');
+      email.setDirty(false);
+      password.setDirty(false);
+      setAuthOpened(false);
     }
     if (variant === AuthOrRegistration.registration) {
       registerUser(email.inputValue, password.inputValue, fingerprint);
-      setIsModalOpened(false);
+      email.setInputValue('');
+      password.setInputValue('');
+      email.setDirty(false);
+      password.setDirty(false);
+      setAuthOpened(false);
     }
+  };
+
+  const closeWindow = () => {
+    setAuthOpened(false);
+    document.body.style.overflow = 'unset';
   };
 
   return (
@@ -70,11 +83,7 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
           })}
         >
           <div className={cn('auth__top')}>
-            <button
-              type="button"
-              className={cn('auth__close')}
-              onClick={() => setIsModalOpened(false)}
-            >
+            <button type="button" className={cn('auth__close')} onClick={() => closeWindow()}>
               <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
             </button>
           </div>

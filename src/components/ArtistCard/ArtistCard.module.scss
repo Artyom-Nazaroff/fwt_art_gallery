@@ -44,6 +44,19 @@
     }
   }
 
+  &__noImage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 30%;
+      transform: translateY(-20px);
+    }
+  }
+
   &__info {
     height: 45px;
     width: 236px;
@@ -105,6 +118,10 @@
     background-color: $primary-black;
   }
 
+  .artist__noImage {
+    background-color: $secondary-black;
+  }
+
   .artist__info {
     background-color: $primary-black;
 
@@ -129,6 +146,10 @@
 .artist--lt {
   .artist__modalWindow {
     background-color: $primary-white;
+  }
+
+  .artist__noImage {
+    background-color: $secondary-white;
   }
 
   .artist__info {

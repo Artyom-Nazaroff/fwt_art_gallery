@@ -121,9 +121,11 @@ export const useInput = (initialValue: string, validations: ValidationsType) => 
 
   return {
     inputValue,
+    setInputValue,
     onChange,
     onBlur,
     isDirty,
+    setDirty,
     errorMessage,
     ...valid,
   };

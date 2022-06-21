@@ -1,5 +1,6 @@
 @import "../../../sass/colors";
 @import "../../../sass/fonts";
+@import "../../../sass/breckpoints.scss";
 
 .btn {
   background-color: inherit;
@@ -10,6 +11,18 @@
   line-height: 128%;
   padding: 5px 10px;
   cursor: pointer;
+
+  &--burger {
+    font-family: "CormorantSCMedium", serif;
+    font-size: 32px;
+    line-height: 100%;
+    padding: 0;
+    border: none;
+
+    &:not(:last-child) {
+      margin-bottom: 32px;
+    }
+  }
 }
 
 .btn--dt {
@@ -25,5 +38,16 @@
 
   &:hover {
     color: $primary-black;
+  }
+}
+
+@media (min-width: $breakpiont-tablet) {
+.btn--burger {
+    font-size: 60px;
+    line-height: 73px;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
   }
 }

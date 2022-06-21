@@ -1,48 +1,66 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import './App.scss';
 import cn from 'classnames';
 import { Route, Routes } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import { ClientJS } from 'clientjs';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MainPage from './pages/MainPage/MainPage';
-import AuthAndRegistration, {
-  AuthOrRegistration,
-} from './components/AuthAndRegistrationWindow/AuthAndRegistration';
+import { AuthOrRegistration } from './components/AuthAndRegistrationWindow/AuthAndRegistration';
 import ArtistProfile from './pages/ArtistProfile/ArtistProfile';
-import { useActions } from './hooks/useActions';
+import ModalContainer from './components/ModalContainer/ModalContainer';
+import { AddOrEditArtist } from './components/AddAndEditArtistPopUp/AddAndEditArtist';
 
 const App: FC = () => {
-  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-  const [variant, setVariant] = useState<AuthOrRegistration>(AuthOrRegistration.auth);
-  const { checkAuth } = useActions();
-
-  useEffect(() => {
-    if (Cookies.get('accessToken')) {
-      const client = new ClientJS();
-      const fingerprint = `${client.getFingerprint()}`;
-      const refreshToken = Cookies.get('refreshToken');
-      if (refreshToken) {
-        checkAuth(fingerprint, refreshToken);
-      }
-    }
-  }, []);
+  const [isAuthOpened, setAuthOpened] = useState<boolean>(false);
+  const [authOrRegistration, setAuthOrRegistration] = useState<AuthOrRegistration>(
+    AuthOrRegistration.auth
+  );
+  const [isDeleteOpened, setDeleteOpened] = useState<boolean>(false);
+  const [addOrEditArtist, setAddOrEditArtist] = useState<AddOrEditArtist>(AddOrEditArtist.add);
+  const [isAddEditOpened, setAddEditOpened] = useState<boolean>(false);
+  const [isAddPaintingOpened, setAddPaintingOpened] = useState<boolean>(false);
 
   return (
     <div className={cn('appContainer')}>
-      <div className={cn('modalContainer', { 'modalContainer--active': isModalOpened })}>
-        <AuthAndRegistration
-          variant={variant}
-          setVariant={setVariant}
-          setIsModalOpened={setIsModalOpened}
-        />
+      <ModalContainer
+        authOrRegistration={authOrRegistration}
+        setAuthOrRegistration={setAuthOrRegistration}
+        isAuthOpened={isAuthOpened}
+        setAuthOpened={setAuthOpened}
+        isDeleteOpened={isDeleteOpened}
+        setDeleteOpened={setDeleteOpened}
+        isAddEditOpened={isAddEditOpened}
+        setAddEditOpened={setAddEditOpened}
+        addOrEditArtist={addOrEditArtist}
+        isAddPaintingOpened={isAddPaintingOpened}
+        setAddPaintingOpened={setAddPaintingOpened}
+      />
+      <Header setAuthOpened={setAuthOpened} setAuthOrRegistration={setAuthOrRegistration} />
+      <div className={cn('centralBlock')}>
+        <Routes>
+          <Route
+            path="/new_art_gallery"
+            element={
+              <MainPage
+                setAddEditOpened={setAddEditOpened}
+                setAddOrEditArtist={setAddOrEditArtist}
+              />
+            }
+          />
+          <Route path="/artists/static/:artistId" element={<ArtistProfile />} />
+          <Route
+            path="/artists/:artistId"
+            element={
+              <ArtistProfile
+                setDeleteOpened={setDeleteOpened}
+                setAddPaintingOpened={setAddPaintingOpened}
+                setAddEditOpened={setAddEditOpened}
+                setAddOrEditArtist={setAddOrEditArtist}
+              />
+            }
+          />
+        </Routes>
       </div>
-      <Header setIsModalOpened={setIsModalOpened} setVariant={setVariant} />
-      <Routes>
-        <Route path="/new_art_gallery" element={<MainPage />} />
-        <Route path="/artists/static/:artistId" element={<ArtistProfile />} />
-      </Routes>
       <Footer />
     </div>
   );

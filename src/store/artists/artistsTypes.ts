@@ -38,11 +38,13 @@ export type ArtistCard = {
   yearsOfLife: string;
   __v: number;
   mainPainting: Painting;
+  avatar?: string;
 };
 
 export type ArtistsState = {
   artistProfile: Artist;
   artists: Array<ArtistCard>;
+  genres: Array<Genre>;
   loading: boolean;
 };
 
@@ -50,6 +52,11 @@ export enum ArtistsActionTypes {
   SHOW_PRELOADER = 'SHOW_PRELOADER',
   FETCH_ARTISTS = 'FETCH_ARTISTS',
   FETCH_ARTIST_PROFILE = 'FETCH_ARTIST_PROFILE',
+  GET_ALL_GENRES = 'GET_ALL_GENRES',
+  ADD_ARTIST = 'ADD_ARTIST',
+  EDIT_ARTIST = 'EDIT_ARTIST',
+  DELETE_ARTIST = 'DELETE_ARTIST',
+  ADD_PAINTING = 'ADD_PAINTING',
 }
 
 export type ShowPreloader = {
@@ -66,4 +73,37 @@ export type FetchArtistProfile = {
   payload: Artist;
 };
 
-export type ArtistsAction = ShowPreloader | FetchArtistsAction | FetchArtistProfile;
+export type GetAllGenres = {
+  type: ArtistsActionTypes.GET_ALL_GENRES;
+  payload: Array<Genre>;
+};
+
+export type AddArtist = {
+  type: ArtistsActionTypes.ADD_ARTIST;
+  payload: ArtistCard;
+};
+
+export type EditArtist = {
+  type: ArtistsActionTypes.EDIT_ARTIST;
+  payload: Artist;
+};
+
+export type DeleteArtist = {
+  type: ArtistsActionTypes.DELETE_ARTIST;
+  payload: { [key: string]: string };
+};
+
+export type AddNewPainting = {
+  type: ArtistsActionTypes.ADD_PAINTING;
+  payload: Painting;
+};
+
+export type ArtistsAction =
+  | ShowPreloader
+  | FetchArtistsAction
+  | FetchArtistProfile
+  | GetAllGenres
+  | AddArtist
+  | AddNewPainting
+  | DeleteArtist
+  | EditArtist;

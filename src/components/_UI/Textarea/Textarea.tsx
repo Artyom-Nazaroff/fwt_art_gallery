@@ -10,9 +10,12 @@ interface TextareaProps {
   id: string;
   label: string;
   name: string;
+  value: string;
+  setValue: (val: string) => void;
+  error?: string;
 }
 
-const Textarea: FC<TextareaProps> = ({ id, label, name }) => {
+const Textarea: FC<TextareaProps> = ({ id, label, name, value, setValue, error }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -25,10 +28,16 @@ const Textarea: FC<TextareaProps> = ({ id, label, name }) => {
       <label className={cn('textarea__label')} htmlFor={id}>
         {label}
       </label>
-      <textarea className={cn('textarea__field')} id={id} name={name} />
+      <textarea
+        className={cn('textarea__field')}
+        id={id}
+        name={name}
+        value={value}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)}
+      />
       <div className={cn('textarea__error')}>
         <img src={errorSign} alt="" />
-        <span>This is an error message!</span>
+        <span>{error}</span>
       </div>
     </div>
   );

@@ -1,0 +1,76 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+
+.btn {
+  border-radius: 0;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  cursor: pointer;
+
+  &__plus {
+    margin-right: 12px;
+  }
+
+  &__text {
+    text-decoration: underline;
+    font-family: "InterBold", serif;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 12px;
+      margin-right: 12px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  &.btn--dt {
+    color: $primary-light-gray;
+    .btn__text::before {
+      background-image: url("../../../assets/dark-theme/_UI/ButtonLink/plus-dt.svg");
+    }
+
+    &:hover {
+      color: $primary-white;
+    }
+
+    &:disabled {
+      color: $secondary-gray;
+    }
+
+    &:focus {
+      color: $primary-white;
+    }
+  }
+
+  &.btn--lt {
+    color: $primary-dark-gray;
+    .btn__text::before {
+      background-image: url("../../../assets/light-theme/_UI/ButtonLink/plus-lt.svg");
+    }
+
+    &:hover {
+      color: $primary-black;
+    }
+
+    &:disabled {
+      color: $primary-light-gray;
+    }
+
+    &:focus {
+      color: $primary-black;
+    }
+  }
+}

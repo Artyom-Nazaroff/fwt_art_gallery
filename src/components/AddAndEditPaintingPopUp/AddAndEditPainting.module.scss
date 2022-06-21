@@ -23,6 +23,8 @@
 
   &__close {
     cursor: pointer;
+    border: none;
+    background-color: inherit;
   }
 
   &__form {
@@ -42,25 +44,57 @@
   }
 
   &__imageField {
-    width: 100%;
+    position: relative;
+    width: 280px;
     height: 187px;
     border-radius: 2px;
-    padding: 20px 26px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     border: 1px dashed $primary-dark-gray;
+  }
 
-    img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 20px;
-    }
+  &__picturePreview {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__imageFieldIcon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+
+  &__previewPictureIcon {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
   }
 
   &__mobileLink {
     margin-bottom: 12px;
+  }
+
+  &__pictureInput {
+    display: none;
+  }
+
+  &__pictureLabel {
+    font-family: 'InterBold', sans-serif;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
   }
 
   &__desktopLink {
@@ -91,6 +125,14 @@
   .popup__portraitFieldText {
     color: $primary-light-gray;
   }
+
+  .popup__pictureLabel {
+    color: $primary-light-gray;
+
+    &:hover {
+      color: $primary-white;
+    }
+  }
 }
 
 .popup--lt {
@@ -103,6 +145,14 @@
   .popup__portraitFieldText {
     color: $primary-dark-gray;
   }
+
+  .popup__pictureLabel {
+    color: $primary-dark-gray;
+
+    &:hover {
+      color: $primary-black;
+    }
+  }
 }
 
 
@@ -110,7 +160,6 @@
   .popupBackground {
     display: flex;
     justify-content: center;
-    align-items: center;
     padding: 150px 37px;
     background-color: $modal-window-background;
   }
@@ -143,13 +192,19 @@
     }
 
     &__imageField {
+      width: 493px;
       height: 327px;
-      padding: 52px 116px;
+    }
 
-      img {
-        width: 130px;
-        height: 130px;
-      }
+    &__imageFieldIcon {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 20px;
+    }
+
+    &__previewPictureIcon {
+      bottom: 12px;
+      right: 12px;
     }
 
     &__mobileLink {
@@ -177,54 +232,54 @@
   }
 }
 
-@media (min-width: $breakpiont-small-desktop) {
-  .popupBackground {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $modal-window-background;
-    padding: 74px 0;
-  }
-
-  .popup {
-    width: 800px;
-    padding: 36px;
-
-    &__content {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    &__addPortrait {
-      padding: 0 60px 0 64px;
-      margin: 0;
-    }
-
-    &__portraitFieldText {
-      display: block;
-      width: 136px;
-      margin-top: 16px;
-      text-align: center;
-      font-family: 'InterLight', sans-serif;
-      font-size: 16px;
-      line-height: 140%;
-    }
-
-    &__form {
-      margin: 0;
-      padding: 0 64px 0 0;
-      flex: 1 0 auto;
-    }
-
-    &__input,
-    &__textarea {
-      margin-bottom: 40px;
-    }
-
-    &__btn {
-      text-align: start;
-      margin-bottom: 44px;
-    }
-  }
-}
+//@media (min-width: $breakpiont-small-desktop) {
+//  .popupBackground {
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    background-color: $modal-window-background;
+//    padding: 74px 0;
+//  }
+//
+//  .popup {
+//    width: 800px;
+//    padding: 36px;
+//
+//    &__content {
+//      display: flex;
+//      justify-content: space-between;
+//      align-items: flex-start;
+//    }
+//
+//    &__addPortrait {
+//      padding: 0 60px 0 64px;
+//      margin: 0;
+//    }
+//
+//    &__portraitFieldText {
+//      display: block;
+//      width: 136px;
+//      margin-top: 16px;
+//      text-align: center;
+//      font-family: 'InterLight', sans-serif;
+//      font-size: 16px;
+//      line-height: 140%;
+//    }
+//
+//    &__form {
+//      margin: 0;
+//      padding: 0 64px 0 0;
+//      flex: 1 0 auto;
+//    }
+//
+//    &__input,
+//    &__textarea {
+//      margin-bottom: 40px;
+//    }
+//
+//    &__btn {
+//      text-align: start;
+//      margin-bottom: 44px;
+//    }
+//  }
+//}

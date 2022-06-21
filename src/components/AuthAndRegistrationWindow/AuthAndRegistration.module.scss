@@ -8,6 +8,7 @@
 
 .auth {
   padding-bottom: 32px;
+  height: 100vh;
 
   &__top {
     padding: 24px;
@@ -188,7 +189,7 @@
   .auth {
     flex: 0 0 52%;
     padding-bottom: 130px;
-    min-height: 0;
+    height: auto;
 
     &__top {
       padding: 36px;

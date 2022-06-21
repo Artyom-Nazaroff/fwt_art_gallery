@@ -12,10 +12,10 @@ type InputProps = {
   name: string;
   type: string;
   value: string;
-  errorMessage: string;
-  placeholder?: string;
   changeHandler: (val: string) => void;
-  onBlur: () => void;
+  errorMessage?: string;
+  placeholder?: string;
+  onBlur?: () => void;
 };
 
 const Input: FC<InputProps> = ({
@@ -36,7 +36,7 @@ const Input: FC<InputProps> = ({
       className={cn('input', {
         'input--dt': theme === 'dark',
         'input--lt': theme === 'light',
-        'input--err': errorMessage?.length > 0,
+        'input--err': errorMessage && errorMessage?.length > 0,
       })}
     >
       <label className={cn('input__label')} htmlFor={id}>
@@ -50,7 +50,7 @@ const Input: FC<InputProps> = ({
         value={value}
         placeholder={placeholder}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeHandler(e.target.value)}
-        onBlur={() => onBlur()}
+        onBlur={() => onBlur?.()}
       />
       <div className={cn('input__error')}>
         <img src={errorSign} alt="" />

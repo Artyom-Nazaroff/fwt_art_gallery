@@ -2,130 +2,99 @@
 @import "../../sass/breckpoints.scss";
 
 .burger {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	z-index: 5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
 
-	&__content {
-		width: 252px;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-	}
+  &__content {
+    width: 252px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
 
-	&__top {
-		height: 64px;
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-		padding: 24px;
-	}
+  &__top {
+    height: 64px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px;
+  }
 
-	&__closeBtn {
-		border: none;
-		background-color: inherit;
-		cursor: pointer;
-	}
+  &__closeBtn {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+  }
 
-	&__buttons {
-		padding: 80px 47px;
-		list-style: none;
-	}
+  &__buttons {
+    padding: 80px 47px;
+    list-style: none;
+  }
 
-	&__changeTheme {
-		margin-bottom: 40px;
-	}
+  &__changeThemeBtn {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: inherit;
+    border: none;
 
-	&__changeThemeBtn {
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-		background-color: inherit;
-		border: none;
-
-		img {
-			margin-right: 12px;
-			cursor: pointer;
-		}
-	}
-
-	&__li {
-		&:not(:last-child) {
-			margin-bottom: 32px;
-		}
-	}
-
-	&__btn {
-		font-family: "CormorantSCMedium", serif;
-		font-size: 32px;
-		line-height: 100%;
-		padding: 0;
-		border: none;
-		background-color: inherit;
-		cursor: pointer;
-	}
+    img {
+      margin-right: 12px;
+      cursor: pointer;
+    }
+  }
 }
 
 
 .burger--dt {
-	background-color: rgba(3, 3, 3, 0.6);
+  background-color: rgba(3, 3, 3, 0.6);
 
-	.burger__content {
-		background-color: $primary-black;
-	}
+  .burger__content {
+    background-color: $primary-black;
+  }
 
-	.burger__btn {
-		color: $primary-light-gray;
-	}
+  .burger__btn {
+    color: $primary-light-gray;
+  }
 }
 
 .burger--lt {
-	background-color: rgba(3, 3, 3, 0.3);
+  background-color: rgba(3, 3, 3, 0.3);
 
-	.burger__content {
-		background-color: $primary-white;
-	}
+  .burger__content {
+    background-color: $primary-white;
+  }
 
-	.burger__btn {
-		color: $primary-dark-gray;
-	}
+  .burger__btn {
+    color: $primary-dark-gray;
+  }
 }
 
 
 @media (min-width: $breakpiont-tablet) {
-	.burger {
-		&__content {
-			width: 466px;
-		}
+  .burger {
+    &__content {
+      width: 466px;
+    }
 
-		&__top {
-			height: 88px;
-			padding: 36px 24px;
-		}
+    &__top {
+      height: 88px;
+      padding: 36px 24px;
+    }
 
-		&__buttons {
-			padding: 100px 94px;
-		}
+    &__buttons {
+      padding: 100px 94px;
+    }
 
-		&__changeTheme {
-			margin-bottom: 60px;
-
-			span {
-				font-size: 16px;
-			}
-		}
-
-		&__btn {
-			font-size: 60px;
-			line-height: 73px;
-
-			&:not(:last-child) {
-				margin-bottom: 40px;
-			}
-		}
-	}
+    &__changeThemeBtn {
+      margin-bottom: 60px;
+      font-size: 16px;
+    }
+  }
 }

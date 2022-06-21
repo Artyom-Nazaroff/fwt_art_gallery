@@ -6,12 +6,12 @@
 
   &__container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
   }
 
-  &__btn {
+  &__back {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +28,27 @@
     margin-left: 16px;
     display: none;
   }
+
+  &__buttons {
+    display: none;
+
+    &--active {
+      display: block;
+    }
+  }
+
+  &__btn {
+    padding: 6px;
+    border-radius: 4px;
+    border: none;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+  }
+
+  &__pen {
+    margin-right: 20px;
+  }
 }
 
 .gallery {
@@ -39,19 +60,128 @@
     font-family: "CormorantSCSemiBold", serif;
     font-size: 32px;
     line-height: 100%;
-    margin-bottom: 60px;
+  }
+
+  &__row {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__paintingInner {
+    max-width: 280px;
+    margin: 0 auto 64px;
+    border: 1px dashed #575757;
+    border-radius: 2px;
+    padding: 17px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  &__plusInput {
+    display: none;
+  }
+
+  &__plus {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__emptyText {
+    padding-top: 20px;
+    font-family: "CormorantSCMedium", serif;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 160px;
+      height: 2px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }
 
 .gallery--dt {
+  .return__btn {
+    background-color: $secondary-black;
+  }
+
   .gallery__title {
     color: $accent-gold;
+  }
+
+  .gallery__paintingInner {
+    background-color: $secondary-black;
+  }
+
+  .gallery__plus {
+    background-color: $accent-gold;
+  }
+
+  .gallery__emptyText {
+    color: $primary-light-gray;
+    &::before {
+      background-color: $accent-gold;
+    }
   }
 }
 
 .gallery--lt {
+  .return__btn {
+    background-color: $secondary-white;
+  }
+
   .gallery__title {
     color: $accent-red;
+  }
+
+  .gallery__paintingInner {
+    background-color: $secondary-white;
+  }
+
+  .gallery__plus {
+    background-color: $accent-red;
+  }
+
+  .gallery__emptyText {
+    color: $primary-dark-gray;
+    &::before {
+      background-color: $accent-red;
+    }
+  }
+}
+
+.return--dt {
+  .return__btn {
+    background-color: $secondary-black;
+  }
+}
+
+.return--lt {
+  .return__btn {
+    background-color: $secondary-white;
   }
 }
 
@@ -72,6 +202,26 @@
     &__title {
       font-size: 60px;
       line-height: 73px;
+    }
+
+    &__row {
+      padding-bottom: 25px;
+    }
+
+    &__paintingInner {
+      max-width: 352px;
+      margin: 0 0 110px;
+      padding: 35px 0;
+    }
+  }
+}
+
+@media (min-width: $breakpiont-tablet) {
+  .gallery {
+    &__paintingInner {
+      max-width: 392px;
+      margin: 0 0 110px;
+      padding: 54px 0;
     }
   }
 }

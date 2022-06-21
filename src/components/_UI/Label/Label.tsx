@@ -9,10 +9,12 @@ const cn = classNames.bind(styles);
 
 type LabelProps = {
   name: string;
+  id: string;
   isRemove: boolean;
+  removeGenre?: (id: string) => void;
 };
 
-const Label: FC<LabelProps> = ({ name, isRemove }) => {
+const Label: FC<LabelProps> = ({ name, id, isRemove, removeGenre }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -24,7 +26,7 @@ const Label: FC<LabelProps> = ({ name, isRemove }) => {
     >
       <span>{name}</span>
       {isRemove && (
-        <button className={cn('label__btn')} type="button">
+        <button className={cn('label__btn')} type="button" onClick={() => removeGenre?.(id)}>
           <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
         </button>
       )}

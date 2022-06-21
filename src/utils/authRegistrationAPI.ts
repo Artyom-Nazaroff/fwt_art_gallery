@@ -1,8 +1,7 @@
-import axios from 'axios';
 import { instance } from './_api';
 import { TokensType } from '../store/authRegistration/authRegistrationTypes';
 
-const url = process.env.REACT_APP_BASE_URL;
+// const url = process.env.REACT_APP_BASE_URL;
 
 export const authRegistrationAPI = {
   registration(username: string, password: string, fingerprint: string) {
@@ -15,13 +14,13 @@ export const authRegistrationAPI = {
       .post<TokensType>(`auth/login`, { username, password, fingerprint })
       .then((response) => response.data);
   },
-  refresh(fingerprint: string, refreshToken: string) {
-    return axios
-      .post<TokensType>(
-        `${url}auth/refresh`,
-        { fingerprint, refreshToken },
-        { withCredentials: true }
-      )
-      .then((response) => response.data);
-  },
+  // refresh(fingerprint: string, refreshToken: string) {
+  //   return axios
+  //     .post<TokensType>(
+  //       `${url}auth/refresh`,
+  //       { fingerprint, refreshToken },
+  //       { withCredentials: true }
+  //     )
+  //     .then((response) => response.data);
+  // },
 };

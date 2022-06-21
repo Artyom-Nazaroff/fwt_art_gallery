@@ -7,7 +7,7 @@ const cn = classNames.bind(styles);
 
 interface ButtonProps {
   text: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   onClick: (val: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -24,7 +24,7 @@ const Button: FC<ButtonProps> = ({ text, isDisabled, onClick }) => {
       disabled={isDisabled}
       onClick={(e: React.MouseEvent<HTMLButtonElement>) => onClick(e)}
     >
-      <span>{text}</span>
+      <span className={cn('btn__text')}>{text}</span>
     </button>
   );
 };
