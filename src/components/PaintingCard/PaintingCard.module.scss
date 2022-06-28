@@ -11,6 +11,14 @@
     width: 100%;
   }
 
+  &__containerBtn {
+    border: none;
+    background-color: inherit;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
   &__inner {
     position: absolute;
     top: 0;
@@ -32,6 +40,65 @@
     }
   }
 
+  &__btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background-color: rgba(26, 24, 24, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__list {
+    display: none;
+    border-radius: 4px;
+    padding: 13px 0;
+    cursor: auto;
+    position: absolute;
+    top: 43px;
+    left: 12px;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      position: absolute;
+      top: -3px;
+      left: 11px;
+    }
+
+    &--active {
+      display: block;
+    }
+  }
+
+  &__itemBtn {
+    text-align: left;
+    padding: 4px 16px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: inherit;
+    font-family: InterBold, sans-serif;
+    font-size: 12px;
+    line-height: 15px;
+    cursor: pointer;
+  }
+
   &__info {
     height: 45px;
     width: 236px;
@@ -39,6 +106,7 @@
     bottom: 0;
     left: 0;
     padding: 8px 12px;
+    text-align: left;
 
     &::before {
       content: "";
@@ -89,6 +157,23 @@
 
 
 .painting--dt {
+  .painting__list {
+    background-color: $secondary-black;
+
+    &::before {
+      border-bottom: 4px solid $secondary-black;
+    }
+  }
+
+  .painting__itemBtn {
+    color: $primary-light-gray;
+
+    &:hover {
+      background-color: $primary-black;
+      color: $accent-gold;
+    }
+  }
+
   .painting__info {
     background-color: $primary-black;
 
@@ -111,6 +196,22 @@
 }
 
 .painting--lt {
+  .painting__list {
+    background-color: $secondary-white;
+
+    &::before {
+      border-bottom: 4px solid $secondary-white;
+    }
+  }
+
+  .painting__itemBtn {
+    color: $primary-dark-gray;
+
+    &:hover {
+      color: $primary-black;
+    }
+  }
+
   .painting__info {
     background-color: $primary-white;
 
@@ -133,7 +234,7 @@
 }
 
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .painting {
     &__info {
       height: 66px;
@@ -158,8 +259,18 @@
   }
 }
 
-@media (min-width: $breakpiont-small-desktop) {
+@media (min-width: $breakpoint-small-desktop) {
   .painting {
+    &__inner:hover {
+      .painting__btn {
+        display: block;
+      }
+    }
+
+    &__btn {
+      display: none;
+    }
+
     &__info {
       height: 82px;
       width: 300px;

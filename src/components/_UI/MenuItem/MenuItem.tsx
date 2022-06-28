@@ -2,25 +2,34 @@ import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
 import styles from './MenuItem.module.scss';
 import { ThemeContext } from '../../../context/themeContext';
-import { AuthOrRegistration } from '../../AuthAndRegistrationWindow/AuthAndRegistration';
+import { AuthOrRegistration } from '../../AuthAndRegistration/AuthAndRegistration';
 
 const cn = classNames.bind(styles);
 
-interface ButtonProps {
+type ButtonProps = {
   text: string;
-  isBurger: boolean;
+  isBurger?: boolean;
+  isFilterMenu?: boolean;
   variant?: AuthOrRegistration;
   setAccount?: (val: AuthOrRegistration) => void;
   removeAccount?: () => void;
-}
+};
 
-const MenuItem: FC<ButtonProps> = ({ text, variant, setAccount, removeAccount, isBurger }) => {
+const MenuItem: FC<ButtonProps> = ({
+  text,
+  variant,
+  setAccount,
+  removeAccount,
+  isBurger,
+  isFilterMenu,
+}) => {
   const { theme } = useContext(ThemeContext);
 
   return (
     <button
       className={cn('btn', {
         'btn--burger': isBurger,
+        'btn--filter': isFilterMenu,
         'btn--dt': theme === 'dark',
         'btn--lt': theme === 'light',
       })}

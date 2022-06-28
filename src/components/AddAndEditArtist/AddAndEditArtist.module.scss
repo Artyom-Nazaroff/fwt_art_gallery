@@ -3,6 +3,7 @@
 
 .popupBackground {
   flex: 1 0 auto;
+  position: relative;
 }
 
 .popup {
@@ -100,6 +101,19 @@
 .popup--dt {
   background-color: $primary-black;
 
+  .popup__dragAndDrop {
+    background-color: $secondary-black;
+    border-color: $primary-dark-gray;
+  }
+
+  .popup__dragAndDropText {
+    color: $primary-light-gray;
+  }
+
+  .popup__dragAndDropLimitation {
+    color: $primary-dark-gray;
+  }
+
   .popup__portraitField {
     border: 1px dashed $primary-dark-gray;
   }
@@ -120,6 +134,19 @@
 .popup--lt {
   background-color: $secondary-white;
 
+  .popup__dragAndDrop {
+    background-color: $primary-white;
+    border-color: $secondary-gray;
+  }
+
+  .popup__dragAndDropText {
+    color: $primary-dark-gray;
+  }
+
+  .popup__dragAndDropLimitation {
+    color: $secondary-gray;
+  }
+
   .popup__portraitField {
     border: 1px dashed $secondary-gray;
   }
@@ -138,7 +165,7 @@
 }
 
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .popup {
     padding: 36px 24px 1px;
 
@@ -167,25 +194,59 @@
   }
 }
 
-@media (min-width: $breakpiont-small-desktop) {
+@media (min-width: $breakpoint-small-desktop) {
   .popupBackground {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: $modal-window-background;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
     min-height: fit-content;
     z-index: 10;
-    padding: 20px;
+    padding: 100px;
   }
 
   .popup {
     width: 800px;
     padding: 36px;
+    position: relative;
+
+    &__dragAndDrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      border: 1px dashed;
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      visibility: hidden;
+
+      &--active {
+        visibility: visible;
+      }
+    }
+
+    &__dragAndDropText {
+      font-family: InterLight, sans-serif;
+      font-size: 16px;
+      line-height: 140%;
+      text-align: center;
+      max-width: 136px;
+      margin-top: 16px;
+    }
+
+    &__dragAndDropLimitation {
+      max-width: 260px;
+      font-family: InterLight, sans-serif;
+      font-size: 12px;
+      line-height: 140%;
+      margin-top: 20px;
+    }
 
     &__content {
       display: flex;

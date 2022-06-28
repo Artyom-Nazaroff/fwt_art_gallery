@@ -15,25 +15,36 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const cn = classNames.bind(styles);
 
+export enum DeleteArtistOrPainting {
+  artist = 'artist',
+  painting = 'painting',
+}
+
 type DeletePopUpProps = {
   setDeleteOpened: (val: boolean) => void;
+  deleteArtistOrPainting: DeleteArtistOrPainting;
+  currentPaintingId: string;
 };
 
-const DeletePopUp: FC<DeletePopUpProps> = ({ setDeleteOpened }) => {
+const DeletePopup: FC<DeletePopUpProps> = ({
+  setDeleteOpened,
+  deleteArtistOrPainting,
+  currentPaintingId,
+}) => {
   const { theme } = useContext(ThemeContext);
-  const { deleteArtist } = useActions();
+  const { deleteArtist, deletePainting } = useActions();
   const { artistProfile } = useTypedSelector((state) => state.artists);
   const navigate = useNavigate();
-
-  const closeWindow = () => {
-    setDeleteOpened(false);
-    document.body.style.overflow = 'unset';
-  };
 
   const removeArtist = () => {
     deleteArtist(artistProfile._id);
     setDeleteOpened(false);
     navigate('/new_art_gallery');
+  };
+
+  const removePainting = () => {
+    deletePainting(artistProfile._id, currentPaintingId);
+    setDeleteOpened(false);
   };
 
   return (
@@ -46,7 +57,11 @@ const DeletePopUp: FC<DeletePopUpProps> = ({ setDeleteOpened }) => {
       >
         <div className={cn('popup__top')}>
           <div className={cn('popup__close')}>
-            <button className={cn('popup__closeBtn')} type="button" onClick={() => closeWindow()}>
+            <button
+              className={cn('popup__closeBtn')}
+              type="button"
+              onClick={() => setDeleteOpened(false)}
+            >
               <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
             </button>
           </div>
@@ -54,12 +69,23 @@ const DeletePopUp: FC<DeletePopUpProps> = ({ setDeleteOpened }) => {
             <img src={theme === 'dark' ? trashBinDT : trashBinLT} alt="" />
           </div>
         </div>
-        <h2 className={cn('popup__title')}>Do you want to delete this artist profile?</h2>
+        <h2 className={cn('popup__title')}>
+          Do you want to delete this{' '}
+          {deleteArtistOrPainting === DeleteArtistOrPainting.artist ? 'artist profile' : 'picture'}?
+        </h2>
         <div className={cn('popup__warning')}>
-          You will not be able to recover this profile afterwards.
+          You will not be able to recover this{' '}
+          {deleteArtistOrPainting === DeleteArtistOrPainting.artist ? 'profile' : 'picture'}{' '}
+          afterwards.
         </div>
         <div className={cn('popup__btn')}>
-          <Button text="Delete" onClick={() => removeArtist()} />
+          <Button
+            text="Delete"
+            onClick={() => {
+              if (deleteArtistOrPainting === DeleteArtistOrPainting.artist) removeArtist();
+              if (deleteArtistOrPainting === DeleteArtistOrPainting.painting) removePainting();
+            }}
+          />
         </div>
         <div className={cn('popup__link')}>
           <TextLink text="Cancel" onClick={setDeleteOpened} />
@@ -69,4 +95,4 @@ const DeletePopUp: FC<DeletePopUpProps> = ({ setDeleteOpened }) => {
   );
 };
 
-export default DeletePopUp;
+export default DeletePopup;

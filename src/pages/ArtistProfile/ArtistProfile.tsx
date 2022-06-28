@@ -1,13 +1,11 @@
-import React, { FC, Suspense, useContext, useEffect } from 'react';
+import React, { FC, Suspense, useContext, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { NavLink, useMatch } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import styles from './ArtistProfile.module.scss';
 import '../../App.scss';
 import arrowDT from '../../assets/dark-theme/artist-profile/return-arrow-dt.svg';
-import penDT from '../../assets/dark-theme/artist-profile/pen-dt.svg';
 import arrowLT from '../../assets/light-theme/artist-profile/return-arrow-lt.svg';
-import penLT from '../../assets/light-theme/artist-profile/pen-lt.svg';
 import emptyPaintingsDT from '../../assets/dark-theme/artist-info/artwork-icon-dt.svg';
 import emptyPaintingsLT from '../../assets/light-theme/artist-info/artwork-lt.svg';
 import plus from '../../assets/common-files/empty-paintings-plus.svg';
@@ -18,9 +16,14 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
 import Preloader from '../../components/_UI/Preloader/Preloader';
 import PaintingCard from '../../components/PaintingCard/PaintingCard';
-import ButtonTrashBin from '../../components/_UI/ButtonTrashBin/ButtonTrashBin';
-import { AddOrEditArtist } from '../../components/AddAndEditArtistPopUp/AddAndEditArtist';
+import ButtonEditDelete, {
+  EditOrDeleteButton,
+} from '../../components/_UI/ButtonEditDeleteProfile/ButtonEditDelete';
+import { AddOrEditArtist } from '../../components/AddAndEditArtist/AddAndEditArtist';
 import ButtonLink from '../../components/_UI/ButtonLink/ButtonLink';
+import Slider from '../../components/_UI/Slider/Slider';
+import { DeleteArtistOrPainting } from '../../components/DeletePopup/DeletePopup';
+import { AddOrEditPainting } from '../../components/AddAndEditPainting/AddAndEditPainting';
 
 const AdaptiveGrid = React.lazy(() => import('../../components/AdaptiveGrid/AdaptiveGrid'));
 
@@ -28,17 +31,24 @@ const cn = classNames.bind(styles);
 
 type ArtistProfileProps = {
   setDeleteOpened?: (val: boolean) => void;
-  setAddPaintingOpened?: (val: boolean) => void;
-  setAddEditOpened?: (val: boolean) => void;
+  setAddEditPaintingOpened?: (val: boolean) => void;
+  setAddEditArtistOpened?: (val: boolean) => void;
+  setCurrentPaintingId?: (val: string) => void;
   setAddOrEditArtist?: (val: AddOrEditArtist) => void;
+  setAddOrEditPainting?: (val: AddOrEditPainting) => void;
+  setDeleteArtistOrPainting?: (val: DeleteArtistOrPainting) => void;
 };
 
 const ArtistProfile: FC<ArtistProfileProps> = ({
   setDeleteOpened,
-  setAddPaintingOpened,
-  setAddEditOpened,
+  setAddEditPaintingOpened,
+  setAddEditArtistOpened,
   setAddOrEditArtist,
+  setAddOrEditPainting,
+  setDeleteArtistOrPainting,
+  setCurrentPaintingId,
 }) => {
+  const [isSliderVisible, setIsSliderVisible] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext);
   const { artistProfile, loading } = useTypedSelector((state) => state.artists);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
@@ -62,10 +72,26 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
     if (!Cookies.get('accessToken') && match) fetchArtistProfile('static/', match.params.artistId);
   }, [isAuth]);
 
-  const openWindow = () => {
+  const openDeleteWindow = () => {
     setDeleteOpened?.(true);
-    document.body.style.overflow = 'hidden';
+    setDeleteArtistOrPainting?.(DeleteArtistOrPainting.artist);
   };
+
+  const openEditWindow = () => {
+    setAddEditArtistOpened?.(true);
+    setAddOrEditArtist?.(AddOrEditArtist.edit);
+  };
+
+  if (isSliderVisible)
+    return (
+      <Slider
+        setIsSliderVisible={setIsSliderVisible}
+        setDeleteOpened={setDeleteOpened}
+        setAddEditPaintingOpened={setAddEditPaintingOpened}
+        setDeleteArtistOrPainting={setDeleteArtistOrPainting}
+        setCurrentPaintingId={setCurrentPaintingId}
+      />
+    );
 
   return (
     <div
@@ -94,26 +120,19 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
                 </button>
               </NavLink>
               <div className={cn('return__buttons', { 'return__buttons--active': isAuth })}>
-                <button
-                  className={cn('return__btn', 'return__pen')}
-                  type="button"
-                  onClick={() => {
-                    setAddEditOpened?.(true);
-                    setAddOrEditArtist?.(AddOrEditArtist.edit);
-                  }}
-                >
-                  <img src={theme === 'dark' ? penDT : penLT} alt="" />
-                </button>
-                <ButtonTrashBin onClick={openWindow} />
+                <span className={cn('return__btn')}>
+                  <ButtonEditDelete variant={EditOrDeleteButton.edit} onClick={openEditWindow} />
+                </span>
+                <ButtonEditDelete variant={EditOrDeleteButton.delete} onClick={openDeleteWindow} />
               </div>
             </div>
           </div>
           <ArtistInfo
-            name={artistProfile.name}
-            years={artistProfile.yearsOfLife}
-            description={artistProfile.description}
-            avatar={artistProfile.avatar}
-            genres={artistProfile.genres}
+            name={artistProfile?.name}
+            years={artistProfile?.yearsOfLife}
+            description={artistProfile?.description}
+            avatar={artistProfile?.avatar}
+            genres={artistProfile?.genres}
           />
           <div
             className={cn('gallery', {
@@ -123,10 +142,13 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
           >
             <div className={cn('gallery__container', 'container')}>
               <h2 className={cn('gallery__title')}>Artworks</h2>
-              {artistProfile.paintings?.length !== 0 ? (
+              {artistProfile?.paintings?.length !== 0 ? (
                 <Suspense fallback={<Preloader />}>
                   <div className={cn('gallery__row')}>
-                    <ButtonLink text="Add picture" onClick={() => setAddPaintingOpened?.(true)} />
+                    <ButtonLink
+                      text="Add picture"
+                      onClick={() => setAddEditPaintingOpened?.(true)}
+                    />
                   </div>
                   <AdaptiveGrid>
                     {artistProfile.paintings?.map((i) => (
@@ -136,6 +158,12 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
                         name={i.name}
                         year={i.yearOfCreation}
                         picture={i.image.src}
+                        onClick={setIsSliderVisible}
+                        setDeleteOpened={setDeleteOpened}
+                        setAddEditPaintingOpened={setAddEditPaintingOpened}
+                        setDeleteArtistOrPainting={setDeleteArtistOrPainting}
+                        setAddOrEditPainting={setAddOrEditPainting}
+                        setCurrentPaintingId={setCurrentPaintingId}
                       />
                     ))}
                   </AdaptiveGrid>
@@ -147,7 +175,7 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
                     <button
                       className={cn('gallery__plus')}
                       type="button"
-                      onClick={() => setAddPaintingOpened?.(true)}
+                      onClick={() => setAddEditPaintingOpened?.(true)}
                     >
                       <img src={plus} alt="" />
                     </button>

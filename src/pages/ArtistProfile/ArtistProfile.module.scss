@@ -38,15 +38,6 @@
   }
 
   &__btn {
-    padding: 6px;
-    border-radius: 4px;
-    border: none;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-  }
-
-  &__pen {
     margin-right: 20px;
   }
 }
@@ -185,7 +176,7 @@
   }
 }
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .return {
     height: 80px;
 
@@ -216,7 +207,7 @@
   }
 }
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .gallery {
     &__paintingInner {
       max-width: 392px;

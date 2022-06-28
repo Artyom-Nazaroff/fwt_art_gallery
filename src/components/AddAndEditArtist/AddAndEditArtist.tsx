@@ -13,7 +13,9 @@ import Multiselect from '../_UI/Multiselect/Multiselect';
 import { ThemeContext } from '../../context/themeContext';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import ButtonTrashBin from '../_UI/ButtonTrashBin/ButtonTrashBin';
+import ButtonEditDelete, {
+  EditOrDeleteButton,
+} from '../_UI/ButtonEditDeleteProfile/ButtonEditDelete';
 import { Genre } from '../../store/artists/artistsTypes';
 import { usePicturePreview } from '../../hooks/usePicturePreview';
 
@@ -26,39 +28,70 @@ export enum AddOrEditArtist {
 
 type AddAndEditArtistProps = {
   addOrEditArtist: AddOrEditArtist;
-  setAddEditOpened: (val: boolean) => void;
+  setAddEditArtistOpened: (val: boolean) => void;
 };
 
-const AddAndEditArtist: FC<AddAndEditArtistProps> = ({ setAddEditOpened, addOrEditArtist }) => {
+const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
+  setAddEditArtistOpened,
+  addOrEditArtist,
+}) => {
   const [name, setName] = useState<string>('');
   const [years, setYears] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [artistsGenres, setArtistsGenres] = useState<Array<Genre>>([]);
+  const [drag, setDrag] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext);
   const { getAllGenres, createArtist, editArtist } = useActions();
   const { genres, artistProfile } = useTypedSelector((state) => state.artists);
-  const { picture, picturePreview, onImageChange, deletePicturePreview } = usePicturePreview();
+  const { picture, picturePreview, onImageChange, onDragAndDropImageChange, deletePicturePreview } =
+    usePicturePreview();
 
   useEffect(() => {
     getAllGenres();
   }, []);
 
   const closeWindow = () => {
-    setAddEditOpened(false);
-    document.body.style.overflow = 'unset';
+    setAddEditArtistOpened(false);
+    // document.body.style.overflow = 'unset';
   };
 
   const saveArtist = () => {
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('yearsOfLife', years);
-    formData.append('description', description);
-    artistsGenres.forEach((item) => formData.append('genres', item._id));
-    formData.append('avatar', picture as File);
-    if (addOrEditArtist === AddOrEditArtist.add) createArtist(formData);
-    if (addOrEditArtist === AddOrEditArtist.edit) editArtist(formData, artistProfile._id);
-    setAddEditOpened(false);
+    if (addOrEditArtist === AddOrEditArtist.add) {
+      formData.append('name', name);
+      formData.append('yearsOfLife', years);
+      formData.append('description', description);
+      artistsGenres.forEach((item) => formData.append('genres', item._id));
+      formData.append('avatar', picture as File);
+      createArtist(formData);
+    }
+    if (addOrEditArtist === AddOrEditArtist.edit) {
+      if (name !== '') formData.append('name', name);
+      if (years !== '') formData.append('yearsOfLife', years);
+      if (description !== '') formData.append('description', description);
+      if (artistsGenres.length !== 0)
+        artistsGenres.forEach((item) => formData.append('genres', item._id));
+      if (picture) formData.append('avatar', picture as File);
+      editArtist(formData, artistProfile._id);
+    }
+    setAddEditArtistOpened(false);
+  };
+
+  const dragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDrag(true);
+  };
+
+  const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDrag(false);
+  };
+
+  const onDropHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    onDragAndDropImageChange(e);
+    setDrag(false);
   };
 
   return (
@@ -69,7 +102,20 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({ setAddEditOpened, addOrEd
             'popup--dt': theme === 'dark',
             'popup--lt': theme === 'light',
           })}
+          onDragEnter={(e: React.DragEvent<HTMLDivElement>) => dragStartHandler(e)}
         >
+          <div
+            className={cn('popup__dragAndDrop', { 'popup__dragAndDrop--active': drag })}
+            onDragLeave={(e: React.DragEvent<HTMLDivElement>) => dragLeaveHandler(e)}
+            onDragOver={(e: React.DragEvent<HTMLDivElement>) => dragStartHandler(e)}
+            onDrop={(e: React.DragEvent<HTMLDivElement>) => onDropHandler(e)}
+          >
+            <img src={theme === 'dark' ? manIconDT : manIconLT} alt="" />
+            <span className={cn('popup__dragAndDropText')}>Drop your image here</span>
+            <span className={cn('popup__dragAndDropLimitation')}>
+              Upload only .jpg or .png format less than 3 MB
+            </span>
+          </div>
           <div className={cn('popup__top')}>
             <button className={cn('popup__close')} type="button" onClick={() => closeWindow()}>
               <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
@@ -82,7 +128,10 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({ setAddEditOpened, addOrEd
                   <div className={cn('popup__previewPictureInner')}>
                     <img className={cn('popup__previewPicture')} src={picturePreview} alt="" />
                     <span className={cn('popup__previewPictureIcon')}>
-                      <ButtonTrashBin onClick={deletePicturePreview} />
+                      <ButtonEditDelete
+                        onClick={deletePicturePreview}
+                        variant={EditOrDeleteButton.delete}
+                      />
                     </span>
                   </div>
                 ) : (

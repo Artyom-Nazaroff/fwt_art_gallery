@@ -3,10 +3,10 @@ import classNames from 'classnames/bind';
 import styles from './ModalContainer.module.scss';
 import AuthAndRegistration, {
   AuthOrRegistration,
-} from '../AuthAndRegistrationWindow/AuthAndRegistration';
-import DeletePopUp from '../DeleteArtistPopUp/DeletePopUp';
-import AddAndEditArtist, { AddOrEditArtist } from '../AddAndEditArtistPopUp/AddAndEditArtist';
-import AddAndEditPainting from '../AddAndEditPaintingPopUp/AddAndEditPainting';
+} from '../AuthAndRegistration/AuthAndRegistration';
+import DeletePopup, { DeleteArtistOrPainting } from '../DeletePopup/DeletePopup';
+import AddAndEditArtist, { AddOrEditArtist } from '../AddAndEditArtist/AddAndEditArtist';
+import AddAndEditPainting, { AddOrEditPainting } from '../AddAndEditPainting/AddAndEditPainting';
 
 const cn = classNames.bind(styles);
 
@@ -14,14 +14,17 @@ type ModalProps = {
   authOrRegistration: AuthOrRegistration;
   isAuthOpened: boolean;
   isDeleteOpened: boolean;
-  isAddEditOpened: boolean;
-  isAddPaintingOpened: boolean;
+  isAddEditArtistOpened: boolean;
+  isAddEditPaintingOpened: boolean;
+  currentPaintingId: string;
   addOrEditArtist: AddOrEditArtist;
+  addOrEditPainting: AddOrEditPainting;
+  deleteArtistOrPainting: DeleteArtistOrPainting;
   setAuthOrRegistration: (val: AuthOrRegistration) => void;
   setAuthOpened: (val: boolean) => void;
   setDeleteOpened: (val: boolean) => void;
-  setAddEditOpened: (val: boolean) => void;
-  setAddPaintingOpened: (val: boolean) => void;
+  setAddEditArtistOpened: (val: boolean) => void;
+  setAddEditPaintingOpened: (val: boolean) => void;
 };
 
 const ModalContainer: FC<ModalProps> = ({
@@ -31,17 +34,20 @@ const ModalContainer: FC<ModalProps> = ({
   setAuthOpened,
   isDeleteOpened,
   setDeleteOpened,
-  isAddEditOpened,
+  isAddEditArtistOpened,
   addOrEditArtist,
-  setAddEditOpened,
-  isAddPaintingOpened,
-  setAddPaintingOpened,
+  addOrEditPainting,
+  setAddEditArtistOpened,
+  isAddEditPaintingOpened,
+  setAddEditPaintingOpened,
+  deleteArtistOrPainting,
+  currentPaintingId,
 }) => {
   return (
     <div
       className={cn('modalContainer', {
         'modalContainer--active':
-          isAuthOpened || isDeleteOpened || isAddEditOpened || isAddPaintingOpened,
+          isAuthOpened || isDeleteOpened || isAddEditArtistOpened || isAddEditPaintingOpened,
       })}
     >
       {isAuthOpened && (
@@ -51,11 +57,26 @@ const ModalContainer: FC<ModalProps> = ({
           setAuthOpened={setAuthOpened}
         />
       )}
-      {isDeleteOpened && <DeletePopUp setDeleteOpened={setDeleteOpened} />}
-      {isAddEditOpened && (
-        <AddAndEditArtist setAddEditOpened={setAddEditOpened} addOrEditArtist={addOrEditArtist} />
+      {isDeleteOpened && (
+        <DeletePopup
+          setDeleteOpened={setDeleteOpened}
+          deleteArtistOrPainting={deleteArtistOrPainting}
+          currentPaintingId={currentPaintingId}
+        />
       )}
-      {isAddPaintingOpened && <AddAndEditPainting setAddPaintingOpened={setAddPaintingOpened} />}
+      {isAddEditArtistOpened && (
+        <AddAndEditArtist
+          setAddEditArtistOpened={setAddEditArtistOpened}
+          addOrEditArtist={addOrEditArtist}
+        />
+      )}
+      {isAddEditPaintingOpened && (
+        <AddAndEditPainting
+          setAddEditPaintingOpened={setAddEditPaintingOpened}
+          addOrEditPainting={addOrEditPainting}
+          currentPaintingId={currentPaintingId}
+        />
+      )}
     </div>
   );
 };

@@ -56,7 +56,9 @@ export enum ArtistsActionTypes {
   ADD_ARTIST = 'ADD_ARTIST',
   EDIT_ARTIST = 'EDIT_ARTIST',
   DELETE_ARTIST = 'DELETE_ARTIST',
+  DELETE_PAINTING = 'DELETE_PAINTING',
   ADD_PAINTING = 'ADD_PAINTING',
+  EDIT_PAINTING = 'EDIT_PAINTING',
 }
 
 export type ShowPreloader = {
@@ -90,11 +92,21 @@ export type EditArtist = {
 
 export type DeleteArtist = {
   type: ArtistsActionTypes.DELETE_ARTIST;
-  payload: { [key: string]: string };
+  payload: string;
+};
+
+export type DeletePainting = {
+  type: ArtistsActionTypes.DELETE_PAINTING;
+  payload: string;
 };
 
 export type AddNewPainting = {
   type: ArtistsActionTypes.ADD_PAINTING;
+  payload: Painting;
+};
+
+export type EditPainting = {
+  type: ArtistsActionTypes.EDIT_PAINTING;
   payload: Painting;
 };
 
@@ -106,4 +118,6 @@ export type ArtistsAction =
   | AddArtist
   | AddNewPainting
   | DeleteArtist
-  | EditArtist;
+  | EditArtist
+  | DeletePainting
+  | EditPainting;

@@ -7,7 +7,7 @@ import changeThemeDT from '../../assets/dark-theme/header/change-theme-dt.svg';
 import changeThemeLT from '../../assets/light-theme/header/change-theme-lt.svg';
 import TextLink from '../_UI/TextLink/TextLink';
 import { ThemeContext } from '../../context/themeContext';
-import { AuthOrRegistration } from '../AuthAndRegistrationWindow/AuthAndRegistration';
+import { AuthOrRegistration } from '../AuthAndRegistration/AuthAndRegistration';
 import MenuItem from '../_UI/MenuItem/MenuItem';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';

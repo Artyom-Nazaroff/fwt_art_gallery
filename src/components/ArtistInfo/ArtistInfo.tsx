@@ -39,20 +39,24 @@ const ArtistInfo: FC<ArtistInfoProps> = ({ name, years, place, description, avat
       })}
     >
       <div className={cn('artist__container')}>
-        {avatar ? (
-          <picture className={cn('artist__portrait')}>
-            <source srcSet={`${url}${avatar.webp}`} media="(min-width: 320px)" />
-            <source srcSet={`${url}${avatar.src}`} media="(min-width: 320px)" />
-            <source srcSet={`${url}${avatar.webp2x}`} media="(min-width: 768px)" />
-            <source srcSet={`${url}${avatar.src2x}`} media="(min-width: 768px)" />
-            <source srcSet={`${url}${avatar.original}`} media="(min-width: 1280px)" />
-            <img src={`${url}${avatar.original}`} alt="portrait" />
-          </picture>
-        ) : (
-          <div className={cn('artist__portrait')}>
-            <img src={theme === 'dark' ? noImageDT : noImageLT} alt="" />
-          </div>
-        )}
+        <picture className={cn('artist__portrait')}>
+          {avatar ? (
+            <>
+              <source srcSet={`${url}${avatar.webp}`} media="(min-width: 320px)" />
+              <source srcSet={`${url}${avatar.src}`} media="(min-width: 320px)" />
+              <source srcSet={`${url}${avatar.webp2x}`} media="(min-width: 768px)" />
+              <source srcSet={`${url}${avatar.src2x}`} media="(min-width: 768px)" />
+              <source srcSet={`${url}${avatar.original}`} media="(min-width: 1280px)" />
+              <img src={`${url}${avatar.original}`} alt="portrait" />
+            </>
+          ) : (
+            <img
+              className={cn('artist__noPortrait')}
+              src={theme === 'dark' ? noImageDT : noImageLT}
+              alt=""
+            />
+          )}
+        </picture>
         <div className={cn('artist__description')}>
           <div className={cn('artist__basicInfo')}>
             <div className={cn('artist__inner')}>

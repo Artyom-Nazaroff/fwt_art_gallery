@@ -28,12 +28,33 @@ export const artistsReducer = (state: ArtistsState = initialState, action: Artis
       return { ...state, artists: [...state.artists, action.payload] };
     case ArtistsActionTypes.EDIT_ARTIST:
       return { ...state, artistProfile: action.payload };
+    case ArtistsActionTypes.DELETE_ARTIST:
+      return { ...state, artists: state.artists.filter((i) => i._id !== action.payload) };
+    case ArtistsActionTypes.DELETE_PAINTING:
+      return {
+        ...state,
+        artistProfile: {
+          ...state.artistProfile,
+          paintings: state.artistProfile.paintings.filter((i) => i._id !== action.payload),
+        },
+      };
     case ArtistsActionTypes.ADD_PAINTING:
       return {
         ...state,
         artistProfile: {
           ...state.artistProfile,
           paintings: [...state.artistProfile.paintings, action.payload],
+        },
+      };
+    case ArtistsActionTypes.EDIT_PAINTING:
+      return {
+        ...state,
+        artistProfile: {
+          ...state.artistProfile,
+          paintings: [
+            ...state.artistProfile.paintings.filter((i) => i._id !== action.payload._id),
+            action.payload,
+          ],
         },
       };
     default:

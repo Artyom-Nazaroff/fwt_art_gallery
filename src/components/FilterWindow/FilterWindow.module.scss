@@ -1,0 +1,182 @@
+@import "../../sass/colors.scss";
+@import "../../sass/breckpoints.scss";
+
+.filter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+
+  &__content {
+    width: 252px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px;
+    margin-bottom: 40px;
+  }
+
+  &__closeBtn {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+  }
+
+  &__categories {
+    padding: 0 20px;
+    flex: 1 1 auto;
+  }
+
+  &__menuItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 32px;
+    margin-left: -10px;
+  }
+
+  &__genresAmount {
+    font-family: "CormorantSCMedium", serif;
+    font-size: 16px;
+    line-height: 128%;
+    margin-left: -10px;
+    cursor: pointer;
+  }
+
+  &__genres--active,
+  &__sortBy--active {
+    padding-bottom: 16px;
+  }
+
+  &__menuItemPlus {
+    border: none;
+    background-color: inherit;
+  }
+
+  &__genresItems {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 60px;
+    margin-bottom: 16px;
+
+    &--active {
+      display: grid;
+    }
+  }
+
+  &__sortByItems {
+    display: none;
+
+    &--active {
+      display: block;
+    }
+  }
+
+  &__sortByItem {
+    font-family: InterLight, sans-serif;
+    font-size: 12px;
+    line-height: 140%;
+    margin-bottom: 12px;
+  }
+
+  &__bottom {
+    padding: 0 20px 100px 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+
+.filter--dt {
+  background-color: rgba(3, 3, 3, 0.6);
+
+  .filter__content {
+    background-color: $primary-black;
+  }
+
+  .filter__genresAmount {
+    color: $primary-white;
+  }
+
+  .filter__sortByItem {
+    color: $primary-light-gray;
+  }
+}
+
+.filter--lt {
+  background-color: rgba(3, 3, 3, 0.3);
+
+  .filter__content {
+    background-color: $primary-white;
+  }
+
+  .filter__genresAmount {
+    color: $primary-black;
+  }
+
+  .filter__sortByItem {
+    color: $primary-dark-gray;
+  }
+}
+
+
+@media (min-width: $breakpoint-tablet) {
+  .filter {
+    visibility: hidden;
+
+    &__content {
+      visibility: visible;
+      width: 372px;
+    }
+
+    &__top {
+      padding: 36px 24px;
+      margin-bottom: 95px;
+    }
+
+    &__categories {
+      padding: 0 32px;
+    }
+
+    &__genres--active,
+    &__sortBy--active {
+      padding-bottom: 20px;
+    }
+
+    &__bottom {
+      padding: 0 20px 100px 20px;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-small-desktop) {
+  .filter {
+    &__content {
+      width: 492px;
+    }
+
+    &__top {
+      padding: 64px 104px;
+      margin-bottom: 40px;
+    }
+
+    &__categories {
+      padding: 0 136px 0 72px;
+    }
+
+    &__bottom {
+      padding: 0 140px 260px 72px;
+    }
+  }
+}

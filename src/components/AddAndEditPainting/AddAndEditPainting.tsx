@@ -9,21 +9,36 @@ import iconLT from '../../assets/light-theme/add-and-edit-painting/icon.svg';
 import Input from '../_UI/Input/Input';
 import Button from '../_UI/Button/Button';
 import { ThemeContext } from '../../context/themeContext';
-import ButtonTrashBin from '../_UI/ButtonTrashBin/ButtonTrashBin';
+import ButtonEditDelete, {
+  EditOrDeleteButton,
+} from '../_UI/ButtonEditDeleteProfile/ButtonEditDelete';
 import { useActions } from '../../hooks/useActions';
 import { usePicturePreview } from '../../hooks/usePicturePreview';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const cn = classNames.bind(styles);
 
+export enum AddOrEditPainting {
+  add = 'add',
+  edit = 'edit',
+}
+
 type AddAndEditPaintingProps = {
-  setAddPaintingOpened: (val: boolean) => void;
+  addOrEditPainting: AddOrEditPainting;
+  currentPaintingId: string;
+  setAddEditPaintingOpened: (val: boolean) => void;
 };
 
-const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({ setAddPaintingOpened }) => {
+const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
+  setAddEditPaintingOpened,
+  addOrEditPainting,
+  currentPaintingId,
+}) => {
   const [name, setName] = useState<string>('');
   const [year, setYear] = useState<string>('');
   const { theme } = useContext(ThemeContext);
-  const { addNewPainting } = useActions();
+  const { addNewPainting, editPainting } = useActions();
+  const { artistProfile } = useTypedSelector((state) => state.artists);
   const { picture, picturePreview, onImageChange, deletePicturePreview } = usePicturePreview();
 
   const savePicture = () => {
@@ -31,8 +46,10 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({ setAddPaintingOpened 
     formData.append('name', name);
     formData.append('yearOfCreation', year);
     formData.append('image', picture as File);
-    addNewPainting(formData);
-    setAddPaintingOpened(false);
+    if (addOrEditPainting === AddOrEditPainting.add) addNewPainting(formData, artistProfile._id);
+    if (addOrEditPainting === AddOrEditPainting.edit)
+      editPainting(formData, artistProfile._id, currentPaintingId);
+    setAddEditPaintingOpened(false);
   };
 
   return (
@@ -48,7 +65,7 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({ setAddPaintingOpened 
             <button
               className={cn('popup__close')}
               type="button"
-              onClick={() => setAddPaintingOpened(false)}
+              onClick={() => setAddEditPaintingOpened(false)}
             >
               <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
             </button>
@@ -82,7 +99,10 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({ setAddPaintingOpened 
                   <>
                     <img className={cn('popup__picturePreview')} src={picturePreview} alt="" />
                     <span className={cn('popup__previewPictureIcon')}>
-                      <ButtonTrashBin onClick={deletePicturePreview} />
+                      <ButtonEditDelete
+                        onClick={deletePicturePreview}
+                        variant={EditOrDeleteButton.delete}
+                      />
                     </span>
                   </>
                 ) : (

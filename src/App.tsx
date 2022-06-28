@@ -5,20 +5,29 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MainPage from './pages/MainPage/MainPage';
-import { AuthOrRegistration } from './components/AuthAndRegistrationWindow/AuthAndRegistration';
+import { AuthOrRegistration } from './components/AuthAndRegistration/AuthAndRegistration';
 import ArtistProfile from './pages/ArtistProfile/ArtistProfile';
 import ModalContainer from './components/ModalContainer/ModalContainer';
-import { AddOrEditArtist } from './components/AddAndEditArtistPopUp/AddAndEditArtist';
+import { AddOrEditArtist } from './components/AddAndEditArtist/AddAndEditArtist';
+import { DeleteArtistOrPainting } from './components/DeletePopup/DeletePopup';
+import { AddOrEditPainting } from './components/AddAndEditPainting/AddAndEditPainting';
 
 const App: FC = () => {
-  const [isAuthOpened, setAuthOpened] = useState<boolean>(false);
+  const [addOrEditArtist, setAddOrEditArtist] = useState<AddOrEditArtist>(AddOrEditArtist.add);
+  const [addOrEditPainting, setAddOrEditPainting] = useState<AddOrEditPainting>(
+    AddOrEditPainting.add
+  );
   const [authOrRegistration, setAuthOrRegistration] = useState<AuthOrRegistration>(
     AuthOrRegistration.auth
   );
+  const [deleteArtistOrPainting, setDeleteArtistOrPainting] = useState<DeleteArtistOrPainting>(
+    DeleteArtistOrPainting.artist
+  );
+  const [isAuthOpened, setAuthOpened] = useState<boolean>(false);
   const [isDeleteOpened, setDeleteOpened] = useState<boolean>(false);
-  const [addOrEditArtist, setAddOrEditArtist] = useState<AddOrEditArtist>(AddOrEditArtist.add);
-  const [isAddEditOpened, setAddEditOpened] = useState<boolean>(false);
-  const [isAddPaintingOpened, setAddPaintingOpened] = useState<boolean>(false);
+  const [isAddEditArtistOpened, setAddEditArtistOpened] = useState<boolean>(false);
+  const [isAddEditPaintingOpened, setAddEditPaintingOpened] = useState<boolean>(false);
+  const [currentPaintingId, setCurrentPaintingId] = useState<string>('');
 
   return (
     <div className={cn('appContainer')}>
@@ -29,11 +38,14 @@ const App: FC = () => {
         setAuthOpened={setAuthOpened}
         isDeleteOpened={isDeleteOpened}
         setDeleteOpened={setDeleteOpened}
-        isAddEditOpened={isAddEditOpened}
-        setAddEditOpened={setAddEditOpened}
+        isAddEditArtistOpened={isAddEditArtistOpened}
+        setAddEditArtistOpened={setAddEditArtistOpened}
         addOrEditArtist={addOrEditArtist}
-        isAddPaintingOpened={isAddPaintingOpened}
-        setAddPaintingOpened={setAddPaintingOpened}
+        addOrEditPainting={addOrEditPainting}
+        isAddEditPaintingOpened={isAddEditPaintingOpened}
+        setAddEditPaintingOpened={setAddEditPaintingOpened}
+        deleteArtistOrPainting={deleteArtistOrPainting}
+        currentPaintingId={currentPaintingId}
       />
       <Header setAuthOpened={setAuthOpened} setAuthOrRegistration={setAuthOrRegistration} />
       <div className={cn('centralBlock')}>
@@ -42,7 +54,7 @@ const App: FC = () => {
             path="/new_art_gallery"
             element={
               <MainPage
-                setAddEditOpened={setAddEditOpened}
+                setAddEditArtistOpened={setAddEditArtistOpened}
                 setAddOrEditArtist={setAddOrEditArtist}
               />
             }
@@ -53,9 +65,12 @@ const App: FC = () => {
             element={
               <ArtistProfile
                 setDeleteOpened={setDeleteOpened}
-                setAddPaintingOpened={setAddPaintingOpened}
-                setAddEditOpened={setAddEditOpened}
+                setAddEditPaintingOpened={setAddEditPaintingOpened}
+                setAddEditArtistOpened={setAddEditArtistOpened}
                 setAddOrEditArtist={setAddOrEditArtist}
+                setAddOrEditPainting={setAddOrEditPainting}
+                setDeleteArtistOrPainting={setDeleteArtistOrPainting}
+                setCurrentPaintingId={setCurrentPaintingId}
               />
             }
           />

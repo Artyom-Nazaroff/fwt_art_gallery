@@ -1,0 +1,28 @@
+@import "../../../sass/colors.scss";
+
+.filterItem {
+  font-family: InterLight, sans-serif;
+  font-size: 12px;
+  line-height: 140%;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+
+.filterItem--dt {
+  color: $primary-light-gray;
+
+  &.filterItem--active {
+    color: $accent-gold;
+    font-family: InterMedium, sans-serif;
+  }
+}
+
+.filterItem--lt {
+  color: $primary-dark-gray;
+
+  &.filterItem--active {
+    color: $primary-black;
+    font-family: InterMedium, sans-serif;
+  }
+}
