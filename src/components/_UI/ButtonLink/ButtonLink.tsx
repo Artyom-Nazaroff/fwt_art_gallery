@@ -5,11 +5,11 @@ import { ThemeContext } from '../../../context/themeContext';
 
 const cn = classNames.bind(styles);
 
-interface ButtonProps {
+type ButtonProps = {
   text: string;
   isDisabled?: boolean;
   onClick: (val: React.MouseEvent<HTMLButtonElement>) => void;
-}
+};
 
 const ButtonLink: FC<ButtonProps> = ({ text, isDisabled, onClick }) => {
   const { theme } = useContext(ThemeContext);

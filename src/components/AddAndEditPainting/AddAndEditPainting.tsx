@@ -39,7 +39,16 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
   const { theme } = useContext(ThemeContext);
   const { addNewPainting, editPainting } = useActions();
   const { artistProfile } = useTypedSelector((state) => state.artists);
-  const { picture, picturePreview, onImageChange, deletePicturePreview } = usePicturePreview();
+  const {
+    drag,
+    picture,
+    picturePreview,
+    onImageChange,
+    deletePicturePreview,
+    dragStartHandler,
+    dragLeaveHandler,
+    onDropHandler,
+  } = usePicturePreview();
 
   const savePicture = () => {
     const formData = new FormData();
@@ -94,7 +103,13 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
               </div>
             </div>
             <div className={cn('popup__browseImage')}>
-              <div className={cn('popup__imageField')}>
+              <div
+                className={cn('popup__imageField', { 'popup__imageField--active': drag })}
+                onDragEnter={(e: React.DragEvent<HTMLDivElement>) => dragStartHandler(e)}
+                onDragLeave={(e: React.DragEvent<HTMLDivElement>) => dragLeaveHandler(e)}
+                onDragOver={(e: React.DragEvent<HTMLDivElement>) => dragStartHandler(e)}
+                onDrop={(e: React.DragEvent<HTMLDivElement>) => onDropHandler(e)}
+              >
                 {picturePreview ? (
                   <>
                     <img className={cn('popup__picturePreview')} src={picturePreview} alt="" />
@@ -102,6 +117,7 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
                       <ButtonEditDelete
                         onClick={deletePicturePreview}
                         variant={EditOrDeleteButton.delete}
+                        transparent
                       />
                     </span>
                   </>

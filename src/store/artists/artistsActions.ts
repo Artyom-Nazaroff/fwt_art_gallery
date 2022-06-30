@@ -2,13 +2,28 @@ import { Dispatch } from 'redux';
 import { ArtistsAction, ArtistsActionTypes } from './artistsTypes';
 import { artistsAPI } from '../../utils/artistsAPI';
 
-export const fetchArtists = (isStatic: 'static' | '') => {
+export const fetchStaticArtists = () => {
   return async (dispatch: Dispatch<ArtistsAction>) => {
     dispatch({ type: ArtistsActionTypes.SHOW_PRELOADER });
-    const response = await artistsAPI.getArtists(isStatic);
+    const response = await artistsAPI.getStaticArtists();
+    dispatch({
+      type: ArtistsActionTypes.FETCH_ARTISTS,
+      payload: response,
+    });
+  };
+};
+
+export const fetchArtists = (perPage: number, portionsAmount: number) => {
+  return async (dispatch: Dispatch<ArtistsAction>) => {
+    dispatch({ type: ArtistsActionTypes.SHOW_PRELOADER });
+    const response = await artistsAPI.getArtists(perPage, portionsAmount);
     dispatch({
       type: ArtistsActionTypes.FETCH_ARTISTS,
       payload: response.data,
+    });
+    dispatch({
+      type: ArtistsActionTypes.SET_TOTAL_ARTISTS_AMOUNT,
+      payload: response.meta.count,
     });
   };
 };

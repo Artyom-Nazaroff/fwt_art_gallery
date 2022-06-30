@@ -3,6 +3,7 @@
 
 .label {
 	padding: 8px 16px;
+	width: fit-content;
 	font-family: "InterMedium", sans-serif;
 	font-size: 12px;
 	line-height: 140%;
@@ -16,9 +17,6 @@
 	}
 
 	&__btn {
-		border: none;
-		padding: 0;
-		background-color: inherit;
 		cursor: pointer;
 	}
 }
@@ -26,12 +24,12 @@
 
 .label--dt {
 	border: 1px solid $primary-white;
-	background-color: rgba(205, 205, 205, 0.05);
+	background-color: $secondary-black;
 	color: $primary-light-gray;
 }
 
 .label--lt {
 	border: none;
-	background-color: rgba(18, 18, 18, 0.05);
+	background-color: $primary-light-gray;
 	color: $primary-dark-gray;
 }

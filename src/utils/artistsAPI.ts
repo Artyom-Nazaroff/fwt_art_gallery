@@ -1,8 +1,18 @@
 import { instance } from './_api';
 
 export const artistsAPI = {
-  getArtists(isStatic: 'static' | '') {
-    return instance.get(`artists/${isStatic}`).then((response) => response.data);
+  getStaticArtists() {
+    return instance.get(`artists/static`).then((response) => response.data);
+  },
+  getArtists(perPage: number, portionsAmount: number) {
+    return instance
+      .get(`artists/`, {
+        params: {
+          perPage: perPage * portionsAmount,
+          pageNumber: 1,
+        },
+      })
+      .then((response) => response.data);
   },
   getFilteredArtists(name: string, genres: string[]) {
     return instance

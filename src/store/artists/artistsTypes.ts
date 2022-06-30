@@ -44,6 +44,7 @@ export type ArtistCard = {
 export type ArtistsState = {
   artistProfile: Artist;
   artists: Array<ArtistCard>;
+  artistsAmount: number;
   genres: Array<Genre>;
   loading: boolean;
 };
@@ -59,6 +60,7 @@ export enum ArtistsActionTypes {
   DELETE_PAINTING = 'DELETE_PAINTING',
   ADD_PAINTING = 'ADD_PAINTING',
   EDIT_PAINTING = 'EDIT_PAINTING',
+  SET_TOTAL_ARTISTS_AMOUNT = 'SET_TOTAL_ARTISTS_AMOUNT',
 }
 
 export type ShowPreloader = {
@@ -110,6 +112,11 @@ export type EditPainting = {
   payload: Painting;
 };
 
+export type setTotalArtistsAmount = {
+  type: ArtistsActionTypes.SET_TOTAL_ARTISTS_AMOUNT;
+  payload: number;
+};
+
 export type ArtistsAction =
   | ShowPreloader
   | FetchArtistsAction
@@ -120,4 +127,5 @@ export type ArtistsAction =
   | DeleteArtist
   | EditArtist
   | DeletePainting
-  | EditPainting;
+  | EditPainting
+  | setTotalArtistsAmount;

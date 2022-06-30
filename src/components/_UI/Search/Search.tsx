@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import errorSign from '../../../assets/common-files/error-sign.svg';

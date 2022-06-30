@@ -66,64 +66,64 @@ const PaintingCard: FC<PaintingCardProps> = ({
         'painting--dt': theme === 'dark',
         'painting--lt': theme === 'light',
       })}
+      onClick={() => onClick(true)}
+      role="presentation"
     >
-      <button className={cn('painting__containerBtn')} type="button" onClick={() => onClick(true)}>
-        <div
-          className={cn('painting__inner')}
-          onMouseLeave={() => {
-            if (document.documentElement.clientWidth >= 1280) setIsDropdownActive(false);
-          }}
+      <div
+        className={cn('painting__inner')}
+        onMouseLeave={() => {
+          if (document.documentElement.clientWidth >= 1280) setIsDropdownActive(false);
+        }}
+      >
+        <button
+          className={cn('painting__btn')}
+          type="button"
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => openCloseMenu(e)}
         >
-          <button
-            className={cn('painting__btn')}
-            type="button"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => openCloseMenu(e)}
-          >
-            <img src={gear} alt="" />
-          </button>
-          <ul
-            className={cn('painting__list', { 'painting__list--active': isDropdownActive })}
-            role="presentation"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <li className={cn('painting__item')}>
-              <button
-                className={cn('painting__itemBtn')}
-                type="button"
-                onClick={() => editMainPainting(artistProfile._id, id)}
-              >
-                {id === artistProfile.mainPainting._id ? 'Remove' : 'Make'} the cover
-              </button>
-            </li>
-            <li className={cn('painting__item')}>
-              <button
-                className={cn('painting__itemBtn')}
-                type="button"
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => openEditWindow(e)}
-              >
-                Edit
-              </button>
-            </li>
-            <li className={cn('painting__item')}>
-              <button
-                className={cn('painting__itemBtn')}
-                type="button"
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => openDeleteWindow(e)}
-              >
-                Delete
-              </button>
-            </li>
-          </ul>
-          <img src={`https://internship-front.framework.team/${picture}`} alt="painting" />
-          <div className={cn('painting__info')}>
-            <div className={cn('painting__name')}>{name}</div>
-            <div className={cn('painting__dateOfCreation')}>{year}</div>
-          </div>
-          <div className={cn('painting__arrow')}>
-            <img src={arrow} alt="arrow" />
-          </div>
+          <img src={gear} alt="" />
+        </button>
+        <ul
+          className={cn('painting__list', { 'painting__list--active': isDropdownActive })}
+          role="presentation"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <li className={cn('painting__item')}>
+            <button
+              className={cn('painting__itemBtn')}
+              type="button"
+              onClick={() => editMainPainting(artistProfile._id, id)}
+            >
+              {id === artistProfile.mainPainting._id ? 'Remove' : 'Make'} the cover
+            </button>
+          </li>
+          <li className={cn('painting__item')}>
+            <button
+              className={cn('painting__itemBtn')}
+              type="button"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => openEditWindow(e)}
+            >
+              Edit
+            </button>
+          </li>
+          <li className={cn('painting__item')}>
+            <button
+              className={cn('painting__itemBtn')}
+              type="button"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => openDeleteWindow(e)}
+            >
+              Delete
+            </button>
+          </li>
+        </ul>
+        <img src={`https://internship-front.framework.team/${picture}`} alt="painting" />
+        <div className={cn('painting__info')}>
+          <div className={cn('painting__name')}>{name}</div>
+          <div className={cn('painting__dateOfCreation')}>{year}</div>
         </div>
-      </button>
+        <div className={cn('painting__arrow')}>
+          <img src={arrow} alt="arrow" />
+        </div>
+      </div>
     </li>
   );
 };

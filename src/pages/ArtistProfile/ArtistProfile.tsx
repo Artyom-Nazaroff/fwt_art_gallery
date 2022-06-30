@@ -1,4 +1,4 @@
-import React, { FC, Suspense, useContext, useEffect, useState } from 'react';
+import React, { FC, Suspense, useContext, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames/bind';
 import { NavLink, useMatch } from 'react-router-dom';
 import Cookies from 'js-cookie';
@@ -24,6 +24,7 @@ import ButtonLink from '../../components/_UI/ButtonLink/ButtonLink';
 import Slider from '../../components/_UI/Slider/Slider';
 import { DeleteArtistOrPainting } from '../../components/DeletePopup/DeletePopup';
 import { AddOrEditPainting } from '../../components/AddAndEditPainting/AddAndEditPainting';
+import Pagination from '../../components/_UI/Pagination/Pagination';
 
 const AdaptiveGrid = React.lazy(() => import('../../components/AdaptiveGrid/AdaptiveGrid'));
 
@@ -49,11 +50,20 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
   setCurrentPaintingId,
 }) => {
   const [isSliderVisible, setIsSliderVisible] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const { theme } = useContext(ThemeContext);
   const { artistProfile, loading } = useTypedSelector((state) => state.artists);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
   const match = useMatch(`artists/${isAuth ? '' : 'static/'}:artistId`);
   const { fetchArtistProfile, setAuthUser } = useActions();
+
+  // const PageSize = 10;
+
+  // const currentTableData = useMemo(() => {
+  //   const firstPageIndex = (currentPage - 1) * PageSize;
+  //   const lastPageIndex = firstPageIndex + PageSize;
+  //   return data.slice(firstPageIndex, lastPageIndex);
+  // }, [currentPage]);
 
   useEffect(() => {
     if (Cookies.get('accessToken')) {
@@ -112,18 +122,26 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
           >
             <div className={cn('return__container', 'container')}>
               <NavLink to="/new_art_gallery">
-                <button className={cn('return__back')} type="button">
+                <span className={cn('return__back')}>
                   <img src={theme === 'dark' ? arrowDT : arrowLT} alt="" />
                   <div className={cn('return__link')}>
                     <TextLink text="back" />
                   </div>
-                </button>
+                </span>
               </NavLink>
               <div className={cn('return__buttons', { 'return__buttons--active': isAuth })}>
                 <span className={cn('return__btn')}>
-                  <ButtonEditDelete variant={EditOrDeleteButton.edit} onClick={openEditWindow} />
+                  <ButtonEditDelete
+                    variant={EditOrDeleteButton.edit}
+                    onClick={openEditWindow}
+                    transparent={false}
+                  />
                 </span>
-                <ButtonEditDelete variant={EditOrDeleteButton.delete} onClick={openDeleteWindow} />
+                <ButtonEditDelete
+                  variant={EditOrDeleteButton.delete}
+                  onClick={openDeleteWindow}
+                  transparent={false}
+                />
               </div>
             </div>
           </div>
@@ -185,6 +203,15 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
                   </div>
                 </div>
               )}
+            </div>
+            <div className={cn('gallery__pagination')}>
+              <Pagination
+                currentPage={currentPage}
+                siblingCount={1}
+                totalCount={100}
+                pageSize={5}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
           </div>
         </>

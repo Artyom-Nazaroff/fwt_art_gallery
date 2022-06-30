@@ -17,6 +17,7 @@ import loupeDT from '../../assets/dark-theme/main-page/loupe.svg';
 import filterLT from '../../assets/light-theme/main-page/filter-menu-icon-lt.svg';
 import loupeLT from '../../assets/light-theme/main-page/loupe.svg';
 import FilterWindow from '../../components/FilterWindow/FilterWindow';
+import TextLink from '../../components/_UI/TextLink/TextLink';
 
 const cn = classNames.bind(styles);
 
@@ -30,10 +31,13 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
   const [isFilterWindowOpened, setIsFilterWindowOpened] = useState<boolean>(false);
   const [searchName, setSearchName] = useState<string>('');
   const [selectedGenres, setSelectedGenres] = useState<Array<string>>([]);
+  const [perPage, setPerPage] = useState<number>(1);
+  const [portionsAmount, setPortionsAmount] = useState<number>(1);
   const { theme } = useContext(ThemeContext);
-  const { artists, loading } = useTypedSelector((state) => state.artists);
+  const { artists, artistsAmount, loading } = useTypedSelector((state) => state.artists);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
-  const { fetchArtists, fetchFilteredArtists, setAuthUser, getAllGenres } = useActions();
+  const { fetchArtists, fetchStaticArtists, fetchFilteredArtists, setAuthUser, getAllGenres } =
+    useActions();
 
   useEffect(() => {
     if (Cookies.get('accessToken')) {
@@ -43,9 +47,9 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
   }, []);
 
   useEffect(() => {
-    if (isAuth) fetchArtists('');
-    if (!isAuth) fetchArtists('static');
-  }, [isAuth]);
+    if (isAuth) fetchArtists(perPage, portionsAmount);
+    if (!isAuth) fetchStaticArtists();
+  }, [isAuth, portionsAmount]);
 
   const openAddEditWindow = () => {
     setAddEditArtistOpened(true);
@@ -66,7 +70,7 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
 
   return (
     <>
-      {isFilterWindowOpened && (
+      {isAuth && isFilterWindowOpened && (
         <FilterWindow
           setIsFilterWindowOpened={setIsFilterWindowOpened}
           addGenreToList={addGenreToList}
@@ -89,12 +93,10 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
                 'paintings--lt': theme === 'light',
               })}
             >
-              <div className={cn('paintings__row', 'container')}>
-                <div
-                  className={cn('paintings__inner', {
-                    'paintings__inner--active': isAuth,
-                  })}
-                >
+              <div
+                className={cn('paintings__row', 'container', { 'paintings__row--active': isAuth })}
+              >
+                <div className={cn('paintings__inner')}>
                   <ButtonLink
                     text="ADD ARTIST"
                     onClick={() => {
@@ -151,6 +153,13 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
                     />
                   ))}
                 </AdaptiveGrid>
+              </div>
+              <div className={cn('paintings__loadMoreBtn')}>
+                {isAuth && portionsAmount * perPage < artistsAmount && (
+                  <span role="presentation" onClick={() => setPortionsAmount((prev) => prev + 1)}>
+                    <TextLink text="Load more" />
+                  </span>
+                )}
               </div>
             </section>
           </main>

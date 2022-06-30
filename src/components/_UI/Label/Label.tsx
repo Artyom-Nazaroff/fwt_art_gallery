@@ -26,9 +26,9 @@ const Label: FC<LabelProps> = ({ name, id, isRemove, removeGenre }) => {
     >
       <span>{name}</span>
       {isRemove && (
-        <button className={cn('label__btn')} type="button" onClick={() => removeGenre?.(id)}>
+        <span className={cn('label__btn')} role="presentation" onClick={() => removeGenre?.(id)}>
           <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
-        </button>
+        </span>
       )}
     </div>
   );

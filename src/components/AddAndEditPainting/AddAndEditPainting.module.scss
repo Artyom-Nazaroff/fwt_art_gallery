@@ -126,6 +126,10 @@
     color: $primary-light-gray;
   }
 
+  .popup__imageField--active {
+    background-color: $secondary-black;
+  }
+
   .popup__pictureLabel {
     color: $primary-light-gray;
 

@@ -16,7 +16,7 @@ export enum EditOrDeleteButton {
 
 interface ButtonProps {
   variant: EditOrDeleteButton;
-  transparent?: boolean;
+  transparent: boolean;
   onClick: () => void;
 }
 

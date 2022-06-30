@@ -1,0 +1,67 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+@import "../../../sass/breckpoints";
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
+
+  &__arrow {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__numbers {
+    margin: 0 20px;
+  }
+
+  &__number {
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-family: InterLight, sans-serif;
+    font-size: 16px;
+    line-height: 140%;
+    margin: 0 2px;
+    cursor: pointer;
+
+    &--active,
+    &:hover {
+      font-family: InterMedium, sans-serif;
+    }
+  }
+
+  &__dots {
+    pointer-events: none;
+  }
+}
+
+.pagination--dt {
+  .pagination__number {
+    color: $primary-light-gray;
+  }
+
+  .pagination__number--active {
+    background-color: $secondary-black;
+  }
+}
+
+.pagination--lt {
+  .pagination__number {
+    color: $primary-dark-gray;
+  }
+
+  .pagination__number--active {
+    background-color: $secondary-gray;
+  }
+}
+@media (min-width: $breakpoint-tablet) {
+  .pagination {
+    margin-bottom: 100px;
+  }
+}
