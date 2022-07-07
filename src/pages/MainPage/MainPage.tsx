@@ -18,6 +18,7 @@ import filterLT from '../../assets/light-theme/main-page/filter-menu-icon-lt.svg
 import loupeLT from '../../assets/light-theme/main-page/loupe.svg';
 import FilterWindow from '../../components/FilterWindow/FilterWindow';
 import TextLink from '../../components/_UI/TextLink/TextLink';
+import { useQueryString } from '../../hooks/useQueryString';
 
 const cn = classNames.bind(styles);
 
@@ -32,12 +33,23 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
   const [searchName, setSearchName] = useState<string>('');
   const [selectedGenres, setSelectedGenres] = useState<Array<string>>([]);
   const [perPage, setPerPage] = useState<number>(1);
-  const [portionsAmount, setPortionsAmount] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
   const { theme } = useContext(ThemeContext);
   const { artists, artistsAmount, loading } = useTypedSelector((state) => state.artists);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
   const { fetchArtists, fetchStaticArtists, fetchFilteredArtists, setAuthUser, getAllGenres } =
     useActions();
+
+  useQueryString({
+    searchName,
+    selectedGenres,
+    perPage,
+    page,
+    setSearchName,
+    setSelectedGenres,
+    setPerPage,
+    setPage,
+  });
 
   useEffect(() => {
     if (Cookies.get('accessToken')) {
@@ -47,13 +59,13 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
   }, []);
 
   useEffect(() => {
-    if (isAuth) fetchArtists(perPage, portionsAmount);
-    if (!isAuth) fetchStaticArtists();
-  }, [isAuth, portionsAmount]);
+    if (Cookies.get('accessToken') && isAuth) fetchArtists(perPage, page, searchName);
+    if (!Cookies.get('accessToken') && !isAuth) fetchStaticArtists();
+  }, [isAuth, page]);
 
   const openAddEditWindow = () => {
     setAddEditArtistOpened(true);
-    // document.body.style.overflow = 'hidden';
+    setAddOrEditArtist(AddOrEditArtist.add);
   };
 
   const fetchSortedArtists = () => {
@@ -97,13 +109,7 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
                 className={cn('paintings__row', 'container', { 'paintings__row--active': isAuth })}
               >
                 <div className={cn('paintings__inner')}>
-                  <ButtonLink
-                    text="ADD ARTIST"
-                    onClick={() => {
-                      openAddEditWindow();
-                      setAddOrEditArtist(AddOrEditArtist.add);
-                    }}
-                  />
+                  <ButtonLink text="ADD ARTIST" onClick={() => openAddEditWindow()} />
                 </div>
                 {document.documentElement.clientWidth < 768 && isLoupeVisible ? (
                   <button
@@ -141,26 +147,39 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
                   </button>
                 </div>
               </div>
-              <div className={cn('paintings__container', 'container')}>
-                <AdaptiveGrid>
-                  {artists?.map((i) => (
-                    <ArtistCard
-                      key={i._id}
-                      id={i._id}
-                      name={i.name}
-                      years={i.yearsOfLife}
-                      picture={i.mainPainting && i.mainPainting.image}
-                    />
-                  ))}
-                </AdaptiveGrid>
-              </div>
-              <div className={cn('paintings__loadMoreBtn')}>
-                {isAuth && portionsAmount * perPage < artistsAmount && (
-                  <span role="presentation" onClick={() => setPortionsAmount((prev) => prev + 1)}>
-                    <TextLink text="Load more" />
-                  </span>
-                )}
-              </div>
+              {artists.length === 0 && searchName.length !== 0 ? (
+                <div className={cn('paintings__noResult', 'container')}>
+                  <p className={cn('paintings__noResultTopRow')}>
+                    No matches for <span>{searchName}</span>
+                  </p>
+                  <p className={cn('paintings__noResultBottomRow')}>
+                    Please try again with a different spelling or keywords.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className={cn('paintings__container', 'container')}>
+                    <AdaptiveGrid>
+                      {artists?.map((i) => (
+                        <ArtistCard
+                          key={i._id}
+                          id={i._id}
+                          name={i.name}
+                          years={i.yearsOfLife}
+                          picture={i.mainPainting && i.mainPainting.image}
+                        />
+                      ))}
+                    </AdaptiveGrid>
+                  </div>
+                  <div className={cn('paintings__loadMoreBtn')}>
+                    {isAuth && page * perPage < artistsAmount && (
+                      <span role="presentation" onClick={() => setPage((prev) => prev + 1)}>
+                        <TextLink text="Load more" />
+                      </span>
+                    )}
+                  </div>
+                </>
+              )}
             </section>
           </main>
         )}

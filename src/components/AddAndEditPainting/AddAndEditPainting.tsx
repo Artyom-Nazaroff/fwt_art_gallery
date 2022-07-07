@@ -63,12 +63,18 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
 
   return (
     <div className={cn('wrapper')}>
-      <div className={cn('popupBackground')}>
+      <div
+        className={cn('popupBackground')}
+        role="presentation"
+        onClick={() => setAddEditPaintingOpened(false)}
+      >
         <div
           className={cn('popup', {
             'popup--dt': theme === 'dark',
             'popup--lt': theme === 'light',
           })}
+          role="presentation"
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
         >
           <div className={cn('popup__top')}>
             <button

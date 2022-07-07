@@ -4,12 +4,13 @@ export const artistsAPI = {
   getStaticArtists() {
     return instance.get(`artists/static`).then((response) => response.data);
   },
-  getArtists(perPage: number, portionsAmount: number) {
+  getArtists(perPage: number, portionsAmount: number, name: string) {
     return instance
       .get(`artists/`, {
         params: {
           perPage: perPage * portionsAmount,
           pageNumber: 1,
+          name,
         },
       })
       .then((response) => response.data);
@@ -22,10 +23,7 @@ export const artistsAPI = {
           genres,
         },
       })
-      .then((response) => {
-        debugger;
-        return response.data;
-      });
+      .then((response) => (response.data ? response.data : []));
   },
   getArtistProfile(isStatic: 'static/' | '', id: string | undefined) {
     return instance.get(`artists/${isStatic}${id}`).then((response) => response.data);
@@ -57,7 +55,7 @@ export const artistsAPI = {
           'Content-Type': 'multipart/form-data',
         },
       })
-      .then((response) => response.data);
+      .then((response) => response);
   },
   editPainting(paintingInfo: FormData, artistId: string, paintingId: string) {
     return instance
@@ -69,9 +67,7 @@ export const artistsAPI = {
       .then((response) => response.data);
   },
   editMainPainting(artistId: string, mainPaintingId: string) {
-    return instance
-      .patch(`artists/${artistId}/main-painting`, { mainPainting: mainPaintingId })
-      .then((response) => response.data);
+    return instance.patch(`artists/${artistId}/main-painting`, { mainPainting: mainPaintingId });
   },
   editArtist(artistInfo: FormData, id: string) {
     return instance

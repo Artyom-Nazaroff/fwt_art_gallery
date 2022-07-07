@@ -57,29 +57,17 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
   const match = useMatch(`artists/${isAuth ? '' : 'static/'}:artistId`);
   const { fetchArtistProfile, setAuthUser } = useActions();
 
-  // const PageSize = 10;
-
-  // const currentTableData = useMemo(() => {
-  //   const firstPageIndex = (currentPage - 1) * PageSize;
-  //   const lastPageIndex = firstPageIndex + PageSize;
-  //   return data.slice(firstPageIndex, lastPageIndex);
-  // }, [currentPage]);
-
   useEffect(() => {
     if (Cookies.get('accessToken')) {
       setAuthUser();
-      // fetchArtistProfile('', match?.params.artistId);
-      // fetchArtistPaintings(match?.params.artistId);
     }
-    // if (!Cookies.get('accessToken')) {
-    //   fetchArtistProfile('static/', match?.params.artistId);
-    // }
   }, []);
 
   useEffect(() => {
-    // Разобраться с ошибкой
-    if (Cookies.get('accessToken') && match) fetchArtistProfile('', match.params.artistId);
-    if (!Cookies.get('accessToken') && match) fetchArtistProfile('static/', match.params.artistId);
+    if (isAuth && Cookies.get('accessToken') && match)
+      fetchArtistProfile('', match?.params.artistId);
+    if (!isAuth && !Cookies.get('accessToken') && match)
+      fetchArtistProfile('static/', match?.params.artistId);
   }, [isAuth]);
 
   const openDeleteWindow = () => {
@@ -160,22 +148,25 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
           >
             <div className={cn('gallery__container', 'container')}>
               <h2 className={cn('gallery__title')}>Artworks</h2>
-              {artistProfile?.paintings?.length !== 0 ? (
+              {artistProfile?.paintings && artistProfile?.paintings?.length !== 0 ? (
                 <Suspense fallback={<Preloader />}>
                   <div className={cn('gallery__row')}>
                     <ButtonLink
                       text="Add picture"
-                      onClick={() => setAddEditPaintingOpened?.(true)}
+                      onClick={() => {
+                        setAddEditPaintingOpened?.(true);
+                        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                      }}
                     />
                   </div>
                   <AdaptiveGrid>
-                    {artistProfile.paintings?.map((i) => (
+                    {artistProfile?.paintings?.map((i) => (
                       <PaintingCard
                         key={i._id}
                         id={i._id}
                         name={i.name}
                         year={i.yearOfCreation}
-                        picture={i.image.src}
+                        picture={i?.image?.src}
                         onClick={setIsSliderVisible}
                         setDeleteOpened={setDeleteOpened}
                         setAddEditPaintingOpened={setAddEditPaintingOpened}
@@ -193,7 +184,10 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
                     <button
                       className={cn('gallery__plus')}
                       type="button"
-                      onClick={() => setAddEditPaintingOpened?.(true)}
+                      onClick={() => {
+                        setAddEditPaintingOpened?.(true);
+                        window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+                      }}
                     >
                       <img src={plus} alt="" />
                     </button>

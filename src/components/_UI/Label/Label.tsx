@@ -24,7 +24,7 @@ const Label: FC<LabelProps> = ({ name, id, isRemove, removeGenre }) => {
         'label--lt': theme === 'light',
       })}
     >
-      <span>{name}</span>
+      <span className={cn('label__text')}>{name}</span>
       {isRemove && (
         <span className={cn('label__btn')} role="presentation" onClick={() => removeGenre?.(id)}>
           <img src={theme === 'dark' ? crossDT : crossLT} alt="" />

@@ -58,8 +58,14 @@ const FilterWindow: FC<FilterWindowProps> = ({
         'filter--dt': theme === 'dark',
         'filter--lt': theme === 'light',
       })}
+      role="presentation"
+      onClick={() => setIsFilterWindowOpened(false)}
     >
-      <div className={cn('filter__content')}>
+      <div
+        className={cn('filter__content')}
+        role="presentation"
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+      >
         <div className={cn('filter__top')}>
           <button
             className={cn('filter__closeBtn')}

@@ -11,6 +11,7 @@ import ModalContainer from './components/ModalContainer/ModalContainer';
 import { AddOrEditArtist } from './components/AddAndEditArtist/AddAndEditArtist';
 import { DeleteArtistOrPainting } from './components/DeletePopup/DeletePopup';
 import { AddOrEditPainting } from './components/AddAndEditPainting/AddAndEditPainting';
+import Toast from './components/_UI/Toast/Toast';
 
 const App: FC = () => {
   const [addOrEditArtist, setAddOrEditArtist] = useState<AddOrEditArtist>(AddOrEditArtist.add);
@@ -27,6 +28,7 @@ const App: FC = () => {
   const [isDeleteOpened, setDeleteOpened] = useState<boolean>(false);
   const [isAddEditArtistOpened, setAddEditArtistOpened] = useState<boolean>(false);
   const [isAddEditPaintingOpened, setAddEditPaintingOpened] = useState<boolean>(false);
+  const [isErrorOpened, setErrorOpened] = useState<boolean>(false);
   const [currentPaintingId, setCurrentPaintingId] = useState<string>('');
 
   return (
@@ -74,9 +76,11 @@ const App: FC = () => {
               />
             }
           />
+          <Route path="*" element={<h1>PAGE</h1>} />
         </Routes>
       </div>
       <Footer />
+      {isErrorOpened && <Toast text="Error message" setErrorOpened={setErrorOpened} />}
     </div>
   );
 };

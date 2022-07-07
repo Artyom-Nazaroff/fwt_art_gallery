@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from 'react';
 import classNames from 'classnames/bind';
-import Cookies from 'js-cookie';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 import '../../App.scss';
 import openBurgerDT from '../../assets/dark-theme/burger-menu/open-menu-dt.svg';
@@ -28,11 +28,16 @@ const Header: FC<HeaderProps> = ({ setAuthOpened, setAuthOrRegistration }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
   const { logOutUser } = useActions();
+  const navigate = useNavigate();
 
   const openModalWindow = (variant: AuthOrRegistration) => {
     setAuthOpened(true);
     setAuthOrRegistration(variant);
-    document.body.style.overflow = 'hidden';
+  };
+
+  const logOut = () => {
+    logOutUser();
+    navigate('/new_art_gallery');
   };
 
   return (
@@ -47,9 +52,11 @@ const Header: FC<HeaderProps> = ({ setAuthOpened, setAuthOrRegistration }) => {
         })}
       >
         <div className={cn('header__container', 'container')}>
-          <div className={cn('header__logo')}>
-            <img src={theme === 'dark' ? logoDT : logoLT} alt="" />
-          </div>
+          <NavLink to="/new_art_gallery">
+            <div className={cn('header__logo')}>
+              <img src={theme === 'dark' ? logoDT : logoLT} alt="" />
+            </div>
+          </NavLink>
           <button
             className={cn('header__burger')}
             onClick={() => setIsMenuOpened(!isMenuOpened)}
@@ -59,7 +66,7 @@ const Header: FC<HeaderProps> = ({ setAuthOpened, setAuthOrRegistration }) => {
           </button>
           <div className={cn('header__buttons')}>
             {isAuth ? (
-              <MenuItem text="LOG OUT" removeAccount={logOutUser} isBurger={false} />
+              <MenuItem text="LOG OUT" removeAccount={logOut} isBurger={false} />
             ) : (
               <>
                 <MenuItem

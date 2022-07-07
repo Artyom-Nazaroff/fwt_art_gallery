@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './BurgerMenu.module.scss';
 import closeWindowDT from '../../assets/dark-theme/burger-menu/close-menu-dt.svg';
@@ -23,16 +24,20 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ setIsMenuOpened, openModalWindow }) =
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { logOutUser } = useActions();
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
+  const navigate = useNavigate();
 
   const openBurgerModalWindow = (variant: AuthOrRegistration) => {
     openModalWindow(variant);
     setIsMenuOpened(false);
-    document.body.style.overflow = 'hidden';
   };
 
   const closeBurgerModalWindow = () => {
     setIsMenuOpened(false);
-    document.body.style.overflow = 'unset';
+  };
+
+  const logOut = () => {
+    logOutUser();
+    navigate('/new_art_gallery');
   };
 
   return (
@@ -58,7 +63,7 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ setIsMenuOpened, openModalWindow }) =
             <TextLink text={theme === 'dark' ? 'light theme' : 'dark theme'} />
           </button>
           {isAuth ? (
-            <MenuItem text="LOG OUT" isBurger removeAccount={logOutUser} />
+            <MenuItem text="LOG OUT" isBurger removeAccount={logOut} />
           ) : (
             <>
               <MenuItem

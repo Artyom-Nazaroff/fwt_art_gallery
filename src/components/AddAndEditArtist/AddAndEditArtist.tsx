@@ -58,11 +58,6 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
     getAllGenres();
   }, []);
 
-  const closeWindow = () => {
-    setAddEditArtistOpened(false);
-    // document.body.style.overflow = 'unset';
-  };
-
   const saveArtist = () => {
     const formData = new FormData();
     if (addOrEditArtist === AddOrEditArtist.add) {
@@ -71,7 +66,7 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
       formData.append('description', description);
       artistsGenres.forEach((item) => formData.append('genres', item._id));
       formData.append('avatar', picture as File);
-      createArtist(formData);
+      if (name && artistsGenres.length !== 0) createArtist(formData);
     }
     if (addOrEditArtist === AddOrEditArtist.edit) {
       if (name !== '') formData.append('name', name);
@@ -108,7 +103,11 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
             </span>
           </div>
           <div className={cn('popup__top')}>
-            <button className={cn('popup__close')} type="button" onClick={() => closeWindow()}>
+            <button
+              className={cn('popup__close')}
+              type="button"
+              onClick={() => setAddEditArtistOpened(false)}
+            >
               <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
             </button>
           </div>
