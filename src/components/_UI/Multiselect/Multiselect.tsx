@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Multiselect.module.scss';
 import arrowDownDT from '../../../assets/dark-theme/_UI/Multiselect/arrow-down.svg';
@@ -27,6 +27,15 @@ const Multiselect: FC<MultiselectProps> = ({
 }) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext);
+  const select = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const onClick = ({ target }: MouseEvent): void => {
+      if (!select.current?.contains(target as Node)) setIsOpened(false);
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
 
   const addGenre = (name: string, _id: string) => {
     setArtistsGenres([...artistsGenres, { name, _id }]);
@@ -43,6 +52,7 @@ const Multiselect: FC<MultiselectProps> = ({
         'select--lt': theme === 'light',
         open: isOpened,
       })}
+      ref={select}
     >
       <div className={cn('select__label')}>{label}</div>
       <div className={cn('select__inner')}>

@@ -1,5 +1,6 @@
 import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 import { ClientJS } from 'clientjs';
 import styles from './AuthAndRegistration.module.scss';
 import '../../App.scss';
@@ -35,12 +36,14 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
   const { theme } = useContext(ThemeContext);
   const { isBtnDisabled } = useTypedSelector((state) => state.authRegistration);
   const { registerUser, authUser } = useActions();
+  const navigate = useNavigate();
 
   const email = useInput('', { isEmpty: true, maxLength: 50, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8, isValidPassword: true });
 
-  const client = new ClientJS();
-  const fingerprint = `${client.getFingerprint()}`;
+  // const client = new ClientJS();
+  // const fingerprint = `${client.getFingerprint()}`;
+  const fingerprint = '1111111';
 
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -51,6 +54,7 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
       email.setDirty(false);
       password.setDirty(false);
       setAuthOpened(false);
+      navigate('/new_art_gallery');
     }
     if (variant === AuthOrRegistration.registration) {
       registerUser(email.inputValue, password.inputValue, fingerprint);
@@ -59,6 +63,7 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
       email.setDirty(false);
       password.setDirty(false);
       setAuthOpened(false);
+      navigate('/new_art_gallery');
     }
   };
 

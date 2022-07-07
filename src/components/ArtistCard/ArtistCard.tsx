@@ -24,10 +24,12 @@ const ArtistCard: FC<ArtistProps> = ({ id, name, years, picture }) => {
   const { theme } = useContext(ThemeContext);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
 
-  const datesOfLife = years
-    .split(' – ')
-    .map((i) => i.slice(-4))
-    .join(' – ');
+  const datesOfLife = years.includes('–')
+    ? years
+        .split(' – ')
+        .map((i) => i.slice(-4))
+        .join(' – ')
+    : years;
 
   return (
     <li

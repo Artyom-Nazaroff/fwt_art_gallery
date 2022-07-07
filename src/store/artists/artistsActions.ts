@@ -13,10 +13,10 @@ export const fetchStaticArtists = () => {
   };
 };
 
-export const fetchArtists = (perPage: number, portionsAmount: number) => {
+export const fetchArtists = (perPage: number, portionsAmount: number, name: string) => {
   return async (dispatch: Dispatch<ArtistsAction>) => {
     dispatch({ type: ArtistsActionTypes.SHOW_PRELOADER });
-    const response = await artistsAPI.getArtists(perPage, portionsAmount);
+    const response = await artistsAPI.getArtists(perPage, portionsAmount, name);
     dispatch({
       type: ArtistsActionTypes.FETCH_ARTISTS,
       payload: response.data,
@@ -34,7 +34,7 @@ export const fetchFilteredArtists = (name: string, genres: string[]) => {
     const response = await artistsAPI.getFilteredArtists(name, genres);
     dispatch({
       type: ArtistsActionTypes.FETCH_ARTISTS,
-      payload: response.data,
+      payload: response.data ? response.data : [],
     });
   };
 };
@@ -85,7 +85,7 @@ export const addNewPainting = (paintingInfo: FormData, artistId: string) => {
     const response = await artistsAPI.addPainting(paintingInfo, artistId);
     dispatch({
       type: ArtistsActionTypes.ADD_PAINTING,
-      payload: response,
+      payload: response.data,
     });
   };
 };
@@ -111,12 +111,8 @@ export const deletePainting = (artistId: string, paintingId: string) => {
 };
 
 export const editMainPainting = (artistId: string, mainPaintingId: string) => {
-  return async (dispatch: Dispatch<ArtistsAction>) => {
-    const response = await artistsAPI.editMainPainting(artistId, mainPaintingId);
-    // dispatch({
-    //   type: ArtistsActionTypes.EDIT_PAINTING,
-    //   payload: response,
-    // });
+  return async () => {
+    await artistsAPI.editMainPainting(artistId, mainPaintingId);
   };
 };
 

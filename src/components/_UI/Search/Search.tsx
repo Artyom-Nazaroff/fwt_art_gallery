@@ -30,7 +30,9 @@ const Search: FC<SearchProps> = ({ id, value, setSearchStringValue, fetchSortedA
           className={cn('search__label')}
           htmlFor={id}
           role="presentation"
-          onClick={() => fetchSortedArtists()}
+          onClick={() => {
+            if (value) fetchSortedArtists();
+          }}
         >
           <img src={theme === 'dark' ? searchIconDT : searchIconLT} alt="" />
         </label>

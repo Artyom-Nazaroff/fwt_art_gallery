@@ -14,16 +14,16 @@ const TextLink: FC<LinkProps> = ({ text, onClick }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <button
+    <span
       className={cn('link', {
         'link--dt': theme === 'dark',
         'link--lt': theme === 'light',
       })}
-      type="button"
+      role="presentation"
       onClick={() => onClick?.(false)}
     >
       {text}
-    </button>
+    </span>
   );
 };
 

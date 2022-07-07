@@ -70,6 +70,27 @@
     cursor: pointer;
   }
 
+  &__noResult {
+    padding-top: 50px;
+  }
+
+  &__noResultTopRow {
+    font-family: InterLight, sans-serif;
+    font-size: 16px;
+    line-height: 140%;
+    margin-bottom: 12px;
+
+    span {
+      font-family: InterMedium, sans-serif;
+    }
+  }
+
+  &__noResultBottomRow {
+    font-family: InterLight, sans-serif;
+    font-size: 12px;
+    line-height: 140%;
+  }
+
   &__container {
     padding-bottom: 32px;
   }
@@ -84,11 +105,27 @@
   .paintings__filterMenu {
     background-color: $secondary-black;
   }
+
+  .paintings__noResultTopRow {
+    color: $primary-light-gray;
+  }
+
+  .paintings__noResultBottomRow {
+    color: $secondary-gray;
+  }
 }
 
 .paintings--lt {
   .paintings__filterMenu {
     background-color: $secondary-white;
+  }
+
+  .paintings__noResultTopRow {
+    color: $primary-dark-gray;
+  }
+
+  .paintings__noResultBottomRow {
+    color: $secondary-gray;
   }
 }
 

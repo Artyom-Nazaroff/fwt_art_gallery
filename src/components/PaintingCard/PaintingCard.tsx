@@ -72,7 +72,7 @@ const PaintingCard: FC<PaintingCardProps> = ({
       <div
         className={cn('painting__inner')}
         onMouseLeave={() => {
-          if (document.documentElement.clientWidth >= 1280) setIsDropdownActive(false);
+          setIsDropdownActive(false);
         }}
       >
         <button
@@ -91,16 +91,22 @@ const PaintingCard: FC<PaintingCardProps> = ({
             <button
               className={cn('painting__itemBtn')}
               type="button"
-              onClick={() => editMainPainting(artistProfile._id, id)}
+              onClick={() => {
+                editMainPainting(artistProfile._id, id);
+                setIsDropdownActive(false);
+              }}
             >
-              {id === artistProfile.mainPainting._id ? 'Remove' : 'Make'} the cover
+              {id === artistProfile?.mainPainting?._id ? 'Remove' : 'Make'} the cover
             </button>
           </li>
           <li className={cn('painting__item')}>
             <button
               className={cn('painting__itemBtn')}
               type="button"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => openEditWindow(e)}
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                openEditWindow(e);
+                window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+              }}
             >
               Edit
             </button>

@@ -7,8 +7,9 @@
 }
 
 .popup {
-  padding: 24px 24px 80px;
+  padding: 24px 24px 185px;
   width: 100vw;
+  min-height: fit-content;
 
   &__top {
     display: flex;
@@ -184,7 +185,7 @@
     &__form {
       padding: 0;
       width: 340px;
-      margin: 0 auto 80px;
+      margin: 0 auto 180px;
     }
 
     &__input,
@@ -206,7 +207,7 @@
     background-color: $modal-window-background;
     min-height: fit-content;
     z-index: 10;
-    padding: 100px;
+    padding: 55px;
   }
 
   .popup {
