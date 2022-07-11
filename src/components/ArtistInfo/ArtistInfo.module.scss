@@ -43,6 +43,8 @@
     font-size: 32px;
     line-height: 100%;
     margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__place {
@@ -70,6 +72,7 @@
 
     &--short {
       max-height: 176px;
+      text-overflow: ellipsis;
     }
     &--full {
       max-height: none;
@@ -219,6 +222,8 @@
     &__name {
       font-size: 48px;
       margin-bottom: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &__place {
@@ -300,6 +305,8 @@
       font-family: "Cormorant SC", serif;
       position: relative;
       margin-bottom: 30px;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       &::before {
         content: "";

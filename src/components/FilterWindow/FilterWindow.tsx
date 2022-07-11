@@ -1,8 +1,7 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './FilterWindow.module.scss';
 import { ThemeContext } from '../../context/themeContext';
-import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import closeWindowDT from '../../assets/dark-theme/main-page/cross-dt.svg';
 import plusDT from '../../assets/dark-theme/main-page/plus-dt.svg';
@@ -18,22 +17,26 @@ import FilterItem from './FilterItem/FilterItem';
 const cn = classNames.bind(styles);
 
 type FilterWindowProps = {
+  selectedGenres: string[];
+  setOrderBy: (val: 'asc' | 'desc' | null) => void;
   setIsFilterWindowOpened: (val: boolean) => void;
   addGenreToList: (val: string) => void;
   removeGenreFromList: (val: string) => void;
+  fetchSortedArtists: () => void;
 };
 
 const FilterWindow: FC<FilterWindowProps> = ({
+  selectedGenres,
   setIsFilterWindowOpened,
   addGenreToList,
+  setOrderBy,
   removeGenreFromList,
+  fetchSortedArtists,
 }) => {
   const [isGenresOpened, setIsGenresOpened] = useState<boolean>(true);
   const [isSortByOpened, setIsSortByOpened] = useState<boolean>(true);
-  const [selectedGenresAmount, setSelectedGenresAmount] = useState<number>(0);
+  const [isItemsDeactivated, setIsItemsDeactivated] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext);
-  const { logOutUser } = useActions();
-  const { isAuth } = useTypedSelector((state) => state.authRegistration);
   const { artists, genres } = useTypedSelector((state) => state.artists);
 
   const currentGenresList = () => {
@@ -50,6 +53,16 @@ const FilterWindow: FC<FilterWindowProps> = ({
       });
     });
     return genresList;
+  };
+
+  const clearFilters = () => {
+    setIsItemsDeactivated(true);
+    setOrderBy(null);
+  };
+
+  const findArtists = () => {
+    fetchSortedArtists();
+    setIsFilterWindowOpened(false);
   };
 
   return (
@@ -81,8 +94,8 @@ const FilterWindow: FC<FilterWindowProps> = ({
               <span onClick={() => setIsGenresOpened(!isGenresOpened)} role="presentation">
                 <MenuItem text="Genres" isFilterMenu />
               </span>
-              {selectedGenresAmount > 0 && (
-                <span className={cn('filter__genresAmount')}>({selectedGenresAmount})</span>
+              {selectedGenres.length > 0 && (
+                <span className={cn('filter__genresAmount')}>({selectedGenres.length})</span>
               )}
             </div>
             <button
@@ -105,10 +118,11 @@ const FilterWindow: FC<FilterWindowProps> = ({
                 key={item._id}
                 id={item._id}
                 name={item.name}
-                selectedGenresAmount={selectedGenresAmount}
-                setSelectedGenresAmount={setSelectedGenresAmount}
+                selectedGenres={selectedGenres}
                 addGenreToList={addGenreToList}
                 removeGenreFromList={removeGenreFromList}
+                isItemsDeactivated={isItemsDeactivated}
+                setIsItemsDeactivated={setIsItemsDeactivated}
               />
             ))}
           </ul>
@@ -128,17 +142,30 @@ const FilterWindow: FC<FilterWindowProps> = ({
               )}
             </button>
           </div>
-          <ul
+          <div
             className={cn('filter__sortByItems', { 'filter__sortByItems--active': isSortByOpened })}
           >
-            <li className={cn('filter__sortByItem')}>Recently added</li>
-            <li className={cn('filter__sortByItem')}>A-Z</li>
-            <li className={cn('filter__sortByItem')}>Z-A</li>
-          </ul>
+            <div className={cn('filter__sortByItem')}>
+              <input type="radio" id="recentlyAdded" name="sortBy" />
+              <label htmlFor="recentlyAdded">Recently added</label>
+            </div>
+            <div className={cn('filter__sortByItem')}>
+              <input type="radio" id="asc" name="sortBy" />
+              <label htmlFor="asc" role="presentation" onClick={() => setOrderBy('asc')}>
+                A-Z
+              </label>
+            </div>
+            <div className={cn('filter__sortByItem')}>
+              <input type="radio" id="desc" name="sortBy" />
+              <label htmlFor="desc" role="presentation" onClick={() => setOrderBy('desc')}>
+                Z-A
+              </label>
+            </div>
+          </div>
         </div>
         <div className={cn('filter__bottom')}>
-          <TextLink text="Show the results" />
-          <TextLink text="Clear" />
+          <TextLink text="Show the results" onClick={findArtists} />
+          <TextLink text="Clear" onClick={clearFilters} />
         </div>
       </div>
     </div>

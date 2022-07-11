@@ -51,21 +51,23 @@ const Slider: FC<SliderProps> = ({
         'swiper--lt': theme === 'light',
       })}
     >
-      <div className={cn('swiper__topRow')} slot="container-start">
-        <button className={cn('swiper__btn')} type="button">
-          <span className={cn('swiper__btnText')}>Remove the cover</span>
-        </button>
-        <button
-          className={cn('swiper__btn')}
-          type="button"
-          onClick={() => setIsSliderVisible(false)}
-        >
-          <img src={cross} alt="" />
-        </button>
-      </div>
       {artistProfile.paintings.map((item) => (
         <SwiperSlide key={item._id}>
           <img src={`https://internship-front.framework.team${item.image.src}`} alt="" />
+          <div className={cn('swiper__topRow')} slot="container-start">
+            <button className={cn('swiper__btn')} type="button">
+              <span className={cn('swiper__btnText')}>
+                {item._id === artistProfile?.mainPainting?._id ? 'Remove' : 'Make'} the cover
+              </span>
+            </button>
+            <button
+              className={cn('swiper__btn')}
+              type="button"
+              onClick={() => setIsSliderVisible(false)}
+            >
+              <img src={cross} alt="" />
+            </button>
+          </div>
           <div className={cn('swiper__bottomRow')} slot="wrapper-end">
             <div className={cn('swiper__description')}>
               <div className={cn('swiper__info')}>

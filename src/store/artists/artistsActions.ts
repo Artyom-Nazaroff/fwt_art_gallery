@@ -13,10 +13,16 @@ export const fetchStaticArtists = () => {
   };
 };
 
-export const fetchArtists = (perPage: number, portionsAmount: number, name: string) => {
+export const fetchArtists = (
+  perPage: number,
+  portionsAmount: number,
+  name: string,
+  genres: string[],
+  orderBy: 'asc' | 'desc' | null
+) => {
   return async (dispatch: Dispatch<ArtistsAction>) => {
     dispatch({ type: ArtistsActionTypes.SHOW_PRELOADER });
-    const response = await artistsAPI.getArtists(perPage, portionsAmount, name);
+    const response = await artistsAPI.getArtists(perPage, portionsAmount, name, genres, orderBy);
     dispatch({
       type: ArtistsActionTypes.FETCH_ARTISTS,
       payload: response.data,
@@ -28,16 +34,20 @@ export const fetchArtists = (perPage: number, portionsAmount: number, name: stri
   };
 };
 
-export const fetchFilteredArtists = (name: string, genres: string[]) => {
-  return async (dispatch: Dispatch<ArtistsAction>) => {
-    dispatch({ type: ArtistsActionTypes.SHOW_PRELOADER });
-    const response = await artistsAPI.getFilteredArtists(name, genres);
-    dispatch({
-      type: ArtistsActionTypes.FETCH_ARTISTS,
-      payload: response.data ? response.data : [],
-    });
-  };
-};
+// export const fetchFilteredArtists = (
+//   name: string,
+//   genres: string[],
+//   orderBy: 'asc' | 'desc' | null
+// ) => {
+//   return async (dispatch: Dispatch<ArtistsAction>) => {
+//     dispatch({ type: ArtistsActionTypes.SHOW_PRELOADER });
+//     const response = await artistsAPI.getFilteredArtists(name, genres, orderBy);
+//     dispatch({
+//       type: ArtistsActionTypes.FETCH_ARTISTS,
+//       payload: response.data ? response.data : [],
+//     });
+//   };
+// };
 
 export const fetchArtistProfile = (isStatic: 'static/' | '', id: string | undefined) => {
   return async (dispatch: Dispatch<ArtistsAction>) => {

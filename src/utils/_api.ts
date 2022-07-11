@@ -23,9 +23,7 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     function refreshTokens() {
-      // const client = new ClientJS();
-      // const fingerprint = `${client.getFingerprint()}`;
-      const fingerprint = '1111111';
+      const fingerprint = Cookies.get('fingerprint');
       const refreshToken = Cookies.get('refreshToken');
       return axios.post<TokensType>(
         `${url}auth/refresh`,

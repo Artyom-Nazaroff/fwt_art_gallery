@@ -26,6 +26,7 @@ const Multiselect: FC<MultiselectProps> = ({
   setArtistsGenres,
 }) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [uncheckedItem, setUncheckedItem] = useState<string>('');
   const { theme } = useContext(ThemeContext);
   const select = useRef<HTMLDivElement | null>(null);
 
@@ -43,6 +44,7 @@ const Multiselect: FC<MultiselectProps> = ({
 
   const removeGenre = (_id: string) => {
     setArtistsGenres(artistsGenres.filter((i) => i._id !== _id));
+    setUncheckedItem(_id);
   };
 
   return (
@@ -88,6 +90,7 @@ const Multiselect: FC<MultiselectProps> = ({
                 title={genre.name}
                 id={genre._id}
                 name={genre.name}
+                uncheckedItem={uncheckedItem}
                 addGenre={addGenre}
                 removeGenre={removeGenre}
               />

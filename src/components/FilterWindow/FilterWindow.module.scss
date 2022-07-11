@@ -88,6 +88,10 @@
     font-size: 12px;
     line-height: 140%;
     margin-bottom: 12px;
+
+    input {
+      display: none;
+    }
   }
 
   &__bottom {
@@ -111,6 +115,11 @@
 
   .filter__sortByItem {
     color: $primary-light-gray;
+
+    input:checked + label {
+      font-family: InterMedium, sans-serif;
+      color: $accent-gold;
+    }
   }
 }
 
@@ -127,6 +136,11 @@
 
   .filter__sortByItem {
     color: $primary-dark-gray;
+
+    &:checked + label {
+      font-family: InterMedium, sans-serif;
+      color: $primary-black;
+    }
   }
 }
 
@@ -176,7 +190,7 @@
     }
 
     &__bottom {
-      padding: 0 140px 260px 72px;
+      padding: 0 140px 200px 72px;
     }
   }
 }

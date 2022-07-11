@@ -28,7 +28,6 @@ type ArtistInfoProps = {
 
 const ArtistInfo: FC<ArtistInfoProps> = ({ name, years, place, description, avatar, genres }) => {
   const [isFullText, setIsFullText] = useState<boolean>(false);
-
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -75,17 +74,21 @@ const ArtistInfo: FC<ArtistInfoProps> = ({ name, years, place, description, avat
             >
               {description}
             </p>
-            <button
-              className={cn('artist__link')}
-              type="button"
-              onClick={() => setIsFullText(!isFullText)}
-            >
-              <TextLink text={isFullText ? 'Read less' : 'Read more'} />
-              {!isFullText && (
-                <img src={theme === 'dark' ? linkArrowDownDT : linkArrowDownLT} alt="" />
-              )}
-              {isFullText && <img src={theme === 'dark' ? linkArrowUpDT : linkArrowUpLT} alt="" />}
-            </button>
+            {description?.length > 265 && (
+              <button
+                className={cn('artist__link')}
+                type="button"
+                onClick={() => setIsFullText(!isFullText)}
+              >
+                <TextLink text={isFullText ? 'Read less' : 'Read more'} />
+                {!isFullText && (
+                  <img src={theme === 'dark' ? linkArrowDownDT : linkArrowDownLT} alt="" />
+                )}
+                {isFullText && (
+                  <img src={theme === 'dark' ? linkArrowUpDT : linkArrowUpLT} alt="" />
+                )}
+              </button>
+            )}
             <div className={cn('artist__labels')}>
               {genres?.map((i) => (
                 <Label key={i._id} id={i._id} name={i.name} isRemove={false} />

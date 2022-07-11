@@ -2,6 +2,7 @@ import React, { FC, useContext } from 'react';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 import { ClientJS } from 'clientjs';
+import Cookies from 'js-cookie';
 import styles from './AuthAndRegistration.module.scss';
 import '../../App.scss';
 import crossDT from '../../assets/dark-theme/auth-registration/cross.svg';
@@ -41,13 +42,12 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
   const email = useInput('', { isEmpty: true, maxLength: 50, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8, isValidPassword: true });
 
-  // const client = new ClientJS();
-  // const fingerprint = `${client.getFingerprint()}`;
-  const fingerprint = '1111111';
-
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (variant === AuthOrRegistration.auth) {
+      const client = new ClientJS();
+      const fingerprint = `${client.getFingerprint()}`;
+      Cookies.set('fingerprint', fingerprint);
       authUser(email.inputValue, password.inputValue, fingerprint);
       email.setInputValue('');
       password.setInputValue('');
@@ -57,6 +57,8 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
       navigate('/new_art_gallery');
     }
     if (variant === AuthOrRegistration.registration) {
+      const client = new ClientJS();
+      const fingerprint = `${client.getFingerprint()}`;
       registerUser(email.inputValue, password.inputValue, fingerprint);
       email.setInputValue('');
       password.setInputValue('');

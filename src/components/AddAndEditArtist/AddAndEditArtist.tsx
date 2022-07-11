@@ -194,7 +194,13 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
                 />
               </div>
               <div className={cn('popup__btn')}>
-                <Button text="Save" onClick={() => saveArtist()} />
+                <Button
+                  text="Save"
+                  isDisabled={
+                    addOrEditArtist === AddOrEditArtist.add && (!name || artistsGenres.length === 0)
+                  }
+                  onClick={() => saveArtist()}
+                />
               </div>
             </div>
           </form>

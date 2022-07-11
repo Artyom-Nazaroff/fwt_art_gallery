@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export const usePicturePreview = () => {
-  const [picture, setPicture] = useState<File>();
+  const [picture, setPicture] = useState<File | null>();
   const [picturePreview, setPicturePreview] = useState('');
   const [drag, setDrag] = useState<boolean>(false);
 
@@ -14,6 +14,7 @@ export const usePicturePreview = () => {
 
   const deletePicturePreview = () => {
     setPicturePreview('');
+    setPicture(null);
   };
 
   const dragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {

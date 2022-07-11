@@ -51,6 +51,7 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
 }) => {
   const [isSliderVisible, setIsSliderVisible] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(3);
   const { theme } = useContext(ThemeContext);
   const { artistProfile, loading } = useTypedSelector((state) => state.artists);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
@@ -69,6 +70,11 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
     if (!isAuth && !Cookies.get('accessToken') && match)
       fetchArtistProfile('static/', match?.params.artistId);
   }, [isAuth]);
+
+  const paintingsPage = artistProfile?.paintings?.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   const openDeleteWindow = () => {
     setDeleteOpened?.(true);
@@ -160,7 +166,7 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
                     />
                   </div>
                   <AdaptiveGrid>
-                    {artistProfile?.paintings?.map((i) => (
+                    {paintingsPage?.map((i) => (
                       <PaintingCard
                         key={i._id}
                         id={i._id}
@@ -202,8 +208,8 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
               <Pagination
                 currentPage={currentPage}
                 siblingCount={1}
-                totalCount={100}
-                pageSize={5}
+                totalCount={artistProfile?.paintings?.length}
+                pageSize={pageSize}
                 onPageChange={(page) => setCurrentPage(page)}
               />
             </div>

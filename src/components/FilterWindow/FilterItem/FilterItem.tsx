@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useMemo, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './FilterItem.module.scss';
 import { ThemeContext } from '../../../context/themeContext';
@@ -8,22 +8,32 @@ const cn = classNames.bind(styles);
 type FilterItemProps = {
   id: string;
   name: string;
-  selectedGenresAmount: number;
-  setSelectedGenresAmount: (val: number) => void;
+  isItemsDeactivated: boolean;
+  selectedGenres: string[];
   addGenreToList: (val: string) => void;
   removeGenreFromList: (val: string) => void;
+  setIsItemsDeactivated: (val: boolean) => void;
 };
 
 const FilterItem: FC<FilterItemProps> = ({
   id,
   name,
-  selectedGenresAmount,
-  setSelectedGenresAmount,
+  selectedGenres,
   addGenreToList,
   removeGenreFromList,
+  isItemsDeactivated,
+  setIsItemsDeactivated,
 }) => {
   const [isItemSelected, setIsItemSelected] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext);
+
+  useMemo(() => {
+    if (selectedGenres.includes(id)) setIsItemSelected(true);
+  }, []);
+
+  useMemo(() => {
+    if (isItemsDeactivated) setIsItemSelected(false);
+  }, [isItemsDeactivated]);
 
   return (
     <li
@@ -35,14 +45,9 @@ const FilterItem: FC<FilterItemProps> = ({
       role="presentation"
       onClick={() => {
         setIsItemSelected?.(!isItemSelected);
-        if (!isItemSelected) {
-          setSelectedGenresAmount(selectedGenresAmount + 1);
-          addGenreToList(id);
-        }
-        if (isItemSelected) {
-          setSelectedGenresAmount(selectedGenresAmount - 1);
-          removeGenreFromList(id);
-        }
+        setIsItemsDeactivated(false);
+        if (!isItemSelected) addGenreToList(id);
+        if (isItemSelected) removeGenreFromList(id);
       }}
     >
       {name}

@@ -61,6 +61,11 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
     setAddEditPaintingOpened(false);
   };
 
+  const setYearValue = (val: string) => {
+    const reg = /^\d+$/;
+    if (reg.test(val)) setYear(val);
+  };
+
   return (
     <div className={cn('wrapper')}>
       <div
@@ -104,7 +109,7 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
                   label="Year of creation"
                   name="year"
                   value={year}
-                  changeHandler={setYear}
+                  changeHandler={setYearValue}
                 />
               </div>
             </div>
@@ -160,7 +165,11 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
               </div>
             </div>
             <div className={cn('popup__btn')}>
-              <Button text="Save" onClick={() => savePicture()} />
+              <Button
+                text="Save"
+                isDisabled={!year || !name || !picture}
+                onClick={() => savePicture()}
+              />
             </div>
           </form>
         </div>

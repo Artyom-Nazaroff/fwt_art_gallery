@@ -4,27 +4,43 @@ export const artistsAPI = {
   getStaticArtists() {
     return instance.get(`artists/static`).then((response) => response.data);
   },
-  getArtists(perPage: number, portionsAmount: number, name: string) {
+  getArtists(
+    perPage: number,
+    portionsAmount: number,
+    name: string,
+    genres: string[],
+    orderBy: 'asc' | 'desc' | null
+  ) {
     return instance
       .get(`artists/`, {
         params: {
           perPage: perPage * portionsAmount,
           pageNumber: 1,
           name,
-        },
-      })
-      .then((response) => response.data);
-  },
-  getFilteredArtists(name: string, genres: string[]) {
-    return instance
-      .get(`artists`, {
-        params: {
-          name,
           genres,
+          orderBy,
+          sortBy: orderBy !== null ? 'name' : null,
         },
       })
-      .then((response) => (response.data ? response.data : []));
+      .then((response) => {
+        // debugger;
+        return response.data ? response.data : [];
+      });
   },
+  // getFilteredArtists(name: string, genres: string[], orderBy: 'asc' | 'desc' | null) {
+  //   return instance
+  //     .get(`artists`, {
+  //       params: {
+  //         name,
+  //         genres,
+  //         orderBy,
+  //         sortBy: orderBy !== null ? 'name' : null,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       return response.data ? response.data : [];
+  //     });
+  // },
   getArtistProfile(isStatic: 'static/' | '', id: string | undefined) {
     return instance.get(`artists/${isStatic}${id}`).then((response) => response.data);
   },
