@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
+import React, { ChangeEvent, FC, useContext, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './AddAndEditPainting.module.scss';
 import '../../App.scss';
@@ -15,6 +15,7 @@ import ButtonEditDelete, {
 import { useActions } from '../../hooks/useActions';
 import { usePicturePreview } from '../../hooks/usePicturePreview';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { showToast } from '../../helpers/helpers';
 
 const cn = classNames.bind(styles);
 
@@ -37,7 +38,7 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
   const [name, setName] = useState<string>('');
   const [year, setYear] = useState<string>('');
   const { theme } = useContext(ThemeContext);
-  const { addNewPainting, editPainting } = useActions();
+  const { addNewPainting, editPainting, setErrorMessage } = useActions();
   const { artistProfile } = useTypedSelector((state) => state.artists);
   const {
     drag,
@@ -55,10 +56,29 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
     formData.append('name', name);
     formData.append('yearOfCreation', year);
     formData.append('image', picture as File);
-    if (addOrEditPainting === AddOrEditPainting.add) addNewPainting(formData, artistProfile._id);
-    if (addOrEditPainting === AddOrEditPainting.edit)
+    if (
+      addOrEditPainting === AddOrEditPainting.add &&
+      name &&
+      year &&
+      picture &&
+      (picture.type === 'image/jpeg' || picture.type === 'image/png')
+    ) {
+      addNewPainting(formData, artistProfile._id);
+      setAddEditPaintingOpened(false);
+    }
+    if (
+      addOrEditPainting === AddOrEditPainting.edit &&
+      (picture?.type === 'image/jpeg' || picture?.type === 'image/png')
+    ) {
       editPainting(formData, artistProfile._id, currentPaintingId);
-    setAddEditPaintingOpened(false);
+      setAddEditPaintingOpened(false);
+    }
+    if (!year || !name || !picture) {
+      showToast(setErrorMessage, 'Пожалуйста, заполните все поля!');
+    }
+    if (picture && picture.type !== 'image/jpeg' && picture.type !== 'image/png') {
+      showToast(setErrorMessage, 'Загружаемое изображение должно быть формата .jpeg или .png!');
+    }
   };
 
   const setYearValue = (val: string) => {
@@ -165,11 +185,7 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
               </div>
             </div>
             <div className={cn('popup__btn')}>
-              <Button
-                text="Save"
-                isDisabled={!year || !name || !picture}
-                onClick={() => savePicture()}
-              />
+              <Button text="Save" onClick={() => savePicture()} />
             </div>
           </form>
         </div>

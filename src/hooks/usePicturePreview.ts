@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export const usePicturePreview = () => {
-  const [picture, setPicture] = useState<File | null>();
+export const usePicturePreview = (inputRef?: any) => {
+  const [picture, setPicture] = useState<File | null>(null);
   const [picturePreview, setPicturePreview] = useState('');
   const [drag, setDrag] = useState<boolean>(false);
 
@@ -13,6 +13,7 @@ export const usePicturePreview = () => {
   };
 
   const deletePicturePreview = () => {
+    if (inputRef && inputRef.current) inputRef.current.value = null;
     setPicturePreview('');
     setPicture(null);
   };

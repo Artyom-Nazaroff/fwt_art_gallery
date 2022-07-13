@@ -22,25 +22,8 @@ export const artistsAPI = {
           sortBy: orderBy !== null ? 'name' : null,
         },
       })
-      .then((response) => {
-        // debugger;
-        return response.data ? response.data : [];
-      });
+      .then((response) => (response.data ? response.data : []));
   },
-  // getFilteredArtists(name: string, genres: string[], orderBy: 'asc' | 'desc' | null) {
-  //   return instance
-  //     .get(`artists`, {
-  //       params: {
-  //         name,
-  //         genres,
-  //         orderBy,
-  //         sortBy: orderBy !== null ? 'name' : null,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       return response.data ? response.data : [];
-  //     });
-  // },
   getArtistProfile(isStatic: 'static/' | '', id: string | undefined) {
     return instance.get(`artists/${isStatic}${id}`).then((response) => response.data);
   },

@@ -93,9 +93,11 @@ export const useInput = (initialValue: string, validations: ValidationsType) => 
     if (isDirty && valid.isEmpty) {
       setErrorMessage('Поле не может быть пустым!');
     } else if (isDirty && valid.passwordError) {
-      setErrorMessage('Введите валидный пароль!');
+      setErrorMessage(
+        'Пароль должен: быть от 8 символов, содержать одну заглавную букву, одну цифру и один спец.символ!'
+      );
     } else if (isDirty && valid.emailError) {
-      setErrorMessage('Введите валидный email!');
+      setErrorMessage('Email не может быть длиннее 50 символов и должен содержать “@“ и “.” !');
     } else if (isDirty && valid.minLengthError) {
       setErrorMessage('Пароль должен содержать минимум 8 символов!');
     } else if (isDirty && valid.maxLengthError) {

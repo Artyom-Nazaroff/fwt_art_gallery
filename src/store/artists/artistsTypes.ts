@@ -36,7 +36,7 @@ export type ArtistCard = {
   name: string;
   description: string;
   yearsOfLife: string;
-  __v: number;
+  __v?: number;
   mainPainting: Painting;
   avatar?: string;
 };
@@ -47,6 +47,7 @@ export type ArtistsState = {
   artistsAmount: number;
   genres: Array<Genre>;
   loading: boolean;
+  errorMessage: string;
 };
 
 export enum ArtistsActionTypes {
@@ -61,6 +62,7 @@ export enum ArtistsActionTypes {
   ADD_PAINTING = 'ADD_PAINTING',
   EDIT_PAINTING = 'EDIT_PAINTING',
   SET_TOTAL_ARTISTS_AMOUNT = 'SET_TOTAL_ARTISTS_AMOUNT',
+  SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE',
 }
 
 export type ShowPreloader = {
@@ -112,9 +114,14 @@ export type EditPainting = {
   payload: Painting;
 };
 
-export type setTotalArtistsAmount = {
+export type SetTotalArtistsAmount = {
   type: ArtistsActionTypes.SET_TOTAL_ARTISTS_AMOUNT;
   payload: number;
+};
+
+export type SetErrorMessage = {
+  type: ArtistsActionTypes.SET_ERROR_MESSAGE;
+  payload: string;
 };
 
 export type ArtistsAction =
@@ -128,4 +135,5 @@ export type ArtistsAction =
   | EditArtist
   | DeletePainting
   | EditPainting
-  | setTotalArtistsAmount;
+  | SetTotalArtistsAmount
+  | SetErrorMessage;

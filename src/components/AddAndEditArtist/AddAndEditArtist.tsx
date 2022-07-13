@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useContext, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './AddAndEditArtist.module.scss';
 import '../../App.scss';
@@ -18,6 +18,7 @@ import ButtonEditDelete, {
 } from '../_UI/ButtonEditDeleteProfile/ButtonEditDelete';
 import { Genre } from '../../store/artists/artistsTypes';
 import { usePicturePreview } from '../../hooks/usePicturePreview';
+import { showToast } from '../../helpers/helpers';
 
 const cn = classNames.bind(styles);
 
@@ -41,8 +42,9 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
   const [description, setDescription] = useState<string>('');
   const [artistsGenres, setArtistsGenres] = useState<Array<Genre>>([]);
   const { theme } = useContext(ThemeContext);
-  const { getAllGenres, createArtist, editArtist } = useActions();
+  const { getAllGenres, createArtist, editArtist, setErrorMessage } = useActions();
   const { genres, artistProfile } = useTypedSelector((state) => state.artists);
+  const inputRef = useRef<HTMLInputElement>(null);
   const {
     drag,
     picture,
@@ -52,7 +54,7 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
     dragStartHandler,
     dragLeaveHandler,
     onDropHandler,
-  } = usePicturePreview();
+  } = usePicturePreview(inputRef);
 
   useEffect(() => {
     getAllGenres();
@@ -60,13 +62,14 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
 
   const saveArtist = () => {
     const formData = new FormData();
-    if (addOrEditArtist === AddOrEditArtist.add) {
+    if (addOrEditArtist === AddOrEditArtist.add && name && artistsGenres && picture) {
       formData.append('name', name);
       formData.append('yearsOfLife', years);
       formData.append('description', description);
       artistsGenres.forEach((item) => formData.append('genres', item._id));
       formData.append('avatar', picture as File);
       if (name && artistsGenres.length !== 0) createArtist(formData);
+      setAddEditArtistOpened(false);
     }
     if (addOrEditArtist === AddOrEditArtist.edit) {
       if (name !== '') formData.append('name', name);
@@ -76,8 +79,10 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
         artistsGenres.forEach((item) => formData.append('genres', item._id));
       if (picture) formData.append('avatar', picture as File);
       editArtist(formData, artistProfile._id);
+      setAddEditArtistOpened(false);
     }
-    setAddEditArtistOpened(false);
+    if (addOrEditArtist === AddOrEditArtist.add && (!name || !artistsGenres.length || !picture))
+      showToast(setErrorMessage, 'Необходимо добавить картинку, имя и жанры!');
   };
 
   return (
@@ -138,6 +143,7 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
                   type="file"
                   name="file"
                   id="portrait"
+                  ref={inputRef}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => onImageChange(e)}
                 />
               </div>
@@ -194,13 +200,7 @@ const AddAndEditArtist: FC<AddAndEditArtistProps> = ({
                 />
               </div>
               <div className={cn('popup__btn')}>
-                <Button
-                  text="Save"
-                  isDisabled={
-                    addOrEditArtist === AddOrEditArtist.add && (!name || artistsGenres.length === 0)
-                  }
-                  onClick={() => saveArtist()}
-                />
+                <Button text="Save" onClick={() => saveArtist()} />
               </div>
             </div>
           </form>

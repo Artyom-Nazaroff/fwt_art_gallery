@@ -13,11 +13,17 @@ import MenuItem from '../_UI/MenuItem/MenuItem';
 import TextLink from '../_UI/TextLink/TextLink';
 import { Genre } from '../../store/artists/artistsTypes';
 import FilterItem from './FilterItem/FilterItem';
+import { setQueryStringParams } from '../../helpers/helpers';
+import { useActions } from '../../hooks/useActions';
 
 const cn = classNames.bind(styles);
 
 type FilterWindowProps = {
+  page: number;
+  perPage: number;
   selectedGenres: string[];
+  setSearchName: (val: string) => void;
+  setSelectedGenres: (val: string[]) => void;
   setOrderBy: (val: 'asc' | 'desc' | null) => void;
   setIsFilterWindowOpened: (val: boolean) => void;
   addGenreToList: (val: string) => void;
@@ -26,10 +32,14 @@ type FilterWindowProps = {
 };
 
 const FilterWindow: FC<FilterWindowProps> = ({
+  page,
+  perPage,
   selectedGenres,
   setIsFilterWindowOpened,
   addGenreToList,
   setOrderBy,
+  setSearchName,
+  setSelectedGenres,
   removeGenreFromList,
   fetchSortedArtists,
 }) => {
@@ -38,6 +48,7 @@ const FilterWindow: FC<FilterWindowProps> = ({
   const [isItemsDeactivated, setIsItemsDeactivated] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext);
   const { artists, genres } = useTypedSelector((state) => state.artists);
+  const { fetchArtists } = useActions();
 
   const currentGenresList = () => {
     const currentGenresID: string[] = [];
@@ -57,7 +68,12 @@ const FilterWindow: FC<FilterWindowProps> = ({
 
   const clearFilters = () => {
     setIsItemsDeactivated(true);
+    setSearchName('');
+    setSelectedGenres([]);
     setOrderBy(null);
+    setQueryStringParams({ searchName: '', selectedGenres: [], perPage, page, orderBy: null });
+    fetchArtists(perPage, page, '', [], null);
+    setIsFilterWindowOpened(false);
   };
 
   const findArtists = () => {

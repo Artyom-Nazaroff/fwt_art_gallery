@@ -12,64 +12,6 @@
 }
 
 .paintings {
-  &__row {
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    visibility: hidden;
-
-    &--active {
-      visibility: visible;
-    }
-  }
-
-  &__inner {
-    padding-bottom: 25px;
-  }
-
-  &__filterFields {
-    padding-bottom: 20px;
-  }
-
-  &__loupe {
-    width: 16px;
-    height: 16px;
-    border: none;
-    background-color: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 22px;
-    right: 68px;
-    cursor: pointer;
-  }
-
-  &__searchMobile {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 64px;
-    width: calc(100% - 64px);
-    padding: 16px 20px;
-  }
-
-  &__searchDesktop {
-    display: none;
-  }
-
-  &__filterMenu {
-    width: 28px;
-    height: 28px;
-    border-radius: 4px;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-
   &__noResult {
     padding-top: 50px;
   }
@@ -102,10 +44,6 @@
 }
 
 .paintings--dt {
-  .paintings__filterMenu {
-    background-color: $secondary-black;
-  }
-
   .paintings__noResultTopRow {
     color: $primary-light-gray;
   }
@@ -116,10 +54,6 @@
 }
 
 .paintings--lt {
-  .paintings__filterMenu {
-    background-color: $secondary-white;
-  }
-
   .paintings__noResultTopRow {
     color: $primary-dark-gray;
   }
@@ -133,25 +67,6 @@
   .paintings {
     &__addArtistRow {
       height: 100px;
-    }
-
-    &__loupe {
-      display: none;
-    }
-
-    &__searchMobile {
-      display: none;
-    }
-
-    &__filterFields {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    &__searchDesktop {
-      display: block;
-      margin-right: 20px;
     }
 
     &__container {

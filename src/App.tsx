@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './App.scss';
 import cn from 'classnames';
 import { Route, Routes } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MainPage from './pages/MainPage/MainPage';
@@ -12,6 +13,8 @@ import { AddOrEditArtist } from './components/AddAndEditArtist/AddAndEditArtist'
 import { DeleteArtistOrPainting } from './components/DeletePopup/DeletePopup';
 import { AddOrEditPainting } from './components/AddAndEditPainting/AddAndEditPainting';
 import Toast from './components/_UI/Toast/Toast';
+import { useActions } from './hooks/useActions';
+import { useTypedSelector } from './hooks/useTypedSelector';
 
 const App: FC = () => {
   const [addOrEditArtist, setAddOrEditArtist] = useState<AddOrEditArtist>(AddOrEditArtist.add);
@@ -30,6 +33,12 @@ const App: FC = () => {
   const [isAddEditPaintingOpened, setAddEditPaintingOpened] = useState<boolean>(false);
   const [isErrorOpened, setErrorOpened] = useState<boolean>(false);
   const [currentPaintingId, setCurrentPaintingId] = useState<string>('');
+  const { setAuthUser } = useActions();
+  const { errorMessage } = useTypedSelector((state) => state.artists);
+
+  useEffect(() => {
+    if (Cookies.get('accessToken')) setAuthUser();
+  }, []);
 
   return (
     <div className={cn('appContainer')}>
@@ -76,11 +85,19 @@ const App: FC = () => {
               />
             }
           />
-          <Route path="*" element={<h1>PAGE</h1>} />
+          <Route
+            path="*"
+            element={
+              <MainPage
+                setAddEditArtistOpened={setAddEditArtistOpened}
+                setAddOrEditArtist={setAddOrEditArtist}
+              />
+            }
+          />
         </Routes>
       </div>
       <Footer />
-      {isErrorOpened && <Toast text="Error message" setErrorOpened={setErrorOpened} />}
+      {errorMessage && <Toast text={errorMessage} />}
     </div>
   );
 };

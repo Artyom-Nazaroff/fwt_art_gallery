@@ -13,10 +13,13 @@ const initialState: ArtistsState = {
   artistsAmount: 0,
   genres: [] as Array<Genre>,
   loading: false,
+  errorMessage: '',
 };
 
 export const artistsReducer = (state: ArtistsState = initialState, action: ArtistsAction) => {
   switch (action.type) {
+    case ArtistsActionTypes.SET_ERROR_MESSAGE:
+      return { ...state, errorMessage: action.payload };
     case ArtistsActionTypes.SHOW_PRELOADER:
       return { ...state, loading: true };
     case ArtistsActionTypes.FETCH_ARTISTS:

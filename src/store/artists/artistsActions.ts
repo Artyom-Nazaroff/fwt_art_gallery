@@ -34,21 +34,6 @@ export const fetchArtists = (
   };
 };
 
-// export const fetchFilteredArtists = (
-//   name: string,
-//   genres: string[],
-//   orderBy: 'asc' | 'desc' | null
-// ) => {
-//   return async (dispatch: Dispatch<ArtistsAction>) => {
-//     dispatch({ type: ArtistsActionTypes.SHOW_PRELOADER });
-//     const response = await artistsAPI.getFilteredArtists(name, genres, orderBy);
-//     dispatch({
-//       type: ArtistsActionTypes.FETCH_ARTISTS,
-//       payload: response.data ? response.data : [],
-//     });
-//   };
-// };
-
 export const fetchArtistProfile = (isStatic: 'static/' | '', id: string | undefined) => {
   return async (dispatch: Dispatch<ArtistsAction>) => {
     dispatch({ type: ArtistsActionTypes.SHOW_PRELOADER });
@@ -132,6 +117,15 @@ export const getAllGenres = () => {
     dispatch({
       type: ArtistsActionTypes.GET_ALL_GENRES,
       payload: response,
+    });
+  };
+};
+
+export const setErrorMessage = (error: string) => {
+  return (dispatch: Dispatch<ArtistsAction>) => {
+    dispatch({
+      type: ArtistsActionTypes.SET_ERROR_MESSAGE,
+      payload: error,
     });
   };
 };
