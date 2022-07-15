@@ -29,15 +29,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 22px;
+    position: absolute;
+    top: -42px;
     right: 68px;
     cursor: pointer;
   }
 
   &__searchMobile {
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: -65px;
     left: 0;
     height: 64px;
     width: calc(100% - 64px);

@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Button from './Button';
 
 export default {
-  title: 'Components/Button',
+  title: 'Components/ScrollUpButton',
   component: Button,
   argTypes: {
     text: {
@@ -28,6 +28,6 @@ ActiveButton.args = {
 
 export const DisabledButton = Template.bind({});
 DisabledButton.args = {
-  text: 'Disabled Button',
+  text: 'Disabled ScrollUpButton',
   isDisabled: true,
 };

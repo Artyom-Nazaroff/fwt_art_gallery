@@ -13,10 +13,11 @@ const cn = classNames.bind(styles);
 
 type PaintingCardProps = {
   id: string;
+  index: number;
   name: string;
   year: string;
   picture: string;
-  onClick: (val: boolean) => void;
+  onClick: (id: string, index: number) => void;
   setDeleteOpened?: (val: boolean) => void;
   setAddEditPaintingOpened?: (val: boolean) => void;
   setDeleteArtistOrPainting?: (val: DeleteArtistOrPainting) => void;
@@ -26,6 +27,7 @@ type PaintingCardProps = {
 
 const PaintingCard: FC<PaintingCardProps> = ({
   id,
+  index,
   name,
   year,
   picture,
@@ -39,6 +41,7 @@ const PaintingCard: FC<PaintingCardProps> = ({
   const { theme } = useContext(ThemeContext);
   const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false);
   const { artistProfile } = useTypedSelector((state) => state.artists);
+  const { isAuth } = useTypedSelector((state) => state.authRegistration);
   const { editMainPainting } = useActions();
 
   const openCloseMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,14 +49,14 @@ const PaintingCard: FC<PaintingCardProps> = ({
     setIsDropdownActive(!isDropdownActive);
   };
 
-  const openEditWindow = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const openEditWindow = () => {
     setAddEditPaintingOpened?.(true);
     setAddOrEditPainting?.(AddOrEditPainting.edit);
     setCurrentPaintingId?.(id);
     setIsDropdownActive(false);
   };
 
-  const openDeleteWindow = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const openDeleteWindow = () => {
     setDeleteOpened?.(true);
     setDeleteArtistOrPainting?.(DeleteArtistOrPainting.painting);
     setCurrentPaintingId?.(id);
@@ -66,7 +69,7 @@ const PaintingCard: FC<PaintingCardProps> = ({
         'painting--dt': theme === 'dark',
         'painting--lt': theme === 'light',
       })}
-      onClick={() => onClick(true)}
+      onClick={() => onClick(id, index)}
       role="presentation"
     >
       <div
@@ -75,17 +78,19 @@ const PaintingCard: FC<PaintingCardProps> = ({
           setIsDropdownActive(false);
         }}
       >
-        <button
-          className={cn('painting__btn')}
-          type="button"
-          onClick={(e: React.MouseEvent<HTMLButtonElement>) => openCloseMenu(e)}
-        >
-          <img src={gear} alt="" />
-        </button>
+        {isAuth && (
+          <button
+            className={cn('painting__btn')}
+            type="button"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => openCloseMenu(e)}
+          >
+            <img src={gear} alt="" />
+          </button>
+        )}
         <ul
           className={cn('painting__list', { 'painting__list--active': isDropdownActive })}
           role="presentation"
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e: React.MouseEvent<HTMLUListElement>) => e.stopPropagation()}
         >
           <li className={cn('painting__item')}>
             <button
@@ -103,8 +108,8 @@ const PaintingCard: FC<PaintingCardProps> = ({
             <button
               className={cn('painting__itemBtn')}
               type="button"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                openEditWindow(e);
+              onClick={() => {
+                openEditWindow();
                 window.scroll({ left: 0, top: 0, behavior: 'smooth' });
               }}
             >
@@ -115,7 +120,7 @@ const PaintingCard: FC<PaintingCardProps> = ({
             <button
               className={cn('painting__itemBtn')}
               type="button"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => openDeleteWindow(e)}
+              onClick={() => openDeleteWindow()}
             >
               Delete
             </button>

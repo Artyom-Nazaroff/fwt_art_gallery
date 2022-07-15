@@ -1,4 +1,4 @@
-import React, { FC, useContext, useRef, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './FilterWindow.module.scss';
 import { ThemeContext } from '../../context/themeContext';
@@ -22,6 +22,7 @@ type FilterWindowProps = {
   page: number;
   perPage: number;
   selectedGenres: string[];
+  isFilterWindowOpened: boolean;
   setSearchName: (val: string) => void;
   setSelectedGenres: (val: string[]) => void;
   setOrderBy: (val: 'asc' | 'desc' | null) => void;
@@ -35,6 +36,7 @@ const FilterWindow: FC<FilterWindowProps> = ({
   page,
   perPage,
   selectedGenres,
+  isFilterWindowOpened,
   setIsFilterWindowOpened,
   addGenreToList,
   setOrderBy,
@@ -43,8 +45,8 @@ const FilterWindow: FC<FilterWindowProps> = ({
   removeGenreFromList,
   fetchSortedArtists,
 }) => {
-  const [isGenresOpened, setIsGenresOpened] = useState<boolean>(true);
-  const [isSortByOpened, setIsSortByOpened] = useState<boolean>(true);
+  const [isGenresOpened, setIsGenresOpened] = useState<boolean>(false);
+  const [isSortByOpened, setIsSortByOpened] = useState<boolean>(false);
   const [isItemsDeactivated, setIsItemsDeactivated] = useState<boolean>(false);
   const { theme } = useContext(ThemeContext);
   const { artists, genres } = useTypedSelector((state) => state.artists);
@@ -86,12 +88,13 @@ const FilterWindow: FC<FilterWindowProps> = ({
       className={cn('filter', {
         'filter--dt': theme === 'dark',
         'filter--lt': theme === 'light',
+        'filter--opened': isFilterWindowOpened,
       })}
       role="presentation"
       onClick={() => setIsFilterWindowOpened(false)}
     >
       <div
-        className={cn('filter__content')}
+        className={cn('filter__content', { 'filter__content--opened': isFilterWindowOpened })}
         role="presentation"
         onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
       >
@@ -114,17 +117,16 @@ const FilterWindow: FC<FilterWindowProps> = ({
                 <span className={cn('filter__genresAmount')}>({selectedGenres.length})</span>
               )}
             </div>
-            <button
-              className={cn('filter__menuItemPlus')}
-              type="button"
+            <span
+              className={cn('filter__menuItemPlus', {
+                filter__plusDt: !isGenresOpened && theme === 'dark',
+                filter__plusLt: !isGenresOpened && theme === 'light',
+                filter__minusDt: isGenresOpened && theme === 'dark',
+                filter__minusLt: isGenresOpened && theme === 'light',
+              })}
+              role="presentation"
               onClick={() => setIsGenresOpened(!isGenresOpened)}
-            >
-              {isGenresOpened ? (
-                <img src={theme === 'dark' ? minusDT : minusLT} alt="" />
-              ) : (
-                <img src={theme === 'dark' ? plusDT : plusLT} alt="" />
-              )}
-            </button>
+            />
           </div>
           <ul
             className={cn('filter__genresItems', { 'filter__genresItems--active': isGenresOpened })}
@@ -146,17 +148,16 @@ const FilterWindow: FC<FilterWindowProps> = ({
             <span onClick={() => setIsSortByOpened(!isSortByOpened)} role="presentation">
               <MenuItem text="Sort by" isFilterMenu />
             </span>
-            <button
-              className={cn('filter__menuItemPlus')}
-              type="button"
+            <span
+              className={cn('filter__menuItemPlus', {
+                filter__plusDt: !isSortByOpened && theme === 'dark',
+                filter__plusLt: !isSortByOpened && theme === 'light',
+                filter__minusDt: isSortByOpened && theme === 'dark',
+                filter__minusLt: isSortByOpened && theme === 'light',
+              })}
+              role="presentation"
               onClick={() => setIsSortByOpened(!isSortByOpened)}
-            >
-              {isSortByOpened ? (
-                <img src={theme === 'dark' ? minusDT : minusLT} alt="" />
-              ) : (
-                <img src={theme === 'dark' ? plusDT : plusLT} alt="" />
-              )}
-            </button>
+            />
           </div>
           <div
             className={cn('filter__sortByItems', { 'filter__sortByItems--active': isSortByOpened })}

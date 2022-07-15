@@ -42,9 +42,11 @@ const Header: FC<HeaderProps> = ({ setAuthOpened, setAuthOrRegistration }) => {
 
   return (
     <>
-      {isMenuOpened && (
-        <BurgerMenu setIsMenuOpened={setIsMenuOpened} openModalWindow={openModalWindow} />
-      )}
+      <BurgerMenu
+        isMenuOpened={isMenuOpened}
+        setIsMenuOpened={setIsMenuOpened}
+        openModalWindow={openModalWindow}
+      />
       <header
         className={cn('header', {
           'header--dt': theme === 'dark',

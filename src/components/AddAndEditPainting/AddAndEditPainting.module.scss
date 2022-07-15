@@ -8,11 +8,9 @@
 
 .popup {
   padding: 24px 20px 80px;
-  position: absolute;
+  height: 100vh;
+  position: sticky;
   top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 
   &__top {
     display: flex;

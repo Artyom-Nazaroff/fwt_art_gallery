@@ -8,13 +8,24 @@
   right: 0;
   left: 0;
   z-index: 5;
+  visibility: hidden;
+  transition: all .5s ease-in-out;
+
+  &--opened {
+    visibility: visible;
+  }
 
   &__content {
     width: 252px;
     position: fixed;
     top: 0;
-    right: 0;
+    right: -252px;
     bottom: 0;
+    transition: right .5s ease-in-out;
+
+    &--opened {
+      right: 0;
+    }
   }
 
   &__top {
@@ -53,7 +64,10 @@
 
 
 .burger--dt {
-  background-color: rgba(3, 3, 3, 0.6);
+  background-color: transparent;
+  &.burger--opened {
+    background-color: rgba(3, 3, 3, 0.6);
+  }
 
   .burger__content {
     background-color: $primary-black;
@@ -65,7 +79,10 @@
 }
 
 .burger--lt {
-  background-color: rgba(3, 3, 3, 0.3);
+  background-color: transparent;
+  &.burger--opened {
+    background-color: rgba(3, 3, 3, 0.3);
+  }
 
   .burger__content {
     background-color: $primary-white;
@@ -81,6 +98,11 @@
   .burger {
     &__content {
       width: 466px;
+      right: -466px;
+
+      &--opened {
+        right: 0;
+      }
     }
 
     &__top {

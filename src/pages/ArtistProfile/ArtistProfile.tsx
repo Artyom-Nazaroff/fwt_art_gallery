@@ -52,6 +52,10 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
   const [isSliderVisible, setIsSliderVisible] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(3);
+  const [paintingData, setPaintingData] = useState<{ id: string; index: number }>({
+    id: '',
+    index: 0,
+  });
   const { theme } = useContext(ThemeContext);
   const { artistProfile, loading } = useTypedSelector((state) => state.artists);
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
@@ -59,6 +63,7 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
   const { fetchArtistProfile, setAuthUser } = useActions();
 
   useEffect(() => {
+    window.scroll(0, 0);
     if (Cookies.get('accessToken')) {
       setAuthUser();
     }
@@ -86,9 +91,15 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
     setAddOrEditArtist?.(AddOrEditArtist.edit);
   };
 
-  if (isSliderVisible)
+  const openSlider = (id: string, index: number) => {
+    setIsSliderVisible(true);
+    setPaintingData({ id, index });
+  };
+
+  if (isSliderVisible && artistProfile?.paintings?.length)
     return (
       <Slider
+        paintingData={paintingData}
         setIsSliderVisible={setIsSliderVisible}
         setDeleteOpened={setDeleteOpened}
         setAddEditPaintingOpened={setAddEditPaintingOpened}
@@ -157,23 +168,26 @@ const ArtistProfile: FC<ArtistProfileProps> = ({
               {artistProfile?.paintings && artistProfile?.paintings?.length !== 0 ? (
                 <Suspense fallback={<Preloader />}>
                   <div className={cn('gallery__row')}>
-                    <ButtonLink
-                      text="Add picture"
-                      onClick={() => {
-                        setAddEditPaintingOpened?.(true);
-                        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-                      }}
-                    />
+                    {isAuth && (
+                      <ButtonLink
+                        text="Add picture"
+                        onClick={() => {
+                          setAddEditPaintingOpened?.(true);
+                          window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                        }}
+                      />
+                    )}
                   </div>
                   <AdaptiveGrid>
-                    {paintingsPage?.map((i) => (
+                    {paintingsPage?.map((i, index) => (
                       <PaintingCard
                         key={i._id}
+                        index={(currentPage - 1) * pageSize + index}
                         id={i._id}
                         name={i.name}
                         year={i.yearOfCreation}
                         picture={i?.image?.src}
-                        onClick={setIsSliderVisible}
+                        onClick={openSlider}
                         setDeleteOpened={setDeleteOpened}
                         setAddEditPaintingOpened={setAddEditPaintingOpened}
                         setDeleteArtistOrPainting={setDeleteArtistOrPainting}

@@ -84,20 +84,19 @@ const MainPage: FC<MainPageProps> = ({ setAddEditArtistOpened, setAddOrEditArtis
 
   return (
     <>
-      {isAuth && isFilterWindowOpened && (
-        <FilterWindow
-          page={page}
-          perPage={perPage}
-          selectedGenres={selectedGenres}
-          setSearchName={setSearchName}
-          setSelectedGenres={setSelectedGenres}
-          setOrderBy={setOrderBy}
-          setIsFilterWindowOpened={setIsFilterWindowOpened}
-          addGenreToList={addGenreToList}
-          removeGenreFromList={removeGenreFromList}
-          fetchSortedArtists={fetchSortedArtists}
-        />
-      )}
+      <FilterWindow
+        page={page}
+        perPage={perPage}
+        selectedGenres={selectedGenres}
+        setSearchName={setSearchName}
+        setSelectedGenres={setSelectedGenres}
+        setOrderBy={setOrderBy}
+        isFilterWindowOpened={isFilterWindowOpened}
+        setIsFilterWindowOpened={setIsFilterWindowOpened}
+        addGenreToList={addGenreToList}
+        removeGenreFromList={removeGenreFromList}
+        fetchSortedArtists={fetchSortedArtists}
+      />
       <div
         className={cn('wrapper', {
           'wrapper--dt': theme === 'dark',

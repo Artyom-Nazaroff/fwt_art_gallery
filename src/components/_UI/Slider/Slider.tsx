@@ -17,8 +17,10 @@ import cross from '../../../assets/dark-theme/_UI/Slider/cross.svg';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import ButtonEditDelete, { EditOrDeleteButton } from '../ButtonEditDeleteProfile/ButtonEditDelete';
 import { DeleteArtistOrPainting } from '../../DeletePopup/DeletePopup';
+import { useActions } from '../../../hooks/useActions';
 
 type SliderProps = {
+  paintingData: { id: string; index: number };
   setIsSliderVisible: (val: boolean) => void;
   setDeleteOpened?: (val: boolean) => void;
   setAddEditPaintingOpened?: (val: boolean) => void;
@@ -27,6 +29,7 @@ type SliderProps = {
 };
 
 const Slider: FC<SliderProps> = ({
+  paintingData,
   setIsSliderVisible,
   setDeleteOpened,
   setAddEditPaintingOpened,
@@ -35,6 +38,8 @@ const Slider: FC<SliderProps> = ({
 }) => {
   const { theme } = useContext(ThemeContext);
   const { artistProfile } = useTypedSelector((state) => state.artists);
+  const { isAuth } = useTypedSelector((state) => state.authRegistration);
+  const { editMainPainting } = useActions();
 
   return (
     <Swiper
@@ -44,8 +49,12 @@ const Slider: FC<SliderProps> = ({
       navigation
       modules={[Pagination, Navigation]}
       onSlideChange={(swiper) => {
-        if (swiper.isEnd) swiper.disable();
+        if (swiper.isEnd) swiper.allowSlideNext = false;
+        if (!swiper.isEnd) swiper.allowSlideNext = true;
+        if (swiper.isBeginning) swiper.allowSlidePrev = false;
+        if (!swiper.isBeginning) swiper.allowSlidePrev = true;
       }}
+      onSwiper={(swiper) => swiper.slideTo(paintingData.index, 0, false)}
       className={cn('swiper', {
         'swiper--dt': theme === 'dark',
         'swiper--lt': theme === 'light',
@@ -55,8 +64,15 @@ const Slider: FC<SliderProps> = ({
         <SwiperSlide key={item._id}>
           <img src={`https://internship-front.framework.team${item.image.src}`} alt="" />
           <div className={cn('swiper__topRow')} slot="container-start">
-            <button className={cn('swiper__btn')} type="button">
-              <span className={cn('swiper__btnText')}>
+            <button
+              className={cn('swiper__btn', { 'swiper__btn--disabled': !isAuth })}
+              type="button"
+            >
+              <span
+                className={cn('swiper__btnText')}
+                role="presentation"
+                onClick={() => editMainPainting(artistProfile._id, paintingData.id)}
+              >
                 {item._id === artistProfile?.mainPainting?._id ? 'Remove' : 'Make'} the cover
               </span>
             </button>
@@ -75,22 +91,26 @@ const Slider: FC<SliderProps> = ({
                 <p className={cn('swiper__name')}>{item.name}</p>
               </div>
               <div className={cn('swiper__bottomButtons')}>
-                <span className={cn('swiper__bottomBtn')}>
-                  <ButtonEditDelete
-                    variant={EditOrDeleteButton.edit}
-                    transparent
-                    onClick={() => setAddEditPaintingOpened?.(true)}
-                  />
-                </span>
-                <ButtonEditDelete
-                  variant={EditOrDeleteButton.delete}
-                  transparent
-                  onClick={() => {
-                    setDeleteOpened?.(true);
-                    setDeleteArtistOrPainting?.(DeleteArtistOrPainting.painting);
-                    setCurrentPaintingId?.(item._id);
-                  }}
-                />
+                {isAuth && (
+                  <>
+                    <span className={cn('swiper__bottomBtn')}>
+                      <ButtonEditDelete
+                        variant={EditOrDeleteButton.edit}
+                        transparent
+                        onClick={() => setAddEditPaintingOpened?.(true)}
+                      />
+                    </span>
+                    <ButtonEditDelete
+                      variant={EditOrDeleteButton.delete}
+                      transparent
+                      onClick={() => {
+                        setDeleteOpened?.(true);
+                        setDeleteArtistOrPainting?.(DeleteArtistOrPainting.painting);
+                        setCurrentPaintingId?.(item._id);
+                      }}
+                    />
+                  </>
+                )}
               </div>
             </div>
           </div>

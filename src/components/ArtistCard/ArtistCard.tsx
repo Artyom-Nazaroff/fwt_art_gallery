@@ -40,7 +40,9 @@ const ArtistCard: FC<ArtistProps> = ({ id, name, years, picture }) => {
     >
       <NavLink to={`/artists/${isAuth ? '' : 'static/'}${id}`}>
         <div className={cn('artist__modalWindow')}>
-          <TextLink text="know more" />
+          <span className={cn('artist__textLink')}>
+            <TextLink text="know more" />
+          </span>
         </div>
         <div className={cn('artist__inner')}>
           {picture ? (

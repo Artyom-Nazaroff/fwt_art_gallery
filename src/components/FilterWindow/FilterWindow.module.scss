@@ -8,15 +8,26 @@
   right: 0;
   left: 0;
   z-index: 5;
+  visibility: hidden;
+  transition: all .5s ease-in-out;
+
+  &--opened {
+    visibility: visible;
+  }
 
   &__content {
     width: 252px;
     position: fixed;
     top: 0;
-    right: 0;
+    right: -252px;
     bottom: 0;
     display: flex;
     flex-direction: column;
+    transition: right .5s ease-in-out;
+
+    &--opened {
+      right: 0;
+    }
   }
 
   &__top {
@@ -54,32 +65,54 @@
     cursor: pointer;
   }
 
-  &__genres--active,
-  &__sortBy--active {
-    padding-bottom: 16px;
+  &__menuItemPlus {
+    width: 12px;
+    height: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all .5s ease;
+    cursor: pointer;
   }
 
-  &__menuItemPlus {
-    border: none;
-    background-color: inherit;
+  .filter__plusDt {
+    background-image: url("../../assets/dark-theme/main-page/plus-dt.svg");
+  }
+
+  .filter__plusLt {
+    background-image: url("../../assets/light-theme/main-page/plus-lt.svg");
+  }
+
+  .filter__minusDt {
+    background-image: url("../../assets/dark-theme/main-page/minus-dt.svg");
+  }
+
+  .filter__minusLt {
+    background-image: url("../../assets/light-theme/main-page/minus-lt.svg");
   }
 
   &__genresItems {
-    display: none;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 60px;
     margin-bottom: 16px;
+    transition: max-height .5s ease-in-out;
 
     &--active {
-      display: grid;
+      max-height: 500px;
     }
   }
 
   &__sortByItems {
-    display: none;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s ease-in-out;
 
     &--active {
-      display: block;
+      max-height: 300px;
     }
   }
 
@@ -103,7 +136,10 @@
 
 
 .filter--dt {
-  background-color: rgba(3, 3, 3, 0.6);
+  background-color: transparent;
+  &.filter--opened {
+    background-color: rgba(3, 3, 3, 0.6);
+  }
 
   .filter__content {
     background-color: $secondary-black;
@@ -124,7 +160,10 @@
 }
 
 .filter--lt {
-  background-color: rgba(3, 3, 3, 0.3);
+  background-color: transparent;
+  &.filter--opened {
+    background-color: rgba(3, 3, 3, 0.3);
+  }
 
   .filter__content {
     background-color: $primary-light-gray;
@@ -152,6 +191,11 @@
     &__content {
       visibility: visible;
       width: 372px;
+      right: -372px;
+
+      &--opened {
+        right: 0;
+      }
     }
 
     &__top {
@@ -161,11 +205,6 @@
 
     &__categories {
       padding: 0 32px;
-    }
-
-    &__genres--active,
-    &__sortBy--active {
-      padding-bottom: 20px;
     }
 
     &__bottom {
@@ -178,6 +217,11 @@
   .filter {
     &__content {
       width: 492px;
+      right: -492px;
+
+      &--opened {
+        right: 0;
+      }
     }
 
     &__top {

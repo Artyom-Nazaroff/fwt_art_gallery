@@ -8,8 +8,8 @@
 
 .popup {
   padding: 24px 24px 185px;
-  width: 100vw;
-  min-height: fit-content;
+  position: sticky;
+  top: 0;
 
   &__top {
     display: flex;

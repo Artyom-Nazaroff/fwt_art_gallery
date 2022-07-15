@@ -26,7 +26,8 @@
   &__basicInfo {
     position: absolute;
     left: 0;
-    top: -118px;
+    top: 0;
+    transform: translateY(-99%);
     width: 300px;
     padding: 20px;
   }

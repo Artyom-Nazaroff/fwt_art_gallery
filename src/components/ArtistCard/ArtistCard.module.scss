@@ -4,6 +4,7 @@
 .artist {
   position: relative;
   padding-top: 66%;
+  transition: all .3s ease-in-out;
 
   &::before {
     content: "";
@@ -12,7 +13,7 @@
   }
 
   &__modalWindow {
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -23,6 +24,13 @@
     right: 0;
     opacity: 0.9;
     cursor: pointer;
+    visibility: hidden;
+    transition: all .3s ease-in-out;
+  }
+
+  &__textLink {
+    transition: opacity .3s ease-in-out;
+    opacity: 0;
   }
 
   &__inner {
@@ -115,7 +123,13 @@
 
 .artist--dt {
   .artist__modalWindow {
-    background-color: $primary-black;
+    background-color: transparent;
+  }
+
+  &:hover {
+    .artist__modalWindow {
+      background-color: $primary-black;
+    }
   }
 
   .artist__noImage {
@@ -145,7 +159,13 @@
 
 .artist--lt {
   .artist__modalWindow {
-    background-color: $primary-white;
+    background-color: transparent;
+  }
+
+  &:hover {
+    .artist__modalWindow {
+      background-color: $primary-white;
+    }
   }
 
   .artist__noImage {
@@ -203,7 +223,11 @@
   .artist {
     &:hover {
       .artist__modalWindow {
-        display: flex;
+        visibility: visible;
+      }
+
+      .artist__textLink {
+        opacity: 1;
       }
     }
 

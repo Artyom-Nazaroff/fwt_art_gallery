@@ -1,0 +1,33 @@
+@import "../../../sass/colors";
+@import "../../../sass/fonts";
+
+.btn {
+  visibility: hidden;
+  position: fixed;
+  z-index: 100;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all .5s ease;
+
+  &--active {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.btn--dt {
+  background-color: $secondary-black;
+}
+
+.btn--lt {
+  background-color: $secondary-white;
+  border: 1px solid $primary-light-gray;
+}

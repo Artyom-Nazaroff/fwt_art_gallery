@@ -16,11 +16,12 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 const cn = classNames.bind(styles);
 
 type BurgerMenuProps = {
+  isMenuOpened: boolean;
   setIsMenuOpened: (val: boolean) => void;
   openModalWindow: (val: AuthOrRegistration) => void;
 };
 
-const BurgerMenu: FC<BurgerMenuProps> = ({ setIsMenuOpened, openModalWindow }) => {
+const BurgerMenu: FC<BurgerMenuProps> = ({ isMenuOpened, setIsMenuOpened, openModalWindow }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { logOutUser } = useActions();
   const { isAuth } = useTypedSelector((state) => state.authRegistration);
@@ -28,10 +29,6 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ setIsMenuOpened, openModalWindow }) =
 
   const openBurgerModalWindow = (variant: AuthOrRegistration) => {
     openModalWindow(variant);
-    setIsMenuOpened(false);
-  };
-
-  const closeBurgerModalWindow = () => {
     setIsMenuOpened(false);
   };
 
@@ -45,14 +42,15 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ setIsMenuOpened, openModalWindow }) =
       className={cn('burger', {
         'burger--dt': theme === 'dark',
         'burger--lt': theme === 'light',
+        'burger--opened': isMenuOpened,
       })}
     >
-      <div className={cn('burger__content')}>
+      <div className={cn('burger__content', { 'burger__content--opened': isMenuOpened })}>
         <div className={cn('burger__top')}>
           <button
             className={cn('burger__closeBtn')}
             type="button"
-            onClick={() => closeBurgerModalWindow()}
+            onClick={() => setIsMenuOpened(false)}
           >
             <img src={theme === 'dark' ? closeWindowDT : closeWindowLT} alt="" />
           </button>

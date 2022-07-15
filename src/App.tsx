@@ -15,6 +15,7 @@ import { AddOrEditPainting } from './components/AddAndEditPainting/AddAndEditPai
 import Toast from './components/_UI/Toast/Toast';
 import { useActions } from './hooks/useActions';
 import { useTypedSelector } from './hooks/useTypedSelector';
+import ScrollUpButton from './components/_UI/ScrollUpButton/ScrollUpButton';
 
 const App: FC = () => {
   const [addOrEditArtist, setAddOrEditArtist] = useState<AddOrEditArtist>(AddOrEditArtist.add);
@@ -31,14 +32,22 @@ const App: FC = () => {
   const [isDeleteOpened, setDeleteOpened] = useState<boolean>(false);
   const [isAddEditArtistOpened, setAddEditArtistOpened] = useState<boolean>(false);
   const [isAddEditPaintingOpened, setAddEditPaintingOpened] = useState<boolean>(false);
-  const [isErrorOpened, setErrorOpened] = useState<boolean>(false);
   const [currentPaintingId, setCurrentPaintingId] = useState<string>('');
+  const [visibleScrollBtn, setVisibleScrollBtn] = useState<boolean>(false);
   const { setAuthUser } = useActions();
   const { errorMessage } = useTypedSelector((state) => state.artists);
 
   useEffect(() => {
     if (Cookies.get('accessToken')) setAuthUser();
   }, []);
+
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 200) setVisibleScrollBtn(true);
+    if (scrolled <= 200) setVisibleScrollBtn(false);
+  };
+
+  window.addEventListener('scroll', toggleVisible);
 
   return (
     <div className={cn('appContainer')}>
@@ -98,6 +107,7 @@ const App: FC = () => {
       </div>
       <Footer />
       {errorMessage && <Toast text={errorMessage} />}
+      <ScrollUpButton visibleScrollBtn={visibleScrollBtn} />
     </div>
   );
 };

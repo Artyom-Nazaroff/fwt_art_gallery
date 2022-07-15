@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useContext, useRef, useState } from 'react';
+import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './AddAndEditPainting.module.scss';
 import '../../App.scss';
@@ -58,7 +58,7 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
     formData.append('image', picture as File);
     if (
       addOrEditPainting === AddOrEditPainting.add &&
-      name &&
+      name.length >= 3 &&
       year &&
       picture &&
       (picture.type === 'image/jpeg' || picture.type === 'image/png')
@@ -68,6 +68,7 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
     }
     if (
       addOrEditPainting === AddOrEditPainting.edit &&
+      name.length >= 3 &&
       (picture?.type === 'image/jpeg' || picture?.type === 'image/png')
     ) {
       editPainting(formData, artistProfile._id, currentPaintingId);
@@ -75,6 +76,9 @@ const AddAndEditPainting: FC<AddAndEditPaintingProps> = ({
     }
     if (!year || !name || !picture) {
       showToast(setErrorMessage, 'Пожалуйста, заполните все поля!');
+    }
+    if (name.length < 3) {
+      showToast(setErrorMessage, 'Название не может быть менее трех символов!');
     }
     if (picture && picture.type !== 'image/jpeg' && picture.type !== 'image/png') {
       showToast(setErrorMessage, 'Загружаемое изображение должно быть формата .jpeg или .png!');

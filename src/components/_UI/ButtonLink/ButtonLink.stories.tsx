@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof ButtonLink> = (args) => <ButtonLink {...ar
 
 export const Button = Template.bind({});
 Button.args = {
-  text: 'Button Link',
+  text: 'ScrollUpButton Link',
 };
 
 // export const DeleteButton = Template.bind({});
