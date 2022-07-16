@@ -1,8 +1,7 @@
 import React from 'react';
 
-export type Theme = string | undefined;
-type ThemeContextType = {
-  theme: Theme;
+export type ThemeContextType = {
+  theme?: string;
   toggleTheme: () => void;
 };
 

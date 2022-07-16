@@ -26,7 +26,7 @@ export type ArtistItemType = {
 export type ArtistsState = {
   artists: Array<ArtistItemType>;
   loading: boolean;
-  error: null | string;
+  error: undefined | string;
 };
 
 export enum ArtistsActionTypes {

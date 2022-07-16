@@ -1,6 +1,6 @@
 import React, { useState, useMemo, FC, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { Theme, ThemeContext } from './themeContext';
+import { ThemeContext, ThemeContextType } from './themeContext';
 
 type ThemeStateProps = {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ export const ThemeState: FC<ThemeStateProps> = ({ children }) => {
       setTheme(Cookies.get('theme'));
     }
   }, []);
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<ThemeContextType['theme']>('dark');
   const toggleTheme = () => {
     const changeTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(changeTheme);

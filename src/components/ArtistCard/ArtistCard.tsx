@@ -16,10 +16,12 @@ type ArtistProps = {
 const ArtistCard: FC<ArtistProps> = ({ name, years, picture }) => {
   const { theme } = useContext(ThemeContext);
 
-  const datesOfLife = years
-    .split(' – ')
-    .map((i) => i.slice(-4))
-    .join(' – ');
+  const datesOfLife = years.includes('–')
+    ? years
+        .split(' – ')
+        .map((i) => i.slice(-4))
+        .join(' – ')
+    : years;
 
   return (
     <li

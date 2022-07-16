@@ -3,7 +3,7 @@ import { ArtistsAction, ArtistsActionTypes, ArtistsState } from './artistsTypes'
 const initialState: ArtistsState = {
   artists: [],
   loading: false,
-  error: null,
+  error: undefined,
 };
 
 export const artistsReducer = (state = initialState, action: ArtistsAction) => {
