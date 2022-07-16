@@ -30,7 +30,7 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({ variant }) => {
         <div className={cn('picture')}>
           <img
             src={variant === AuthOrRegistration.auth ? authMainPic : registrationMainPic}
-            alt=""
+            alt="main-painting"
           />
         </div>
         <div
@@ -61,12 +61,19 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({ variant }) => {
             </form>
             <div className={cn('auth__text')}>
               {variant === AuthOrRegistration.auth ? (
-                <span>
-                  If you don't have an account yet, please <a href="https://google.com"> sign up</a>
+                <span className={cn('auth__textVariant')}>
+                  If you don't have an account yet, please{' '}
+                  <a className={cn('auth__textLink')} href="https://google.com">
+                    {' '}
+                    sign up
+                  </a>
                 </span>
               ) : (
-                <span>
-                  If you already have an account, please <a href="https://google.com">log in</a>
+                <span className={cn('auth__textVariant')}>
+                  If you already have an account, please{' '}
+                  <a className={cn('auth__textLink')} href="https://google.com">
+                    log in
+                  </a>
                 </span>
               )}
             </div>

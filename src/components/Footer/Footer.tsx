@@ -22,7 +22,9 @@ const Footer = () => {
           <div className={cn('footer__text')}>
             Проект реализован в рамках стажировки
             <br /> для Frontend-разработчиков от компании{' '}
-            <a href="https://framework.team/">Framework Team</a>
+            <a className={cn('footer__link')} href="https://framework.team/">
+              Framework Team
+            </a>
           </div>
           <div className={cn('footer__developer')}>Назаров Артём, 2022</div>
         </div>

@@ -52,10 +52,10 @@
     font-family: "InterLight", sans-serif;
     font-size: 12px;
     line-height: 140%;
+  }
 
-    a {
-      font-weight: 500;
-    }
+  &__textLink {
+    font-weight: 500;
   }
 }
 
@@ -75,9 +75,10 @@
 
   .auth__text {
     color: $primary-light-gray;
-    a {
-      color: $primary-light-gray;
-    }
+  }
+
+  .auth__textLink {
+    color: $primary-light-gray;
   }
 }
 
@@ -90,9 +91,10 @@
 
   .auth__text {
     color: $primary-dark-gray;
-    a {
-      color: $primary-dark-gray;
-    }
+  }
+
+  .auth__textLink {
+    color: $primary-dark-gray;
   }
 }
 
