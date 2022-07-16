@@ -3,6 +3,7 @@
 
 .header {
   height: 64px;
+  transition: background-color .3s ease;
 
   &__container {
     height: 100%;
