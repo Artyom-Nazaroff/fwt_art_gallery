@@ -39,7 +39,7 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ isMenuOpened, setIsMenuOpened }) => {
           <li className={cn('burger__changeTheme')}>
             <button className={cn('burger__changeThemeBtn')} type="button" onClick={toggleTheme}>
               <img src={theme === 'dark' ? changeThemeDT : changeThemeLT} alt="" />
-              <TextLink text="light theme" />
+              <TextLink text={theme === 'dark' ? 'light theme' : 'dark theme'} />
             </button>
           </li>
           <li className={cn('burger__btn')}>LOG IN</li>

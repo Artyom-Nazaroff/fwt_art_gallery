@@ -47,13 +47,13 @@ const Header: FC<HeaderProps> = ({ user, onLogin, onLogout, onCreateAccount }) =
             onClick={() => setIsMenuOpened(!isMenuOpened)}
             type="button"
           >
-            <img src={theme === 'dark' ? openBurgerDT : openBurgerLT} alt="menu" />
+            <img src={theme === 'dark' ? openBurgerDT : openBurgerLT} alt="" />
           </button>
           <div className={cn('header__buttons')}>
             <button type="button">LOG IN</button>
             <button type="button">SIGN UP</button>
             <button className={cn('header__changeTheme')} type="button" onClick={toggleTheme}>
-              <img src={theme === 'dark' ? changeThemeDT : changeThemeLT} alt="sun" />
+              <img src={theme === 'dark' ? changeThemeDT : changeThemeLT} alt="" />
             </button>
           </div>
         </div>

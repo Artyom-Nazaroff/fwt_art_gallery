@@ -6,7 +6,7 @@
 }
 
 .popup {
-  padding: 24px 24px 0;
+  padding: 24px 24px 80px;
 
   &__top {
     display: flex;
@@ -40,7 +40,6 @@
 
   &__form {
     padding: 0 6px;
-    margin-bottom: 80px;
   }
 
   &__input,
@@ -141,10 +140,9 @@
       width: 136px;
       margin-top: 16px;
       text-align: center;
-      font-weight: 300;
+      font-family: 'InterLight', sans-serif;
       font-size: 16px;
       line-height: 140%;
-      font-family: 'Inter', sans-serif;
     }
 
     &__form {

@@ -4,14 +4,13 @@
 .footer {
 	border-top: 2px solid $secondary-gray;
 	padding: 32px 0;
-	font-family: "Inter", sans-serif;
 
 	&__textContainer {
 		margin-bottom: 20px;
 	}
 
 	&__text {
-		font-weight: 300;
+		font-family: "InterLight", sans-serif;
 		font-size: 12px;
 		line-height: 140%;
 		margin-bottom: 10px;
@@ -22,7 +21,7 @@
 	}
 
 	&__developer {
-		font-weight: 300;
+		font-family: "InterLight", sans-serif;
 		font-size: 12px;
 		line-height: 140%;
 		color: $secondary-gray;

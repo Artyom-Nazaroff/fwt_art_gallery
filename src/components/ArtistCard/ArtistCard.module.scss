@@ -103,112 +103,114 @@
 
 
 .artist--dt {
-	.artist__modalWindow {
-		background-color: $primary-black;
-	}
+  .artist__modalWindow {
+    background-color: $primary-black;
+  }
 
-	.artist__info {
-		background-color: $primary-black;
-		&::before {
-			background-color: $accent-gold;
-		}
-	}
+  .artist__info {
+    background-color: $primary-black;
 
-	.artist__name {
-		color: $primary-white;
-	}
+    &::before {
+      background-color: $accent-gold;
+    }
+  }
 
-	.artist__datesOfLife {
-		color: $accent-gold;
-	}
+  .artist__name {
+    color: $primary-white;
+  }
 
-	.artist__arrow {
-		background-color: $accent-gold;
-	}
+  .artist__datesOfLife {
+    color: $accent-gold;
+  }
+
+  .artist__arrow {
+    background-color: $accent-gold;
+  }
 }
 
 .artist--lt {
-	.artist__modalWindow {
-		background-color: $primary-white;
-	}
+  .artist__modalWindow {
+    background-color: $primary-white;
+  }
 
-	.artist__info {
-		background-color: $primary-white;
-		&::before {
-			background-color: $accent-red;
-		}
-	}
+  .artist__info {
+    background-color: $primary-white;
 
-	.artist__name {
-		color: $primary-black;
-	}
+    &::before {
+      background-color: $accent-red;
+    }
+  }
 
-	.artist__datesOfLife {
-		color: $accent-red;
-	}
+  .artist__name {
+    color: $primary-black;
+  }
 
-	.artist__arrow {
-		background-color: $accent-red;
-	}
+  .artist__datesOfLife {
+    color: $accent-red;
+  }
+
+  .artist__arrow {
+    background-color: $accent-red;
+  }
 }
 
 
 @media (min-width: $breakpiont-tablet) {
-	.artist {
-		&__info {
-			height: 66px;
-			width: 300px;
-			padding: 12px;
-		}
+  .artist {
+    &__info {
+      height: 66px;
+      width: 300px;
+      padding: 12px;
+    }
 
-		&__name {
-			font-size: 16px;
-			line-height: 19px;
-		}
+    &__name {
+      font-size: 16px;
+      line-height: 19px;
+    }
 
-		&__datesOfLife {
-			font-size: 12px;
-			line-height: 15px;
-		}
+    &__datesOfLife {
+      font-size: 12px;
+      line-height: 15px;
+    }
 
-		&__arrow {
-			height: 66px;
-			left: 300px;
-		}
-	}
+    &__arrow {
+      height: 66px;
+      left: 300px;
+    }
+  }
 }
 
 @media (min-width: $breakpiont-small-desktop) {
-	.artist {
-		&:hover {
-			.artist__modalWindow {
-				display: flex;
-			}
-		}
+  .artist {
+    &:hover {
+      .artist__modalWindow {
+        display: flex;
+      }
+    }
 
-		&__info {
-			height: 82px;
-			width: 300px;
-			padding: 20px;
+    &__info {
+      height: 82px;
+      width: 300px;
+      padding: 20px;
 
-			&::before {
-				display: block;
-			}
-		}
+      &::before {
+        display: block;
+      }
+    }
 
-		&__name {
-			font-size: 16px;
-			line-height: 19px;
-		}
+    &__name {
+      font-size: 16px;
+      line-height: 19px;
+    }
 
-		&__datesOfLife {
-			font-size: 12px;
-			line-height: 15px;
-		}
+    &__datesOfLife {
+      font-size: 12px;
+      line-height: 15px;
+    }
 
-		&__arrow {
-			height: 82px;
-			display: none;
-		}
-	}
+    &__arrow {
+      height: 82px;
+      display: none;
+    }
+  }
 }

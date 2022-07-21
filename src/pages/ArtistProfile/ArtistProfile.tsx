@@ -10,11 +10,13 @@ import AdaptiveGrid from '../../components/AdaptiveGrid/AdaptiveGrid';
 import Footer from '../../components/Footer/Footer';
 import TextLink from '../../components/_UI/TextLink/TextLink';
 import { ThemeContext } from '../../context/themeContext';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const cn = classNames.bind(styles);
 
 const ArtistProfile = () => {
   const { theme } = useContext(ThemeContext);
+  const { artists } = useTypedSelector((state) => state.artists);
 
   return (
     <div
@@ -47,7 +49,7 @@ const ArtistProfile = () => {
       >
         <div className={cn('gallery__container', 'container')}>
           <h2 className={cn('gallery__title')}>Artworks</h2>
-          <AdaptiveGrid />
+          <AdaptiveGrid items={artists} />
         </div>
       </div>
       <Footer />
