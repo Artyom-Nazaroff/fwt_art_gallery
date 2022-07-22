@@ -8,11 +8,11 @@ import { ThemeContext } from '../../../context/themeContext';
 const cn = classNames.bind(styles);
 
 type LabelProps = {
-  text: string;
+  name: string;
   isRemove: boolean;
 };
 
-const Label: FC<LabelProps> = ({ text, isRemove }) => {
+const Label: FC<LabelProps> = ({ name, isRemove }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -22,7 +22,7 @@ const Label: FC<LabelProps> = ({ text, isRemove }) => {
         'label--lt': theme === 'light',
       })}
     >
-      <span>{text}</span>
+      <span>{name}</span>
       {isRemove && (
         <button className={cn('label__btn')} type="button">
           <img src={theme === 'dark' ? crossDT : crossLT} alt="" />

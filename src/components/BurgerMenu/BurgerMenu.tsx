@@ -11,11 +11,10 @@ import { ThemeContext } from '../../context/themeContext';
 const cn = classNames.bind(styles);
 
 type BurgerMenuProps = {
-  isMenuOpened: boolean;
-  setIsMenuOpened: (a: boolean) => void;
+  setIsMenuOpened: (val: boolean) => void;
 };
 
-const BurgerMenu: FC<BurgerMenuProps> = ({ isMenuOpened, setIsMenuOpened }) => {
+const BurgerMenu: FC<BurgerMenuProps> = ({ setIsMenuOpened }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -30,7 +29,7 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ isMenuOpened, setIsMenuOpened }) => {
           <button
             className={cn('burger__closeBtn')}
             type="button"
-            onClick={() => setIsMenuOpened(!isMenuOpened)}
+            onClick={() => setIsMenuOpened(false)}
           >
             <img src={theme === 'dark' ? closeWindowDT : closeWindowLT} alt="" />
           </button>
@@ -42,8 +41,16 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ isMenuOpened, setIsMenuOpened }) => {
               <TextLink text={theme === 'dark' ? 'light theme' : 'dark theme'} />
             </button>
           </li>
-          <li className={cn('burger__btn')}>LOG IN</li>
-          <li className={cn('burger__btn')}>SIGN UP</li>
+          <li className={cn('burger__li')}>
+            <button className={cn('burger__btn')} type="button">
+              LOG IN
+            </button>
+          </li>
+          <li className={cn('burger__li')}>
+            <button className={cn('burger__btn')} type="button">
+              SIGN UP
+            </button>
+          </li>
         </ul>
       </div>
     </div>

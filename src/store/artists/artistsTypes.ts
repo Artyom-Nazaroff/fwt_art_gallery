@@ -1,4 +1,4 @@
-type MainPaintingType = {
+export type Painting = {
   artist: string;
   name: string;
   yearOfCreation: string;
@@ -13,43 +13,57 @@ type MainPaintingType = {
   };
 };
 
-export type ArtistItemType = {
+export type Genre = {
+  _id: string;
+  name: string;
+};
+
+export type Artist = {
   name: string;
   yearsOfLife: string;
   description: string;
   __v: number;
   _id: string;
+  genres: Array<Genre>;
+  mainPainting: Painting;
+  paintings: Array<Painting>;
+  avatar: Painting['image'];
+};
+
+export type ArtistCard = {
   genres: Array<string>;
-  mainPainting: MainPaintingType;
+  _id: string;
+  name: string;
+  description: string;
+  yearsOfLife: string;
+  __v: number;
+  mainPainting: Painting;
 };
 
 export type ArtistsState = {
-  artists: Array<ArtistItemType>;
+  artistProfile: Artist;
+  artists: Array<ArtistCard>;
   loading: boolean;
-  error: undefined | string;
 };
 
 export enum ArtistsActionTypes {
+  SHOW_PRELOADER = 'SHOW_PRELOADER',
   FETCH_ARTISTS = 'FETCH_ARTISTS',
-  FETCH_ARTISTS_SUCCESS = 'FETCH_ARTISTS_SUCCESS',
-  FETCH_ARTISTS_ERROR = 'FETCH_ARTISTS_ERROR',
+  FETCH_ARTIST_PROFILE = 'FETCH_ARTIST_PROFILE',
 }
+
+export type ShowPreloader = {
+  type: ArtistsActionTypes.SHOW_PRELOADER;
+};
 
 export type FetchArtistsAction = {
   type: ArtistsActionTypes.FETCH_ARTISTS;
+  payload: Array<ArtistCard>;
 };
 
-export type FetchArtistsSuccessAction = {
-  type: ArtistsActionTypes.FETCH_ARTISTS_SUCCESS;
-  payload: Array<ArtistItemType>;
+export type FetchArtistProfile = {
+  type: ArtistsActionTypes.FETCH_ARTIST_PROFILE;
+  payload: Artist;
 };
 
-export type FetchArtistsErrorAction = {
-  type: ArtistsActionTypes.FETCH_ARTISTS_ERROR;
-  payload: string;
-};
-
-export type ArtistsAction =
-  | FetchArtistsAction
-  | FetchArtistsSuccessAction
-  | FetchArtistsErrorAction;
+export type ArtistsAction = ShowPreloader | FetchArtistsAction | FetchArtistProfile;

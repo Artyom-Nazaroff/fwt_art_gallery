@@ -1,6 +1,24 @@
 @import "sass/breckpoints.scss";
 @import "sass/colors.scss";
 
+.appContainer {
+	position: relative;
+}
+
+.modalContainer {
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+}
+
+.modalContainer--active {
+	display: block;
+}
+
 .wrapper {
 	min-height: 100vh;
 	box-sizing: border-box;

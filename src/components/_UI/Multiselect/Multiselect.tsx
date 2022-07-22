@@ -27,11 +27,7 @@ const Multiselect = () => {
       <div className={cn('select__label')}>Label</div>
       <div className={cn('select__inner')}>
         <div className={cn('select__input')}>
-          <div className={cn('select__inputItems')}>
-            <Label text="Romanticism" isRemove />
-            <Label text="Romanticism" isRemove />
-            <Label text="Romanticism" isRemove />
-          </div>
+          <div className={cn('select__inputItems')}>LABELS ARE HERE</div>
           <button
             type="button"
             className={cn('select__inputArrow')}
