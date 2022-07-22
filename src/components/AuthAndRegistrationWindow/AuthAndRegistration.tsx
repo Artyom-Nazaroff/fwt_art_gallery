@@ -19,9 +19,15 @@ export enum AuthOrRegistration {
 
 type AuthAndRegistrationProps = {
   variant: AuthOrRegistration;
+  setVariant: (val: AuthOrRegistration) => void;
+  setIsModalOpened: (val: boolean) => void;
 };
 
-const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({ variant }) => {
+const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({
+  variant,
+  setVariant,
+  setIsModalOpened,
+}) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -40,9 +46,13 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({ variant }) => {
           })}
         >
           <div className={cn('auth__top')}>
-            <div className={cn('auth__close')}>
+            <button
+              type="button"
+              className={cn('auth__close')}
+              onClick={() => setIsModalOpened(false)}
+            >
               <img src={theme === 'dark' ? crossDT : crossLT} alt="" />
-            </div>
+            </button>
           </div>
           <h2 className={cn('auth__title')}>
             {variant === AuthOrRegistration.auth ? 'Welcome back' : 'Create your profile'}
@@ -61,19 +71,26 @@ const AuthAndRegistration: FC<AuthAndRegistrationProps> = ({ variant }) => {
             </form>
             <div className={cn('auth__text')}>
               {variant === AuthOrRegistration.auth ? (
-                <span className={cn('auth__textVariant')}>
+                <span>
                   If you don't have an account yet, please{' '}
-                  <a className={cn('auth__textLink')} href="https://google.com">
-                    {' '}
+                  <button
+                    className={cn('auth__textLink')}
+                    type="button"
+                    onClick={() => setVariant(AuthOrRegistration.registration)}
+                  >
                     sign up
-                  </a>
+                  </button>
                 </span>
               ) : (
-                <span className={cn('auth__textVariant')}>
+                <span>
                   If you already have an account, please{' '}
-                  <a className={cn('auth__textLink')} href="https://google.com">
+                  <button
+                    className={cn('auth__textLink')}
+                    type="button"
+                    onClick={() => setVariant(AuthOrRegistration.auth)}
+                  >
                     log in
-                  </a>
+                  </button>
                 </span>
               )}
             </div>

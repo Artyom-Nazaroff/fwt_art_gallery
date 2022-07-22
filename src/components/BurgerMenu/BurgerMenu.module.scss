@@ -53,15 +53,20 @@
 		}
 	}
 
+	&__li {
+		&:not(:last-child) {
+			margin-bottom: 32px;
+		}
+	}
+
 	&__btn {
 		font-family: "CormorantSCMedium", serif;
 		font-size: 32px;
 		line-height: 100%;
+		padding: 0;
+		border: none;
+		background-color: inherit;
 		cursor: pointer;
-
-		&:not(:last-child) {
-			margin-bottom: 32px;
-		}
 	}
 }
 
@@ -91,7 +96,7 @@
 }
 
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
 	.burger {
 		&__content {
 			width: 466px;

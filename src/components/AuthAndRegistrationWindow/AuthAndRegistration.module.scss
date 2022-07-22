@@ -8,12 +8,20 @@
 
 .auth {
   padding-bottom: 32px;
+  min-height: 100vh;
 
   &__top {
     padding: 24px;
     display: flex;
     justify-content: flex-end;
     margin-bottom: 66px;
+  }
+
+  &__close {
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
   }
 
   &__title {
@@ -55,7 +63,14 @@
   }
 
   &__textLink {
-    font-weight: 500;
+    font-family: "InterMedium", sans-serif;
+    font-size: 12px;
+    line-height: 140%;
+    text-decoration: underline;
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
   }
 }
 
@@ -99,7 +114,7 @@
 }
 
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .auth {
     padding-bottom: 270px;
 
@@ -137,10 +152,14 @@
       margin-bottom: 60px;
       font-size: 16px;
     }
+
+    &__textLink {
+      font-size: 16px;
+    }
   }
 }
 
-@media (min-width: $breakpiont-small-desktop) {
+@media (min-width: $breakpoint-small-desktop) {
   .modalWindowWrapper {
     position: absolute;
     top: 0;
@@ -149,7 +168,6 @@
     right: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
     padding: 150px 0;
     background-color: $modal-window-background;
   }
@@ -169,6 +187,7 @@
   .auth {
     flex: 0 0 52%;
     padding-bottom: 130px;
+    min-height: 0;
 
     &__top {
       padding: 36px;

@@ -14,10 +14,9 @@
 		font-size: 12px;
 		line-height: 140%;
 		margin-bottom: 10px;
-	}
-
-	&__link {
-		font-weight: 600;
+		a {
+			font-weight: 600;
+		}
 	}
 
 	&__developer {
@@ -50,7 +49,7 @@
 	}
 }
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
 	.footer {
 		padding: 40px 0 48px;
 
