@@ -179,7 +179,7 @@
 }
 
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .artist {
     margin-bottom: 60px;
 
@@ -226,7 +226,7 @@
   }
 }
 
-@media (min-width: $breakpiont-small-desktop) {
+@media (min-width: $breakpoint-small-desktop) {
   .artist {
     margin-bottom: 160px;
 
@@ -324,7 +324,7 @@
   }
 }
 
-@media (min-width: $breakpiont-large-desktop) {
+@media (min-width: $breakpoint-large-desktop) {
   .artist {
     &__portrait {
       flex: 0 0 75%;

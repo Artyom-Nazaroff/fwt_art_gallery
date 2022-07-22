@@ -10,19 +10,28 @@ import changeThemeDT from '../../assets/dark-theme/header/change-theme-dt.svg';
 import changeThemeLT from '../../assets/light-theme/header/change-theme-lt.svg';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import { ThemeContext } from '../../context/themeContext';
+import { AuthOrRegistration } from '../AuthAndRegistrationWindow/AuthAndRegistration';
 
 const cn = classNames.bind(styles);
 
-type HeaderProps = {};
+type HeaderProps = {
+  setIsModalOpened: (val: boolean) => void;
+  setVariant: (val: AuthOrRegistration) => void;
+};
 
-const Header: FC<HeaderProps> = () => {
+const Header: FC<HeaderProps> = ({ setIsModalOpened, setVariant }) => {
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
+
+  const openModalWindow = (variant: AuthOrRegistration) => {
+    setIsModalOpened(true);
+    setVariant(variant);
+  };
 
   return (
     <>
       {isMenuOpened && (
-        <BurgerMenu setIsMenuOpened={setIsMenuOpened} />
+        <BurgerMenu setIsMenuOpened={setIsMenuOpened} openModalWindow={openModalWindow} />
       )}
       <header
         className={cn('header', {
@@ -44,11 +53,17 @@ const Header: FC<HeaderProps> = () => {
           <div className={cn('header__buttons')}>
             <button
               type="button"
+              onClick={() => {
+                openModalWindow(AuthOrRegistration.auth);
+              }}
             >
               LOG IN
             </button>
             <button
               type="button"
+              onClick={() => {
+                openModalWindow(AuthOrRegistration.registration);
+              }}
             >
               SIGN UP
             </button>

@@ -1,0 +1,201 @@
+@import "../../sass/colors.scss";
+@import "../../sass/breckpoints.scss";
+@import "../../sass/fonts.scss";
+
+.picture {
+  display: none;
+}
+
+.auth {
+  padding-bottom: 32px;
+  min-height: 100vh;
+
+  &__top {
+    padding: 24px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 66px;
+  }
+
+  &__close {
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+  }
+
+  &__title {
+    font-family: "CormorantSCSemiBold", serif;
+    font-size: 32px;
+    line-height: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__content {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  &__field {
+    width: 260px;
+    margin-bottom: 32px;
+  }
+
+  &__btn {
+    max-width: 210px;
+    margin: 8px auto 0;
+  }
+
+  &__text {
+    text-align: center;
+    font-family: "InterLight", sans-serif;
+    font-size: 12px;
+    line-height: 140%;
+  }
+
+  &__textLink {
+    font-family: "InterMedium", sans-serif;
+    font-size: 12px;
+    line-height: 140%;
+    text-decoration: underline;
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+  }
+}
+
+
+.auth--dt {
+  background-color: $primary-black;
+
+  .auth__title {
+    color: $primary-white;
+  }
+
+  .auth__field {
+    input::-ms-reveal {
+      filter: invert(100%);
+    }
+  }
+
+  .auth__text {
+    color: $primary-light-gray;
+  }
+
+  .auth__textLink {
+    color: $primary-light-gray;
+  }
+}
+
+.auth--lt {
+  background-color: $secondary-white;
+
+  .auth__title {
+    color: $primary-dark-gray;
+  }
+
+  .auth__text {
+    color: $primary-dark-gray;
+  }
+
+  .auth__textLink {
+    color: $primary-dark-gray;
+  }
+}
+
+
+@media (min-width: $breakpoint-tablet) {
+  .auth {
+    padding-bottom: 270px;
+
+    &__top {
+      padding: 36px 24px;
+      margin-bottom: 182px;
+    }
+
+    &__title {
+      font-size: 60px;
+    }
+
+    &__content {
+      flex-direction: column-reverse;
+    }
+
+    &__form {
+      margin-bottom: 0;
+    }
+
+    &__field {
+      width: 340px;
+      margin-bottom: 40px;
+    }
+
+    &__field:last-child {
+      margin-bottom: 60px;
+    }
+
+    &__btn {
+      margin: 20px auto 0;
+    }
+
+    &__text {
+      margin-bottom: 60px;
+      font-size: 16px;
+    }
+
+    &__textLink {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-small-desktop) {
+  .modalWindowWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 150px 0;
+    background-color: $modal-window-background;
+  }
+
+  .contentInner {
+    width: 1030px;
+    height: 700px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .picture {
+    display: block;
+    flex: 0 0 48%;
+  }
+
+  .auth {
+    flex: 0 0 52%;
+    padding-bottom: 130px;
+    min-height: 0;
+
+    &__top {
+      padding: 36px;
+      margin-bottom: 44px;
+    }
+
+    &__title {
+      font-size: 48px;
+    }
+  }
+}

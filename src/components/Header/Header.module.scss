@@ -61,13 +61,13 @@
 }
 
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .header {
     height: 88px;
   }
 }
 
-@media (min-width: $breakpiont-small-desktop) {
+@media (min-width: $breakpoint-small-desktop) {
   .header {
     height: 80px;
 

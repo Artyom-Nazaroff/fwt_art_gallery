@@ -153,7 +153,7 @@
 }
 
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .artist {
     &__info {
       height: 66px;
@@ -178,7 +178,7 @@
   }
 }
 
-@media (min-width: $breakpiont-small-desktop) {
+@media (min-width: $breakpoint-small-desktop) {
   .artist {
     &:hover {
       .artist__modalWindow {

@@ -8,7 +8,7 @@
 	}
 }
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
 	.grid {
 		&__container {
 			grid-template-columns: 1fr 1fr;
@@ -17,7 +17,7 @@
 	}
 }
 
-@media (min-width: $breakpiont-small-desktop) {
+@media (min-width: $breakpoint-small-desktop) {
 	.grid {
 		&__container {
 			grid-template-columns: 1fr 1fr 1fr;

@@ -133,7 +133,7 @@
 }
 
 
-@media (min-width: $breakpiont-tablet) {
+@media (min-width: $breakpoint-tablet) {
   .painting {
     &__info {
       height: 66px;
@@ -158,7 +158,7 @@
   }
 }
 
-@media (min-width: $breakpiont-small-desktop) {
+@media (min-width: $breakpoint-small-desktop) {
   .painting {
     &__info {
       height: 82px;
